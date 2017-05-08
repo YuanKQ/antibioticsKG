@@ -29,115 +29,61 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">中医药知识图谱</a>
+            <a class="navbar-brand" href="">中医药知识图谱</a>
         </div>
         <div class="navbar-collapse in" style="height: auto;">
             <ul class="nav navbar-nav">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识图谱<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="graph_intro.php?graph=tcmls">中医药学语言系统</a></li>
-                        <li><a href="graph_intro.php?graph=tcm_therapy">中医特色疗法知识地图</a></li>
-                        <li><a href="graph_intro.php?graph=formula">中医经方知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=health2">中医养生知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=skin">中医学术传承知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=cosmetology">中医美容知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=tcm_cases">中医医案知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=technique">中医特色诊疗技术知识图谱</a></li>
+                        <li><a href="">中医药学语言系统</a></li>
+                        <li><a href="">中医特色疗法知识地图</a></li>
+                        <li><a href="">中医经方知识图谱</a></li>
+                        <li><a href="">中医养生知识图谱</a></li>
+                        <li><a href="">中医学术传承知识图谱</a></li>
+                        <li><a href="">中医美容知识图谱</a></li>
+                        <li><a href="">中医医案知识图谱</a></li>
+                        <li><a href="">中医特色诊疗技术知识图谱</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识服务<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="master.php">名医信息检索</a></li>
+                        <li><a href="">名医信息检索</a></li>
 
-                        <li><a href="tcm_cases_search.php">医案知识检索</a></li>
+                        <li><a href="">医案知识检索</a></li>
                         <li class="divider">
-                        </li><li><a href="tcm_therapies.php">知识分析</a></li>
+                        </li><li><a href="">知识分析</a></li>
                     </ul>
                 </li>
-                <li><a href="doc_search.php">文献检索</a></li>
+                <li><a href="/introduce">项目简介</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="project_skin.php">北京地区中医皮肤科代表流派学术思想传承和文献整理挖掘</a></li>
-                        <li><a href="project_health.php">中医养生知识图谱的构建与应用研究</a></li>
-                        <li><a href="project_tcm_therapies.php">中医特色疗法知识地图</a></li>
-                        <li><a href="project_tcmls.php">中医药学语言系统的语义网络框架</a></li>
-
+                        <li><a href="">北京地区中医皮肤科代表流派学术思想传承和文献整理挖掘</a></li>
+                        <li><a href="">中医养生知识图谱的构建与应用研究</a></li>
+                        <li><a href="">中医特色疗法知识地图</a></li>
+                        <li><a href="">中医药学语言系统的语义网络框架</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">文档<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li> <a href="http://www.tcmkb.cn/knowledge_graph/doc.php" role="button">中医药知识图谱介绍</a></li>
-                        <li><a href="examples.php">中医药知识图谱举例</a></li>
+                        <li> <a href="" role="button">中医药知识图谱介绍</a></li>
+                        <li><a href="">中医药知识图谱举例</a></li>
                         <li class="divider">
-                        </li><li><a href="intro.php">中医药知识地图系统介绍</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.navbar-collapse -->
-    </div>
-</div><div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.php">中医药知识图谱</a>
-        </div>
-        <div class="navbar-collapse in" style="height: auto;">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识图谱<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="graph_intro.php?graph=tcmls">中医药学语言系统</a></li>
-                        <li><a href="graph_intro.php?graph=tcm_therapy">中医特色疗法知识地图</a></li>
-                        <li><a href="graph_intro.php?graph=formula">中医经方知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=health2">中医养生知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=skin">中医学术传承知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=cosmetology">中医美容知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=tcm_cases">中医医案知识图谱</a></li>
-                        <li><a href="graph_intro.php?graph=technique">中医特色诊疗技术知识图谱</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">知识服务<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="master.php">名医信息检索</a></li>
-
-                        <li><a href="tcm_cases_search.php">医案知识检索</a></li>
-                        <li class="divider">
-                        </li><li><a href="tcm_therapies.php">知识分析</a></li>
-                    </ul>
-                </li>
-                <li><a href="doc_search.php">文献检索</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">项目<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="project_skin.php">北京地区中医皮肤科代表流派学术思想传承和文献整理挖掘</a></li>
-                        <li><a href="project_health.php">中医养生知识图谱的构建与应用研究</a></li>
-                        <li><a href="project_tcm_therapies.php">中医特色疗法知识地图</a></li>
-                        <li><a href="project_tcmls.php">中医药学语言系统的语义网络框架</a></li>
-
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">文档<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li> <a href="http://www.tcmkb.cn/knowledge_graph/doc.php" role="button">中医药知识图谱介绍</a></li>
-                        <li><a href="examples.php">中医药知识图谱举例</a></li>
-                        <li class="divider">
-                        </li><li><a href="intro.php">中医药知识地图系统介绍</a></li>
+                        </li><li><a href="">中医药知识地图系统介绍</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
 </div>
+
+<br>
+<br>
+<h2>Hello World! 你好</h2>
+<h2>Hello World! 你好</h2>
 <h2>Hello World! 你好</h2>
 </body>
 </html>
