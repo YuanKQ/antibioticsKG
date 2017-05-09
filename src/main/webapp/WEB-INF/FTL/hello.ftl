@@ -4,7 +4,7 @@
 <head>
     <%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">--%>
     <#include "/template/head.html">
-    <title>Insert title here</title>
+    <title>*Test*</title>
 </head>
 <body>
 <#include "/template/navigationBar.html">
