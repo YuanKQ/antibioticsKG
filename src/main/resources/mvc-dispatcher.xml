@@ -18,6 +18,35 @@
     <mvc:default-servlet-handler />
 
 
+
+
+    <!--用于支持Servlet、JSP视图解析-->
+    <context:annotation-config />
+
+    <!--以下配置是为了解决同时使用JSP和FTL，顺序很重要：freemarkerResolver-》servletResolver-》freemarkerConfig-->
+    <!-- viewResolver for Freemarker -->
+    <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+       <!-- <property name="prefix" value=""/>
+        <property name="suffix" value=".ftl"/>
+        <property name="contentType" value="text/html;charset=utf-8"/>-->
+        <property name="viewClass" >
+            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
+        </property>
+        <property name="cache" value="true" />
+        <property name="prefix" value="" />
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=UTF-8"/>
+        <property name="requestContextAttribute" value="request" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+    </bean>
+
+    <bean id="servletResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="WEB-INF/JSP/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath">
             <value>WEB-INF/FTL/</value>
@@ -37,31 +66,6 @@
                 <prop key="url_escaping_charset">UTF-8</prop>
             </props>
         </property>
-    </bean>
-
-    <!--用于支持Servlet、JSP视图解析-->
-    <context:annotation-config />
-
-    <!-- viewResolver for Freemarker -->
-    <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-       <!-- <property name="prefix" value=""/>
-        <property name="suffix" value=".ftl"/>
-        <property name="contentType" value="text/html;charset=utf-8"/>
-        <property name="viewClass" >
-            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
-        </property>-->
-        <property name="cache" value="true" />
-        <property name="prefix" value="" />
-        <property name="suffix" value=".ftl" />
-        <property name="contentType" value="text/html;charset=UTF-8"/>
-        <property name="requestContextAttribute" value="request" />
-        <property name="exposeSpringMacroHelpers" value="true" />
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-    </bean>
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="prefix" value="WEB-INF/JSP/"/>
-    <property name="suffix" value=".jsp"/>
     </bean>
 
 
