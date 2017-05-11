@@ -1,5 +1,5 @@
 #Just for the project built by IntelliJ Idea
-.idea/
+.idea/*
 target/
 out/
 
