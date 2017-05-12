@@ -1,3 +1,12 @@
+/********************************************
+ * User: yuan
+ * Date: 17-5-12 上午10:44
+ * Email: kq_yuan@outlook.com
+ *
+ * Description: 控制导航栏跳转页面链接的controller
+ *
+ ********************************************/
+
 package com.iaso.antibiotic.controller;
 
 import org.springframework.stereotype.Controller;
@@ -13,9 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-/**
- * Created by yuan on 4/9/17.
- */
 @Controller
 public class MainController {
     @RequestMapping(value = "/index",method = RequestMethod.GET)
@@ -28,7 +34,27 @@ public class MainController {
         return "introduce";
     }
 
-    /*两种写法都可以
+    @RequestMapping(value = "/hello")
+    public String hello(Model model) {
+        model.addAttribute("name", " world");
+        return "antibioticKG";
+    }
+
+    @RequestMapping(value = "/base")
+    public String next(Model model) {
+        model.addAttribute("name", " world");
+        return "base";
+    }
+
+     /*
+    //该写法与public String hello()运行效果一致
+    @RequestMapping(value = "/hello")
+    public String hello(Model model) {
+        model.addAttribute("name", " world");
+        return "next";
+    }
+
+
     @RequestMapping(value = "/hello")
     public ModelAndView hello(HttpServletRequest request,HttpServletResponse response) {
         ModelAndView model = new ModelAndView();
@@ -36,13 +62,6 @@ public class MainController {
         return model;
     }
     */
-
-    @RequestMapping(value = "/hello")
-    public String hello(Model model) {
-        model.addAttribute("name", "张三");
-        return "hello";
-    }
-
 
 
 

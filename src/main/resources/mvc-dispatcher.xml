@@ -6,7 +6,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <!--指明 controller 所在包，并扫描其中的注解-->
     <context:component-scan base-package="com.iaso.antibiotic.controller"/>
@@ -26,10 +28,7 @@
     <!--以下配置是为了解决同时使用JSP和FTL，顺序很重要：freemarkerResolver-》servletResolver-》freemarkerConfig-->
     <!-- viewResolver for Freemarker -->
     <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-       <!-- <property name="prefix" value=""/>
-        <property name="suffix" value=".ftl"/>
-        <property name="contentType" value="text/html;charset=utf-8"/>-->
-        <property name="viewClass" >
+      <property name="viewClass" >
             <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
         </property>
         <property name="cache" value="true" />
@@ -64,9 +63,26 @@
                 <prop key="whitespace_stripping">true</prop>
                 <prop key="tag_syntax">auto_detect</prop>
                 <prop key="url_escaping_charset">UTF-8</prop>
+                <prop key="classic_compatible">true</prop>
             </props>
         </property>
+        <!--设置模板继承的参数-->
+        <property name="freemarkerVariables">
+            <map>
+                <!--<entry key="xml_escape" value-ref="fmXmlEscape" />-->
+                <entry key="extends" value-ref="extendsDirective"/>
+                <entry key="override" value-ref="overrideDirective"/>
+                <entry key="block" value-ref="blockDirective"/>
+                <entry key="super" value-ref="superDirective"/>
+            </map>
+        </property>
     </bean>
+
+    <!-- freemaker  Directive-->
+    <bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/>
+    <bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
+    <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
+    <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/>
 
 
 </beans>

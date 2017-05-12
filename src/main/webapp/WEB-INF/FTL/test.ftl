@@ -21,7 +21,7 @@
 <body>
 <#include "/template/navigationBar.html">
 <h1>这是测试页面</h1>
-${test}
-
+<h2>搜索领域为： ${domain}</h2>
+搜说关键词为： ${test}
 </body>
 </html>
