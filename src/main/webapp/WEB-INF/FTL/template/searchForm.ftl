@@ -35,11 +35,13 @@
                             <input type="hidden" id="graph" name="graph" value="IASO">
                         </@block>
                         </div>
-                        <!--<p>推荐：-->
-                        <!--<a href="cytoscape.php?keywords=中药&amp;graph=tcmls">中药</a> -->
-                        <!--<a href="cytoscape.php?keywords=气&amp;graph=tcmls">气</a> -->
-                        <!--<a href="cytoscape.php?keywords=五行&amp;graph=tcmls">五行</a>                         -->
-                        <!--</p>-->
+                        <p>推荐：
+                            <@block name="recommendation">
+                            <a href="/search?keywords=中药&amp;graph=IASO">IASO1</a> 
+                            <a href="/search?keywords=气&amp;graph=IASO">IASO2</a> 
+                            <a href="/search?keywords=五行&amp;graph=IASO">IASO3</a>
+                            </@block>
+                        </p>
                     </div>
                 </div>
             </form>

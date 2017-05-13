@@ -1,19 +1,16 @@
-<#--抗生素知识图谱【英文】 知识地图展示部分-->
-<@override name='baseTile'>antibioticKG</@override>
+<#--抗感染药物知识图谱【中文】 知识地图展示部分-->
+<@override name='baseTile'>anti-infectious agent KG</@override>
 
 <@override name="baseDomain">
-<input type="hidden" id="graph" name="graph" value="antibiotic">
+<input type="hidden" id="graph" name="graph" value="agent">
 </@override>
 
 
 <@override name='recommendation'>
-    <a href="/search?keywords=AmBisome&amp;graph=antibiotic">AmBisome</a> 
-    <a href="/search?keywords=Amoxycillin&amp;graph=antibiotic">Amoxycillin</a> 
-    <a href="/search?keywords=Flucloxacillin&amp;graph=antibiotic">Flucloxacillin</a>
-    </@override>
-
-
-
+<a href="/search?keywords=阿莫西林&amp;graph=agent">阿莫西林</a> 
+<a href="/search?keywords=头孢拉定&amp;graph=agent">头孢拉定</a> 
+<a href="/search?keywords=阿奇霉素&amp;graph=agent">阿奇霉素</a>
+</@override>
 
 <@override name="baseBody">
 <h2>搜说关键词为： ${test!"null"}</h2>

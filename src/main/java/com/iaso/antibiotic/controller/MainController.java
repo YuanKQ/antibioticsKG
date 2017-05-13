@@ -40,12 +40,6 @@ public class MainController {
         return "antibioticKG";
     }
 
-    @RequestMapping(value = "/base")
-    public String next(Model model) {
-        model.addAttribute("name", " world");
-        return "base";
-    }
-
      /*
     //该写法与public String hello()运行效果一致
     @RequestMapping(value = "/hello")
