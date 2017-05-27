@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iaso.antibiotic.dao.SymptomMapper">
+  <resultMap id="BaseResultMap" type="com.iaso.antibiotic.model.Symptom">
+    <id column="symptom_id" jdbcType="VARCHAR" property="symptomId" />
+    <result column="symptom_name" jdbcType="VARCHAR" property="symptomName" />
+    <result column="body_part" jdbcType="VARCHAR" property="bodyPart" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.iaso.antibiotic.model.Symptom">
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    description
+  </sql>
+</mapper>

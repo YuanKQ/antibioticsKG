@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iaso.antibiotic.dao.EdgeMapper">
+  <resultMap id="BaseResultMap" type="com.iaso.antibiotic.model.Edge">
+    <id column="edge_id" jdbcType="VARCHAR" property="edgeId" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="target" jdbcType="VARCHAR" property="target" />
+    <result column="relation_id" jdbcType="VARCHAR" property="relationId" />
+    <result column="strength" jdbcType="DOUBLE" property="strength" />
+  </resultMap>
+</mapper>

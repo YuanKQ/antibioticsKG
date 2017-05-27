@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.sql.*;
+
 /**
  * Created by yuan on 17-5-10.
  */
@@ -13,11 +15,34 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class SearchController {
     //  搜索栏:搜索领域graph，搜索关键词keywords
     @RequestMapping(name="/search")
-    public String testRedirect(String keywords, String graph, RedirectAttributes attr) {
-//        System.out.println("get keywords from search bar: " + keywords);
-        attr.addAttribute("keywords", keywords);
-        return "redirect:/" + graph + "/hello";
+    public String testNeo4j(String keywords, String graph, Model model) {
+        try {
+            Connection con = DriverManager.getConnection("jdbc:neo4j:http://219.223.222.6:7474", "neo4j", "neo4jneo4j");
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = null;
+
+            rs = stmt.executeQuery("MATCH (a:Antibiotic{name:'AmBisome'})-[r]-(a2) RETURN a,r,a2 LIMIT 3");
+            while (rs.next()){
+                System.out.print(rs.getString(1));
+                System.out.print(rs.getString(2));
+                System.out.print(rs.getString(3));
+            }
+        }catch (SQLException e){
+            System.out.print("Fail to connect to neo4j:");
+            System.out.print(e.toString());
+        }
+
+        return "testd3js";
+
     }
+
+
+// 该方法不可行，重定向太多次了
+// public String testRedirect(String keywords, String graph, RedirectAttributes attr) {
+//        attr.addAttribute("keywords", keywords);
+//        return "redirect:/" + graph + "/hello";
+//    }
 
 
 /*  public String getSearchText(String keywords, String graph, Model model) {

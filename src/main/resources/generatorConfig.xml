@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!-- 数据库驱动-->
+    <classPathEntry  location="target/antibioticdemo1/WEB-INF/lib/mysql-connector-java-6.0.5.jar"/>
+    <context id="DB2Tables"  targetRuntime="MyBatis3">
+    <!--<context id="DB2Tables"  targetRuntime="Ibatis2Java5">-->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/openKG"
+                        userId="root"
+                        password="1234567">
+        </jdbcConnection>
+        <!--将 JDBC DECIMAL和NUMERIC解析为Integer，而不是BigDecimal-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.iaso.antibiotic.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.iaso.antibiotic.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成哪些表-->
+        <table tableName="bacteria" domainObjectName="Bacteria" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="complication" domainObjectName="Complication" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="disease" domainObjectName="Disease" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="edge_in_KG" domainObjectName="Edge" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="infection_site" domainObjectName="InfectionSite" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="relation" domainObjectName="Situation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="symptom" domainObjectName="Symptom" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="symptom_type" domainObjectName="SymptomType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+    </context>
+</generatorConfiguration>

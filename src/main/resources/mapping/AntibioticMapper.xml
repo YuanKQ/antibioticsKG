@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间唯一-->
+<mapper namespace="AntibioticMapper">
+    <!--
+    *** 将数据查询结果映射成JavaBean
+    *** id 数据库中主键映射
+    *** column表示sql查询返回的列名
+    *** property表示JavaBean中属性名
+    *** dbcType表示数据库字段类型
+    -->
+    <resultMap id="AntibioticResult" type="com.iaso.antibiotic.model.Antibiotic">
+        <id column="antibiotic_id" jdbcType="VARCHAR" property="id"/>
+        <result column="antibiotic_name" jdbcType="VARCHAR" property="name"/>
+        <result column="antibiotic_type" jdbcType="VARCHAR" property="type"/>
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+        <result column="drug_indication" jdbcType="LONGVARCHAR" property="drug_indication"/>
+    </resultMap>
+
+
+    <!--
+    *** 根据姓名获取对应的值
+    *** parameterType是参数类型，可以是基本类型，也可是JavaBean类型
+    *** resultMap表示使用定义的哪个映射关系将结果集合转换为JavaBean
+    *** 如果返回的是基本数据类型，就不用resultMap，直接使用resultType指定返回数据类型
+    *** 如果没有返回结果，resultMap和resultType都不需要
+    -->
+    <select id="findAntibioticByName" parameterType="String" resultMap="AntibioticResult">
+        select * from antibiotic where antibiotic_name = #{name}
+    </select>
+
+
+
+    <!--
+    <insert id="addUser" parameterType="com.nothing.Model.User">
+        insert into user_nothing(username,password) values(#{username},#{password})
+    </insert>-->
+
+</mapper>

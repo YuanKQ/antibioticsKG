@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iaso.antibiotic.dao.SituationMapper">
+  <resultMap id="BaseResultMap" type="com.iaso.antibiotic.model.Situation">
+    <id column="relation_id" jdbcType="VARCHAR" property="relationId" />
+    <result column="relation_name" jdbcType="VARCHAR" property="relationName" />
+    <result column="relation_type" jdbcType="VARCHAR" property="relationType" />
+    <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+    <result column="target_type" jdbcType="VARCHAR" property="targetType" />
+  </resultMap>
+</mapper>
