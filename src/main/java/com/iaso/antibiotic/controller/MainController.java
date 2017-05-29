@@ -10,6 +10,7 @@
 package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.model.Antibiotic;
+import com.iaso.antibiotic.model.Bacteria;
 import com.iaso.antibiotic.service.AntibioticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -48,11 +51,42 @@ public class MainController {
     @RequestMapping(value = "/test")
     @ResponseBody
     public String testMyBatis() {
+        /* 测试Ｍｙｂａｔｉｓ返回对象　Ａｎｔｉｂｉｏｔｉｃ
         String name = "AmBisome";
         Antibiotic antibiotic = antibioticService.findAntibioticByName(name);
         return "×id     " + antibiotic.getId() + "<br>×name     " + antibiotic.getName()
                 + "<br>*type    " + antibiotic.getType() + "<br>description     " + antibiotic.getDescription()
                 + "<br>*indication  " + antibiotic.getDrug_indication();
+        */
+
+        /* 测试findAllNodeID
+        String id = "31e104dd-d685-11e6-82b5-3497f68b8eda";
+        List<String> idList = antibioticService.findAllNodeID(id);
+        String idStr = "";
+        int count = 0;
+        for (String item: idList) {
+            String temp = item + "<br>";
+            idStr += temp;
+            count ++;
+        }
+
+        return idStr;*/
+
+        /*测试findBacteriaByID*/
+        List<String> idList = new ArrayList<String>();
+        idList.add("34fa29c9-d681-11e6-82b5-3497f68b8eda");
+        idList.add("34fa49b3-d681-11e6-82b5-3497f68b8eda");
+        idList.add("34fa60c9-d681-11e6-82b5-3497f68b8eda");
+        idList.add("34fa7ad7-d681-11e6-82b5-3497f68b8eda");
+        List<Bacteria> bacteriaList = antibioticService.findBcateriaByID(idList);
+        String showStr = "";
+        for (Bacteria b: bacteriaList) {
+            String tmp = "id: " + b.getBacteriaId() + "<br>name: " + b.getBacteriaName()
+                    + "<br>type: " + b.getBacteriaType() + "<br>description: " + b.getDescription() + "<br><hr><br>";
+            showStr += tmp;
+        }
+
+        return showStr;
     }
 
      /*

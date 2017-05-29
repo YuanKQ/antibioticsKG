@@ -18,8 +18,6 @@
         <result column="description" jdbcType="LONGVARCHAR" property="description"/>
         <result column="drug_indication" jdbcType="LONGVARCHAR" property="drug_indication"/>
     </resultMap>
-
-
     <!--
     *** 根据姓名获取对应的值
     *** parameterType是参数类型，可以是基本类型，也可是JavaBean类型
@@ -31,6 +29,38 @@
         select * from antibiotic where antibiotic_name = #{name}
     </select>
 
+    <!--
+    *** 查询与Ａｎｔｉｂｉｏｔｉｃ相关的所有的节点
+    *** 返回类型为List<String>, 主要体现在AntibioticDao.findAllNodeID的返回类型
+    -->
+    <select id="findAllNodeID" parameterType="String" resultType="String">
+        SELECT target FROM edge_in_KG WHERE source = #{researching_id}
+        UNION
+        SELECT source FROM edge_in_KG WHERE target = #{researching_id}
+    </select>
+
+    <!--
+    *** relation: antibiotic-bacteria
+    *** 参数类型：List<String>
+    *** 返回类型：List<Bacteria>
+    -->
+    <resultMap id="BacteriaResult" type="com.iaso.antibiotic.model.Bacteria">
+        <id column="bacteria_id" jdbcType="VARCHAR" property="bacteriaId" />
+        <result column="bacteria_name" jdbcType="VARCHAR" property="bacteriaName" />
+        <result column="bacteria_type" jdbcType="VARCHAR" property="bacteriaType" />
+    </resultMap>
+    <resultMap extends="BacteriaResult" id="ResultMapWithBLOBs" type="com.iaso.antibiotic.model.Bacteria">
+        <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    </resultMap>
+    <sql id="Blob_Column_List">
+        description
+    </sql>
+    <select id="findBacteriaByID" resultMap="BacteriaResult">
+        SELECT * FROM bacteria WHERE bacteria_id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+    </select>
 
 
     <!--

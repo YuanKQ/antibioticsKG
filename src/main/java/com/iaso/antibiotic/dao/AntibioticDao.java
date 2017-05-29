@@ -9,6 +9,7 @@
 package com.iaso.antibiotic.dao;
 
 import com.iaso.antibiotic.model.Antibiotic;
+import com.iaso.antibiotic.model.Bacteria;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,6 +17,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 //import javax.annotation.Resources;
 
@@ -38,5 +40,17 @@ public class AntibioticDao {
         String statement = "AntibioticMapper.findAntibioticByName";
         Antibiotic antibiotic = (Antibiotic)session.selectOne(statement, name);
         return antibiotic;
+    }
+
+    public List<String> findAllNodeID(String id){
+        String statment = "AntibioticMapper.findAllNodeID";
+        List<String> idList = session.selectList(statment, id);
+        return idList;
+    }
+
+    public List<Bacteria> findBacteriaByID(List<String> idList){
+        String statment = "AntibioticMapper.findBacteriaByID";
+        List<Bacteria> bacteriaList = session.selectList(statment, idList);
+        return bacteriaList;
     }
 }
