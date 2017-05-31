@@ -11,6 +11,7 @@ package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.model.Antibiotic;
 import com.iaso.antibiotic.model.Bacteria;
+import com.iaso.antibiotic.model.Situation;
 import com.iaso.antibiotic.service.AntibioticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +73,7 @@ public class MainController {
 
         return idStr;*/
 
-        /*测试findBacteriaByID*/
+       /* 测试findBacteriaByID
         List<String> idList = new ArrayList<String>();
         idList.add("34fa29c9-d681-11e6-82b5-3497f68b8eda");
         idList.add("34fa49b3-d681-11e6-82b5-3497f68b8eda");
@@ -86,6 +87,38 @@ public class MainController {
             showStr += tmp;
         }
 
+        return showStr;*/
+
+        /*测试findSituationByID
+        List<String> idList = new ArrayList<String>();
+        idList.add("d3466268-d687-11e6-82b5-3497f68b8eda");
+        idList.add("d3467cac-d687-11e6-82b5-3497f68b8eda");
+        idList.add("d3468b10-d687-11e6-82b5-3497f68b8eda");
+        idList.add("d3469d9c-d687-11e6-82b5-3497f68b8eda");
+        List<Situation> resultList = antibioticService.findSituationByID(idList);
+        String showStr = "";
+        for (Situation s: resultList) {
+            String tmp = "id: " + s.getSituationId() + "<br>name: " + s.getSituationName() + "<br><hr><br>";
+            showStr += tmp;
+        }
+
+        return showStr;*/
+
+        List<String> idList = new ArrayList<String>();
+        idList.add("31e104dd-d685-11e6-82b5-3497f68b8eda");
+        idList.add("31e12f96-d685-11e6-82b5-3497f68b8eda");
+        idList.add("31e18cfb-d685-11e6-82b5-3497f68b8eda");
+        idList.add("31e197a0-d685-11e6-82b5-3497f68b8eda");
+        String id = "31e197a0-d685-11e6-82b5-3497f68b8eda";
+
+        List<Antibiotic> antibioticList = antibioticService.findAntibioticByID(id, idList);
+        String showStr = "";
+        for (Antibiotic antibiotic: antibioticList) {
+            String tmp = "id     " + antibiotic.getId() + "<br>name     " + antibiotic.getName()
+                    + "<br>type    " + antibiotic.getType() + "<br>description     " + antibiotic.getDescription()
+                    + "<br>indication  " + antibiotic.getDrug_indication() + "<br><hr><br>";
+            showStr += tmp;
+        }
         return showStr;
     }
 

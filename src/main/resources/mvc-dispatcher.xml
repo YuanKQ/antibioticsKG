@@ -14,16 +14,17 @@
     <context:component-scan base-package="com.iaso.antibiotic.controller"/>
 
     <!-- 开启注解 -->
-    <mvc:annotation-driven />
-
-    <!-- 静态资源(js、image等)的访问 -->
-    <mvc:default-servlet-handler />
-
-
+    <!--导入jackson的jar包即可使用springMVC默认配置返回json-->
+    <mvc:annotation-driven>
+    </mvc:annotation-driven>
 
 
     <!--用于支持Servlet、JSP视图解析-->
     <context:annotation-config />
+
+
+    <!-- 静态资源(js、image等)的访问 -->
+    <mvc:default-servlet-handler />
 
     <!--以下配置是为了解决同时使用JSP和FTL，顺序很重要：freemarkerResolver-》servletResolver-》freemarkerConfig-->
     <!-- viewResolver for Freemarker -->
@@ -83,6 +84,5 @@
     <bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
     <bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
     <bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/>
-
 
 </beans>

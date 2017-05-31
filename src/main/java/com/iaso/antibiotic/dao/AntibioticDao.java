@@ -10,6 +10,7 @@ package com.iaso.antibiotic.dao;
 
 import com.iaso.antibiotic.model.Antibiotic;
 import com.iaso.antibiotic.model.Bacteria;
+import com.iaso.antibiotic.model.Situation;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,7 +18,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //import javax.annotation.Resources;
 
@@ -41,6 +44,14 @@ public class AntibioticDao {
         Antibiotic antibiotic = (Antibiotic)session.selectOne(statement, name);
         return antibiotic;
     }
+    public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
+        String statment = "AntibioticMapper.findAntibioticByID";
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("id", id);
+        paraMap.put("list", idList);
+        List<Antibiotic> antibioticList = session.selectList(statment, paraMap);
+        return antibioticList;
+    }
 
     public List<String> findAllNodeID(String id){
         String statment = "AntibioticMapper.findAllNodeID";
@@ -52,5 +63,11 @@ public class AntibioticDao {
         String statment = "AntibioticMapper.findBacteriaByID";
         List<Bacteria> bacteriaList = session.selectList(statment, idList);
         return bacteriaList;
+    }
+
+    public List<Situation> findSituationByID(List<String> idList){
+        String statment = "AntibioticMapper.findSituationByID";
+        List<Situation> situationList = session.selectList(statment, idList);
+        return situationList;
     }
 }

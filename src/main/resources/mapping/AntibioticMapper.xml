@@ -29,6 +29,13 @@
         select * from antibiotic where antibiotic_name = #{name}
     </select>
 
+    <select id="findAntibioticByID" parameterType="map" resultMap="AntibioticResult">
+        SELECT * FROM antibiotic WHERE antibiotic_id != #{id} AND antibiotic_id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+    </select>
+
     <!--
     *** 查询与Ａｎｔｉｂｉｏｔｉｃ相关的所有的节点
     *** 返回类型为List<String>, 主要体现在AntibioticDao.findAllNodeID的返回类型
@@ -62,10 +69,23 @@
         </foreach>
     </select>
 
+    <resultMap id="BaseResultMap" type="com.iaso.antibiotic.model.Situation">
+        <id column="relation_id" jdbcType="VARCHAR" property="relationId" />
+        <result column="relation_name" jdbcType="VARCHAR" property="relationName" />
+        <result column="relation_type" jdbcType="VARCHAR" property="relationType" />
+        <result column="source_type" jdbcType="VARCHAR" property="sourceType" />
+        <result column="target_type" jdbcType="VARCHAR" property="targetType" />
+    </resultMap>
 
-    <!--
-    <insert id="addUser" parameterType="com.nothing.Model.User">
-        insert into user_nothing(username,password) values(#{username},#{password})
-    </insert>-->
+    <resultMap id="SituationResult" type="com.iaso.antibiotic.model.Situation">
+        <id column="situation_id" jdbcType="VARCHAR" property="situationId" />
+        <result column="situation_name" jdbcType="VARCHAR" property="situationName" />
+    </resultMap>
+    <select id="findSituationByID" resultMap="SituationResult">
+        SELECT * FROM situation WHERE situation_id IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")" >
+            #{item}
+        </foreach>
+    </select>
 
 </mapper>

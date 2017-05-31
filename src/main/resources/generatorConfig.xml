@@ -37,13 +37,6 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成哪些表-->
-        <table tableName="bacteria" domainObjectName="Bacteria" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="complication" domainObjectName="Complication" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="disease" domainObjectName="Disease" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="edge_in_KG" domainObjectName="Edge" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="infection_site" domainObjectName="InfectionSite" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="relation" domainObjectName="Situation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="symptom" domainObjectName="Symptom" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
-        <table tableName="symptom_type" domainObjectName="SymptomType" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="situation" domainObjectName="Situation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
     </context>
 </generatorConfiguration>

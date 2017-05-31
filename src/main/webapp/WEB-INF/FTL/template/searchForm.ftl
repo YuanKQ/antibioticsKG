@@ -1,17 +1,17 @@
 <div class="panel">
-    <script type="text/javascript">
-        //添加用户
-        function clickButton() {
-            var form = document.forms[0];
-            form.action = "/search";
-            form.method = "get";
-            form.submit();
-        }
-    </script>
+    <#--<script type="text/javascript">-->
+        <#--//添加用户-->
+        <#--function clickButton() {-->
+            <#--var form = document.forms[0];-->
+            <#--form.action = "/search";-->
+            <#--form.method = "get";-->
+            <#--form.submit();-->
+        <#--}-->
+    <#--</script>-->
 
     <div class="panel-body">
         <div class="container">
-            <form enctype="multipart/form-data"  action ="/search", method="get">
+            <form id="searchForm">
                 <div class="row">
                     <div class="col-md-2">
                         <h1><font face="微软雅黑">IASO</font></h1>
