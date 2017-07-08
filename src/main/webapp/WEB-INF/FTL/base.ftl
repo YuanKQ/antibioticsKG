@@ -1,6 +1,19 @@
 <#--父模板-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<style>
+
+    .links line {
+        stroke: #999;
+        stroke-opacity: 0.6;
+    }
+
+    .nodes circle {
+        stroke: #fff;
+        stroke-width: 3px;
+    }
+
+</style>
 <head>
 <#--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
     <#include "/template/head.html">

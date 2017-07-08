@@ -1,5 +1,9 @@
 package com.iaso.antibiotic.model;
 
+import com.iaso.antibiotic.json.GNode;
+
+import java.util.HashMap;
+
 public class Situation {
     private String situationId;
 
@@ -19,5 +23,15 @@ public class Situation {
 
     public void setSituationName(String situationName) {
         this.situationName = situationName == null ? null : situationName.trim();
+    }
+
+    public GNode situation2GNode(int group) {
+        GNode node = new GNode(this.situationName, "situation", group);
+
+        HashMap<String, String> infos = new HashMap<String, String>();
+        String infoStr = "<b>[Name]</b>" + this.situationName + "<br /><br /><b>[Type]</b> Situation ";
+        node.setInfos(infoStr);
+
+        return node;
     }
 }

@@ -40,6 +40,11 @@ public class AntibioticDao {
     }
 
     public Antibiotic findAntibioticByName(String name) {
+        /**
+         * 数据库中存在部分重名的数据, 有时是selectOne可能会报错:
+         *    org.apache.ibatis.exceptions.TooManyResultsException:
+         *    Expected one result (or null) to be returned by selectOne(), but found: 2
+         */
         String statement = "AntibioticMapper.findAntibioticByName";
         Antibiotic antibiotic = (Antibiotic)session.selectOne(statement, name);
         return antibiotic;

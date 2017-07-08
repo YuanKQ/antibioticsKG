@@ -1,5 +1,7 @@
 package com.iaso.antibiotic.model;
 
+import com.iaso.antibiotic.json.GNode;
+
 public class Bacteria {
     private String bacteriaId;
 
@@ -39,5 +41,14 @@ public class Bacteria {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public GNode bacteria2GNode(int group) {
+        GNode node = new GNode(this.getBacteriaName(), "bacteria", group);
+        String infoStr = "<b>[Name]</b>" + this.getBacteriaName() + "<br /><br /><b>[Type]</b> Bacteria "
+                + "<br /><br /><b>[Description]</b><br />" + this.getDescription();
+        node.setInfos(infoStr);
+
+        return node;
     }
 }

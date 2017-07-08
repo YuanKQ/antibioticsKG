@@ -20,7 +20,11 @@
                     <div class="col-md-10">
                         <br>
                         <div class="input-group">
-                            <input type="text" id="keywords" name="keywords" class="form-control input-lg" placeholder="搜索......" value="dfghdfgh">
+                        <@block name="searchMention">
+                            <input type="text" id="keywords" name="keywords" class="form-control input-lg"
+                                   placeholder="搜索......" value="AmBisome">
+
+                        </@block>
 
                             <!--<input type="button" class="btn btn-default  btn-lg" onclick="clickButton()" value="search">-->
                             <span class="input-group-btn">

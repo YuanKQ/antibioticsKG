@@ -29,7 +29,6 @@ public class GLink {
     public GLink(String source, String target) {
         this.source = source;
         this.target = target;
-        this.value = 1;
     }
 
     public String getSource() {

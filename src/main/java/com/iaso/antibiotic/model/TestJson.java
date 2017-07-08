@@ -3,7 +3,7 @@
  * Date: 17-5-30 下午4:37
  * Email: kq_yuan@outlook.com
  *
- * Description:
+ * Description: [可丢弃］只是为了验证Jackson包是否有效
  *
  ******************************/
 package com.iaso.antibiotic.model;

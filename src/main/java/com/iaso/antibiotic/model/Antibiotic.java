@@ -8,6 +8,11 @@
  ******************************/
 package com.iaso.antibiotic.model;
 
+import com.iaso.antibiotic.json.GNode;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class Antibiotic {
     private String id;
     private String name;
@@ -57,5 +62,15 @@ public class Antibiotic {
         this.type = antibiotic.type;
         this.description = antibiotic.description;
         this.drug_indication = antibiotic.drug_indication;
+    }
+
+    public GNode antibiotic2GNode(int group) {
+        GNode node = new GNode(this.name, "antibiotic", group);
+        String infoStr = "<b>[Name]</b>" + this.name + "<br /><br /><b>[Type]</b> Antibiotic "
+                + "<br /><br /><b>[Description]</b><br />" + this.description
+                + "<br /><br /><b>[Drug indication]</b><br />" + this.drug_indication;
+        node.setInfos(infoStr);
+
+        return node;
     }
 }

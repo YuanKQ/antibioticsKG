@@ -10,6 +10,7 @@ package com.iaso.antibiotic.json;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GNode implements Serializable {
     /**
@@ -24,10 +25,17 @@ public class GNode implements Serializable {
      */
     private String id;
     private String infos;
+    private String type;
     private int group;
 
     public GNode(String id, int group) {
         this.id = id;
+        this.group = group;
+    }
+
+    public GNode(String id, String type, int group) {
+        this.id = id;
+        this.type = type;
         this.group = group;
     }
 
@@ -45,5 +53,9 @@ public class GNode implements Serializable {
 
     public int getGroup() {
         return group;
+    }
+
+    public String getType() {
+        return type;
     }
 }
