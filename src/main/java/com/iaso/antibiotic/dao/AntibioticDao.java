@@ -15,6 +15,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -24,6 +25,7 @@ import java.util.Map;
 
 //import javax.annotation.Resources;
 
+//@Component
 public class AntibioticDao {
     private SqlSessionFactory sessionFactory;
     private SqlSession session;
@@ -40,21 +42,26 @@ public class AntibioticDao {
     }
 
     public Antibiotic findAntibioticByName(String name) {
-        /**
-         * 数据库中存在部分重名的数据, 有时是selectOne可能会报错:
-         *    org.apache.ibatis.exceptions.TooManyResultsException:
-         *    Expected one result (or null) to be returned by selectOne(), but found: 2
-         */
         String statement = "AntibioticMapper.findAntibioticByName";
-        Antibiotic antibiotic = (Antibiotic)session.selectOne(statement, name);
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("name", name);
+        paraMap.put("limit", 1);
+        Antibiotic antibiotic = (Antibiotic) session.selectOne(statement, paraMap);
         return antibiotic;
     }
+
     public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
         String statment = "AntibioticMapper.findAntibioticByID";
         Map<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("id", id);
         paraMap.put("list", idList);
         List<Antibiotic> antibioticList = session.selectList(statment, paraMap);
+        for (Antibiotic a : antibioticList
+                ) {
+            if (a.getId().equals(id)) {
+                antibioticList.remove(a);
+                break;
+            }
+        }
         return antibioticList;
     }
 
@@ -64,15 +71,15 @@ public class AntibioticDao {
         return idList;
     }
 
-    public List<Bacteria> findBacteriaByID(List<String> idList){
-        String statment = "AntibioticMapper.findBacteriaByID";
+/*    public List<Bacteria> findBacteriaByID(List<String> idList){
+        String statment = "BacteriaMapper.findBacteriaByID";
         List<Bacteria> bacteriaList = session.selectList(statment, idList);
         return bacteriaList;
-    }
+    }*/
 
-    public List<Situation> findSituationByID(List<String> idList){
-        String statment = "AntibioticMapper.findSituationByID";
+    /*public List<Situation> findSituationByID(List<String> idList){
+        String statment = "SituationMapper.findSituationByID";
         List<Situation> situationList = session.selectList(statment, idList);
         return situationList;
-    }
+    }*/
 }

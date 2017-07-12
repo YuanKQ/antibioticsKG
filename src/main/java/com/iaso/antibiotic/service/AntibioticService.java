@@ -8,51 +8,125 @@
  ******************************/
 package com.iaso.antibiotic.service;
 
-import com.iaso.antibiotic.dao.AntibioticDao;
+import com.iaso.antibiotic.dao.*;
 import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.json.GNode;
-import com.iaso.antibiotic.model.Antibiotic;
-import com.iaso.antibiotic.model.Bacteria;
-import com.iaso.antibiotic.model.Situation;
+import com.iaso.antibiotic.model.*;
+import com.iaso.antibiotic.model.SymptomType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import sun.nio.fs.GnomeFileTypeDetector;
 
+import javax.xml.ws.ServiceMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class AntibioticService {
-    private AntibioticDao antibioticDao;
 
-    public AntibioticService() {
-        antibioticDao = new AntibioticDao();
+    //@Autowired
+    private AntibioticDao antibioticDao = new AntibioticDao();
+
+    //    @Autowired
+    private BacteriaDao bacteriaDao = new BacteriaDao();
+
+    //    @Autowired
+    private SituationDao situationDao = new SituationDao();
+
+    //    @Autowired
+    private InfectionSiteDao infectionSiteDao = new InfectionSiteDao();
+
+    //    @Autowired
+    private DiseaseDao diseaseDao = new DiseaseDao();
+
+    //    @Autowired
+    private ComplicationDao complicationDao = new ComplicationDao();
+
+    //    @Autowired
+    private SymptomDao symptomDao = new SymptomDao();
+
+    //    @Autowired
+    private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
+
+//    public AntibioticService() {
+//        antibioticDao = new AntibioticDao();
+//    }
+//
+//
+//    public Antibiotic findAntibioticByName(String name){
+//        return antibioticDao.findAntibioticByName(name);
+//    }
+//
+//    public List<String> findAllNodeID(String id){
+//        return antibioticDao.findAllNodeID(id);
+//    }
+//
+//    public List<Bacteria> findBcateriaByID(List<String> idList){
+//        return antibioticDao.findBacteriaByID(idList);
+//    }
+//
+//    public List<Situation> findSituationByID(List<String> idList){
+//        return antibioticDao.findSituationByID(idList);
+//    }
+//
+//    public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
+//        return antibioticDao.findAntibioticByID(id, idList);
+//    }
+
+    private HashMap<String, Object> createGraphMap(List<GNode> nodeList) {
+        List<GLink> linkList = new ArrayList<GLink>();
+        int size = nodeList.size();
+        int max = 0;
+        for (int i = 1; i < size; i++) {
+            int tmp = nodeList.get(i).getGroup();
+            max = max > tmp ? max : tmp;
+            GLink link = new GLink(nodeList.get(0).getId(), nodeList.get(i).getId(), tmp);
+            linkList.add(link);
+        }
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("nodes", nodeList);
+        map.put("links", linkList);
+        map.put("totalGroup", max);
+
+        return map;
     }
 
-    public Antibiotic findAntibioticByName(String name){
-        return antibioticDao.findAntibioticByName(name);
-    }
+    public HashMap<String, Object> buildBacteriaGraph(String name) {
+        Bacteria bacteria = bacteriaDao.findBacteriaByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(bacteria.getBacteriaId());
+        List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
+        List<InfectionSite> infectionSiteList = infectionSiteDao.findInfectionSiteByID(idList);
+        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID("", idList);
 
-    public List<String> findAllNodeID(String id){
-        return antibioticDao.findAllNodeID(id);
-    }
+        List<GNode> nodeList = new ArrayList<GNode>();
+        GNode sourceNode = bacteria.bacteria2GNode(0);
+        nodeList.add(sourceNode);
+        for (Antibiotic a : antibioticList) {
+            GNode node = a.antibiotic2GNode(1);
+            nodeList.add(node);
+        }
 
-    public List<Bacteria> findBcateriaByID(List<String> idList){
-        return antibioticDao.findBacteriaByID(idList);
-    }
+        for (Disease d : diseaseList) {
+            GNode node = d.disease2GNode(2);
+            nodeList.add(node);
+        }
 
-    public List<Situation> findSituationByID(List<String> idList){
-        return antibioticDao.findSituationByID(idList);
-    }
+        for (InfectionSite site : infectionSiteList) {
+            GNode node = site.infectionSite2GNode(3);
+            nodeList.add(node);
+        }
 
-    public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
-        return antibioticDao.findAntibioticByID(id, idList);
+        return createGraphMap(nodeList);
     }
 
     public HashMap<String, Object> buildAntibioticGraph(String name) {
-        Antibiotic antibiotic = findAntibioticByName(name);
-        List<String> idList = findAllNodeID(antibiotic.getId());
-        List<Bacteria> bacteriaList = findBcateriaByID(idList);
-        List<Situation> situationList = findSituationByID(idList);
-        List<Antibiotic> antibioticList = findAntibioticByID(antibiotic.getId(), idList);
+        Antibiotic antibiotic = antibioticDao.findAntibioticByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(antibiotic.getId());
+        List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
+        List<Situation> situationList = situationDao.findSituationByID(idList);
+        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(antibiotic.getId(), idList);
 
         List<GNode> nodeList = new ArrayList<GNode>();
         GNode sourceNode = antibiotic.antibiotic2GNode(0);
@@ -73,20 +147,81 @@ public class AntibioticService {
             nodeList.add(node);
         }
 
+        return createGraphMap(nodeList);
+    }
+
+    public HashMap<String, Object> buildDiseaseGraph(String name) {
+        Disease disease = diseaseDao.findDiseaseByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(disease.getId());
+        List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
+        List<Complication> complicationList = complicationDao.findComplicationByIdList(idList);
+        List<Symptom> symptomList = symptomDao.findSymptomByIdList(idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
+        GNode sourceNode = disease.disease2GNode(0);
+        nodeList.add(sourceNode);
+        for (Complication c : complicationList) {
+            GNode node = c.complication2GNode(1);
+            nodeList.add(node);
+        }
+
+        for (Bacteria b : bacteriaList) {
+            GNode node = b.bacteria2GNode(2);
+            nodeList.add(node);
+        }
+
+        for (Symptom s : symptomList
+                ) {
+            GNode node = s.symptom2GNode(3);
+            nodeList.add(node);
+        }
+
+        return createGraphMap(nodeList);
+    }
+
+    public HashMap<String, Object> buildSymptomGraph(String name) {
+        Symptom symptom = symptomDao.findSymptomByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(symptom.getSymptomId());
+        if (idList.isEmpty())
+            return null;
+
+        List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
+        List<SymptomType> symptomTypeList = symptomTypeDao.findSymptomTypeByIdList(idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
         List<GLink> linkList = new ArrayList<GLink>();
-        int size = nodeList.size();
-        int max = 0;
-        for (int i = 1; i < size; i++) {
-            int tmp = nodeList.get(i).getGroup();
-            max = max > tmp ? max : tmp;
-            GLink link = new GLink(nodeList.get(0).getId(), nodeList.get(i).getId(), tmp);
-            linkList.add(link);
+        int totalGroup = 4;
+
+        GNode sourceNode = symptom.symptom2GNode(0);
+        nodeList.add(sourceNode);
+        for (Disease d : diseaseList
+                ) {
+            GNode node = d.disease2GNode(1);
+            nodeList.add(node);
+            linkList.add(new GLink(symptom.getSymptomName(), d.getDiseaseName(), 1));
+        }
+
+        for (SymptomType st : symptomTypeList
+                ) {
+            GNode node = st.symptomType2GNode(2);
+            nodeList.add(node);
+            linkList.add(new GLink(symptom.getSymptomName(), st.getSymptomTypeName(), 2));
+
+            List<String> idList2 = antibioticDao.findAllNodeID(st.getSymptomTypeId());
+            List<SymptomType> symptomTypeList2 = symptomTypeDao.findSymptomTypeByIdList(idList2);
+
+            for (SymptomType st2 : symptomTypeList2
+                    ) {
+                GNode node1 = st2.symptomType2GNode(3);
+                nodeList.add(node1);
+                linkList.add(new GLink(st.getSymptomTypeName(), st2.getSymptomTypeName(), 3));
+            }
         }
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("nodes", nodeList);
         map.put("links", linkList);
-        map.put("totalGroup", max);
+        map.put("totalGroup", totalGroup);
 
         return map;
     }

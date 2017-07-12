@@ -44,7 +44,7 @@ public class Bacteria {
     }
 
     public GNode bacteria2GNode(int group) {
-        GNode node = new GNode(this.getBacteriaName(), "bacteria", group);
+        GNode node = new GNode(bacteriaName, "bacteria", group);
         String infoStr = "<b>[Name]</b>" + this.getBacteriaName() + "<br /><br /><b>[Type]</b> Bacteria "
                 + "<br /><br /><b>[Description]</b><br />" + this.getDescription();
         node.setInfos(infoStr);

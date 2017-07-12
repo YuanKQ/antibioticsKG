@@ -28,11 +28,6 @@ public class GNode implements Serializable {
     private String type;
     private int group;
 
-    public GNode(String id, int group) {
-        this.id = id;
-        this.group = group;
-    }
-
     public GNode(String id, String type, int group) {
         this.id = id;
         this.type = type;

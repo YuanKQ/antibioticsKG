@@ -1,20 +1,12 @@
 package com.iaso.antibiotic.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.iaso.antibiotic.json.GLink;
-import com.iaso.antibiotic.json.GNode;
-import com.iaso.antibiotic.json.Graph;
-import com.iaso.antibiotic.model.TestJson;
 import com.iaso.antibiotic.service.AntibioticService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -26,12 +18,20 @@ public class SearchController {
     //  搜索栏:搜索领域graph，搜索关键词keywords
     private AntibioticService antibioticService = new AntibioticService();
 
-    @RequestMapping(name = "/search", method = RequestMethod.GET)
+    @RequestMapping(name = "/**/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> search(String keywords, String graph) {
         if (graph.equals("antibiotic") == true) {
             return antibioticService.buildAntibioticGraph(keywords);
+        } else if (graph.equals("bacteria") == true) {
+            return antibioticService.buildBacteriaGraph(keywords);
+        } else if (graph.equals("disease") == true) {
+            return antibioticService.buildDiseaseGraph(keywords);
+        } else if (graph.equals("symptom") == true) {
+            return antibioticService.buildSymptomGraph(keywords);
         }
+
+//        return antibioticService.buildSymptomGraph(keywords);
 
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("keywords", keywords);

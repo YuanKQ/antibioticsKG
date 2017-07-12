@@ -18,6 +18,14 @@
 
     <mappers>
         <mapper resource="/mapping/AntibioticMapper.xml" />
+        <mapper resource="/mapping/BacteriaMapper.xml"/>
+        <mapper resource="/mapping/SituationMapper.xml"/>
+        <mapper resource="/mapping/InfectionSiteMapper.xml"/>
+        <mapper resource="/mapping/DiseaseMapper.xml"/>
+        <mapper resource="/mapping/ComplicationMapper.xml"/>
+        <mapper resource="/mapping/SymptomMapper.xml"/>
+        <mapper resource="/mapping/SymptomTypeMapper.xml"/>
+        <mapper resource="/mapping/EdgeMapper.xml"/>
     </mappers>
 
 </configuration>

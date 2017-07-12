@@ -1,5 +1,7 @@
 package com.iaso.antibiotic.model;
 
+import com.iaso.antibiotic.json.GNode;
+
 public class Symptom {
     private String symptomId;
 
@@ -8,6 +10,8 @@ public class Symptom {
     private String bodyPart;
 
     private String description;
+
+    private String typeName = "symptom";
 
     public String getSymptomId() {
         return symptomId;
@@ -39,5 +43,14 @@ public class Symptom {
 
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
+    }
+
+    public GNode symptom2GNode(int group) {
+        GNode node = new GNode(symptomName, typeName, group);
+        String infoStr = "<b>[Name]</b>" + symptomName + "<br /><br /><b>[Type]</b> " + typeName + "<br /><br /><b>[body part]</b> " + bodyPart
+                + "<br /><br /><b>[Description]</b><br />" + this.getDescription();
+        node.setInfos(infoStr);
+
+        return node;
     }
 }

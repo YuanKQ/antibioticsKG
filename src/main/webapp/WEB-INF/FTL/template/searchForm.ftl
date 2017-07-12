@@ -11,7 +11,7 @@
 
     <div class="panel-body">
         <div class="container">
-            <form id="searchForm">
+            <div id="searchForm">
                 <div class="row">
                     <div class="col-md-2">
                         <h1><font face="微软雅黑">IASO</font></h1>
@@ -22,7 +22,7 @@
                         <div class="input-group">
                         <@block name="searchMention">
                             <input type="text" id="keywords" name="keywords" class="form-control input-lg"
-                                   placeholder="搜索......" value="AmBisome">
+                                   placeholder="搜索......" value="AmBisome" ">
 
                         </@block>
 
@@ -48,7 +48,7 @@
                         </p>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

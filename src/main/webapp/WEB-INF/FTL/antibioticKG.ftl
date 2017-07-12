@@ -2,7 +2,7 @@
 <@override name='baseTile'>antibioticKG</@override>
 <@override name="searchMention">
 <input type="text" id="keywords" name="keywords" class="form-control input-lg" placeholder="搜索......"
-       value="Amoxycillin">
+       value="Amoxycillin" onkeydown="enterSearch()">
 </@override>
 
 <@override name="baseDomain">
@@ -14,7 +14,7 @@
 <a onclick="getResultAndRedraw('AmBisome','antibiotic')">AmBisome</a> 
 <a onclick="getResultAndRedraw('Amoxycillin','antibiotic')">Amoxycillin</a> 
 <a onclick="getResultAndRedraw('Flucloxacillin','antibiotic')">Flucloxacillin</a>
-    </@override>
+</@override>
 
 
 
@@ -56,10 +56,27 @@
         getResult(qs, redraw);
     }
 
+    function clickButton() {
+
+        var kw = $("#keywords").val();
+        var graph = $("#graph").val();
+
+        var qs = 'keywords=' + kw + '&graph=' + graph;
+        console.log(qs)
+        getResult(qs, redraw)
+    }
+
+    function updateSearchForm(kw) {
+        var kwArray = kw.split(/[&, =]/);
+        document.getElementById('keywords').value = kwArray[1];
+    }
+
     function getResult(kw, callback) {
+        updateSearchForm(kw);
+
         $.ajax({
             type: "GET",
-            url: "/search",
+            url: "antibioticKG/search",
             data: kw,
             datatype: "application/json",
             error: function (error) {
@@ -138,7 +155,9 @@
                     return color(d.group);
                 })
                 .on("click", function (d) {
-//                    console.log(d.id +"  group:" + d.group);
+                    //解决node中drag事件和click事件的冲突(node同时监听drag和click事件, 当拖动时,会同时触发click事件)
+                    if (d3.event.defaultPrevented) //检查是否为drag事件
+                        return;
                     getResultAndRedraw(d.id, d.type);
                 })
                 .on("mouseover", showDescription)
@@ -211,11 +230,16 @@
         }
     }
 
-    function clickButton() {
-        getResult($("#searchForm").serialize(), redraw)
+    function enterSearch() {
+        var event = window.event || arguments.callee.caller.arguments[0];
+        if (event.keyCode == 13) {
+            var kw = $("#keywords").val();
+            var graph = $("#graph").val();
+            var qs = "keywords=" + kw + "&graph=" + graph;
+            console.log(qs);
+            getResult(qs, redraw);
+        }
     }
-
-
 
 </script>
 </@override>
