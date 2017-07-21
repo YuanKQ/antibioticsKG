@@ -21,7 +21,7 @@ public class SearchController {
     @RequestMapping(name = "/**/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> search(String keywords, String graph) {
-        if (graph.equals("antibiotic") == true) {
+        /*if (graph.equals("antibiotic") == true) {
             return antibioticService.buildAntibioticGraph(keywords);
         } else if (graph.equals("bacteria") == true) {
             return antibioticService.buildBacteriaGraph(keywords);
@@ -29,14 +29,14 @@ public class SearchController {
             return antibioticService.buildDiseaseGraph(keywords);
         } else if (graph.equals("symptom") == true) {
             return antibioticService.buildSymptomGraph(keywords);
-        }
+        }*/
 
-//        return antibioticService.buildSymptomGraph(keywords);
+        return antibioticService.buildDiseaseGraph(keywords);
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
+        /*HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("keywords", keywords);
         map.put("graph", graph);
-        return map;
+        return map;*/
     }
     /* // !!!推荐: parse 复杂对象(内含ArrayList<对象>) into json
     public HashMap<String, Object> testGraph(String keywords, String graph) {

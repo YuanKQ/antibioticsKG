@@ -84,7 +84,7 @@
             },
             success: function (graph) {
                 console.log("Successfully accept.");
-                console.log(graph.toString());
+//                console.log(graph.toString());
                 callback(graph);
             }
         });
@@ -97,8 +97,7 @@
         var width = $("#shownSVG").width();
         var height = $("#shownSVG").height();
         var min = width > height ? height : width
-//        var linkDistance = min/2.5 > 30? min/2.5: 30;
-        var linkDistance = min / 8 > 15 ? min / 8 : 15;
+        var linkDistance = min / 9 > 15 ? min / 9 : 15;
         var radius = min / 30 > 25 ? min / 30 : 25;
 
 
@@ -108,15 +107,20 @@
         var simulation = d3.forceSimulation()
                 .force("link", d3.forceLink().id(function (d) {
                     return d.id;
-                })
-                        .distance(function (d) {
-                            if (groupNum == 1)
-                                return linkDistance * 3;
-                            if (groupNum == 2)
-                                return linkDistance * 1.2 * d.value;
-                            if (groupNum > 4)
-                                return linkDistance * 0.7 * d.value;
-                            return linkDistance * d.value;
+                }).distance(function (d, i) {
+                    if (i < 10)
+                        return linkDistance * 2;
+                    if (i >= 10 && i < 31)
+                        return linkDistance * 3;
+                    if (i >= 31)
+                        return linkDistance * 4;
+                    /*if (groupNum == 1)
+                        return linkDistance * 3;
+                    if (groupNum == 2)
+                        return linkDistance * 1.2 * d.value;
+                    if (groupNum > 4)
+                        return linkDistance * 0.7 * d.value;
+                    return linkDistance * d.value;*/
                         }))
                 .force("charge", d3.forceManyBody())
                 .force("center", d3.forceCenter(width / 2, height / 2));
@@ -126,8 +130,60 @@
                 .selectAll("line")
                 .data(graph.links)
                 .enter().append("line")
-                .attr("stroke-width", function (d) {
-                    return Math.sqrt(d.value);
+                .attr("class", "link");
+//                .attr("stroke-width", function (d) {
+//                    return Math.sqrt(d.value);
+//                });
+
+        // 给link添加名称 ref: http://bl.ocks.org/fancellu/2c782394602a93921faff74e594d1bb1
+        edgePaths = svg.selectAll(".edgePath")
+                .data(graph.links)
+                .enter().append('path')
+                .attrs({
+                    'class': 'edgePath',
+                    'fill-opacity': 0,
+                    'stroke-opacity': 0,
+                    'id': function (d, i) {
+                        return 'edgePath_' + i;
+                    }
+                })
+                .style('pointer-events', 'none');
+
+//        edgepaths = svg.selectAll(".edgepath")
+//                .data(graph.links)
+//                .enter()
+//                .append('path')
+//                .attrs({
+//                    'class': 'edgepath',
+//                    'fill-opacity': 0,
+//                    'stroke-opacity': 0,
+//                    'id': function (d, i) {return 'edgepath' + i}
+//                })
+//                .style("pointer-events", "none");
+
+
+        edgeLabels = svg.selectAll(".edgeLabel")
+                .data(graph.links)
+                .enter().append('text')
+                .style("pointer-events", "none")
+                .attrs({
+                    'class': 'edgeLabel',
+                    'id': function (d, i) {
+                        return 'edgeLabel_' + i;
+                    },
+                    'font-size': 12,
+                    'fill': '#aaa'
+                });
+
+        edgeLabels.append('textPath')
+                .attr('xlink:href', function (d, i) {
+                    return '#edgePath_' + i;
+                })
+                .style("text-anchor", "middle")
+                .style('pointer-events', 'none')
+                .attr('startOffset', "50%")
+                .text(function (d, i) {
+                    return d.linkType;
                 });
 
         /*var node = svg.append("g")
@@ -205,6 +261,21 @@
             gnodes.attr("transform", function (d) {
                 return 'translate(' + [d.x, d.y] + ')';
             });
+
+            edgePaths.attr('d', function (d) {
+                return 'M ' + d.source.x + ' ' + d.source.y + ' L ' + d.target.x + ' ' + d.target.y;
+            });
+
+            edgeLabels.attr('transform', function (d) {
+                if (d.target.x < d.source.x) {
+                    var bbox = this.getBBox();  // adjust rect to text size
+                    rx = bbox.x + bbox.width / 2;
+                    ry = bbox.y + bbox.height / 2;
+                    return 'rotate(180 ' + rx + ' ' + ry + ')';
+                } else {
+                    return 'rotate(0)';
+                }
+            })
         }
 
         function dragstarted(d) {

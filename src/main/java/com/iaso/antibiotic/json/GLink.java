@@ -14,17 +14,30 @@ public class GLink {
      * 涵盖连线的基本信息：
      * ＠source：只有一个，即为查询的节点
      * ＠target
-     * ＠value=1
+     * @linkType: 节点关系名称
      */
     private String source;
     private String target;
-    private int value;
+    private String linkType;
 
-    public GLink(String source, String target, int value) {
+    /*public GLink(String source, String target, int value, String linkType) {
         this.source = source;
         this.target = target;
         this.value = value;
+        this.linkType = linkType;
+    }*/
+
+    public GLink(String source, String target, String linkType) {
+        this.source = source;
+        this.target = target;
+        this.linkType = linkType;
     }
+
+    /*public GLink(String source, String target, int value) {
+        this.source = source;
+        this.target = target;
+        this.value = value;
+    }*/
 
     public GLink(String source, String target) {
         this.source = source;
@@ -39,7 +52,7 @@ public class GLink {
         return target;
     }
 
-    public int getValue() {
-        return value;
+    public String getLinkType() {
+        return linkType;
     }
 }
