@@ -13,4 +13,8 @@
     </foreach>
   </select>
 
+  <select id="findSymptomTypeByName" resultMap="SymptomTypeMap">
+    SELECT * FROM symptom_type WHERE symptom_type_name = #{name} LIMIT #{limit}
+  </select>
+
 </mapper>

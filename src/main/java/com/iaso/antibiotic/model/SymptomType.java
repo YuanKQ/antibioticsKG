@@ -7,7 +7,7 @@ public class SymptomType {
 
     private String symptomTypeName;
 
-    private String typeName = "symptom_type"; //这个涉及数据库, 要将空格变为下划线
+    private String typeName = "symptom_type"; //数据库名称，这个涉及数据库, 要将空格变为下划线
 
     public String getSymptomTypeId() {
         return symptomTypeId;

@@ -13,4 +13,8 @@
     </foreach>
   </select>
 
+  <select id="findInfectionSiteByName" resultMap="InfectionSiteResult">
+    SELECT * FROM infection_site WHERE infection_site_name = #{name} LIMIT #{limit}
+  </select>
+
 </mapper>

@@ -92,6 +92,21 @@
 
     function redraw(graph) {
         $("#shownSVG").empty();
+        $("#description").empty();
+
+        if (graph.status == 404) {
+            var tmpSVG = d3.select("#shownSVG");
+            tmpSVG.append("g").append("text")
+                    .text("Node not found. \n 抱歉， 该名词暂时没有收录入库。\n数据将持续更新, 敬请期待。")
+                    .attrs({
+                        'font-size': "15pt",
+                        'fill': '#aaa',
+                        'x': "0",
+                        'y': "3%"
+                    });
+
+            return;
+        }
 
         var svg = d3.select("#shownSVG");
         var width = $("#shownSVG").width();
@@ -109,7 +124,7 @@
                     return d.id;
                 }).distance(function (d, i) {
                     if (i < 10)
-                        return linkDistance * 2;
+                        return linkDistance * 2 + 5;
                     if (i >= 10 && i < 31)
                         return linkDistance * 3;
                     if (i >= 31)

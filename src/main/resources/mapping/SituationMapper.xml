@@ -13,4 +13,7 @@
         </foreach>
     </select>
 
+    <select id="findSituationByName" resultMap="SituationResult">
+        SELECT * FROM situation WHERE situation_name = #{name} LIMIT #{limit}
+    </select>
 </mapper>

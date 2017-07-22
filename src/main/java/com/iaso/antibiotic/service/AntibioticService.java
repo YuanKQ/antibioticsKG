@@ -13,6 +13,7 @@ import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.json.GNode;
 import com.iaso.antibiotic.model.*;
 import com.iaso.antibiotic.model.SymptomType;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import javax.xml.ws.ServiceMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 enum NodeTypeEnum {
     SourceNode, AntibioticNode, BacteriaNode, ComplicationNode, DiseaseNode, InfectionSiteNode, SituationNode,
@@ -99,6 +101,7 @@ public class AntibioticService {
         map.put("nodes", nodeList);
         map.put("links", linkList);
         map.put("totalGroup", max);
+        map.put("status", 200);
 
         return map;
     }
@@ -254,6 +257,98 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
+    public HashMap<String, Object> buildSymptomTypeGraph(String name) {
+        SymptomType symptomType = symptomTypeDao.findSymptomTypeByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(symptomType.getSymptomTypeId());
+        List<SymptomType> symptomTypeList = symptomTypeDao.findSymptomTypeByIdList(idList);
+        List<Symptom> symptomList = symptomDao.findSymptomByIdList(idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
+        List<GLink> linkList = new ArrayList<GLink>();
+        int totalGroup = 3;
+
+        GNode sourceNode = symptomType.symptomType2GNode(NodeTypeEnum.SourceNode.ordinal());
+        nodeList.add(sourceNode);
+        for (SymptomType st : symptomTypeList
+                ) {
+            GNode node = st.symptomType2GNode(NodeTypeEnum.SymptomTypeNode.ordinal());
+            nodeList.add(node);
+            linkList.add(new GLink(sourceNode.getId(), node.getId(), LinkTypeEnum.SymptomTypeToSymptomType.toString()));
+        }
+
+        for (Symptom s : symptomList
+                ) {
+            GNode node = s.symptom2GNode(NodeTypeEnum.SymptomNode.ordinal());
+            nodeList.add(node);
+            linkList.add(new GLink(sourceNode.getId(), node.getId(), LinkTypeEnum.SymptomToSymptomType.toString()));
+        }
+
+        return createGraphMap(nodeList, linkList, totalGroup);
+    }
+
+    public HashMap<String, Object> buildComplicationGraph(String name) {
+        Complication complication = complicationDao.findComplicationByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(complication.getComplicationId());
+        List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
+        List<GLink> linkList = new ArrayList<GLink>();
+        int totalGroup = 2;
+
+        GNode sourceNode = complication.complication2GNode(NodeTypeEnum.SourceNode.ordinal());
+        nodeList.add(sourceNode);
+        for (Disease d : diseaseList
+                ) {
+            GNode node = d.disease2GNode(NodeTypeEnum.DiseaseNode.ordinal());
+            nodeList.add(node);
+            linkList.add(new GLink(sourceNode.getId(), node.getId(), LinkTypeEnum.DiseaseToComplication.toString()));
+        }
+
+        return createGraphMap(nodeList, linkList, totalGroup);
+    }
+
+    public HashMap<String, Object> buildInfectionSiteGraph(String name) {
+        InfectionSite infectionSite = infectionSiteDao.findInfectionSiteByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(infectionSite.getInfectionSiteId());
+        List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
+        List<GLink> linkList = new ArrayList<GLink>();
+        int totalGroup = 2;
+
+        GNode sourceNode = infectionSite.infectionSite2GNode(NodeTypeEnum.SourceNode.ordinal());
+        nodeList.add(sourceNode);
+        for (Bacteria b : bacteriaList
+                ) {
+            GNode node = b.bacteria2GNode(NodeTypeEnum.BacteriaNode.ordinal());
+            nodeList.add(node);
+            linkList.add(new GLink(sourceNode.getId(), node.getId(), LinkTypeEnum.BacteriaToInfectionSite.toString()));
+        }
+
+        return createGraphMap(nodeList, linkList, totalGroup);
+    }
+
+    public HashMap<String, Object> buildSituationGraph(String name) {
+        Situation situation = situationDao.findSituationByName(name);
+        List<String> idList = antibioticDao.findAllNodeID(situation.getSituationId());
+        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(situation.getSituationId(), idList);
+
+        List<GNode> nodeList = new ArrayList<GNode>();
+        List<GLink> linkList = new ArrayList<GLink>();
+        int totalGroup = 2;
+
+        GNode sourceNode = situation.situation2GNode(NodeTypeEnum.SourceNode.ordinal());
+        nodeList.add(sourceNode);
+        for (Antibiotic a : antibioticList
+                ) {
+            GNode node = a.antibiotic2GNode(NodeTypeEnum.AntibioticNode.ordinal());
+            nodeList.add(node);
+            linkList.add(new GLink(sourceNode.getId(), node.getId(), LinkTypeEnum.AntibioticToSituation.toString()));
+        }
+
+
+        return createGraphMap(nodeList, linkList, totalGroup);
+    }
 }
 
 

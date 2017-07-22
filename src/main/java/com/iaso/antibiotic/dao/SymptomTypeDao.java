@@ -18,7 +18,9 @@ import org.w3c.dom.ls.LSException;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //@Component
 public class SymptomTypeDao {
@@ -41,6 +43,16 @@ public class SymptomTypeDao {
         List<SymptomType> symptomTypeList = session.selectList(statememt, idList);
 
         return symptomTypeList;
+    }
+
+    public SymptomType findSymptomTypeByName(String name) {
+        String statememt = "SymptomTypeMapper.findSymptomTypeByName";
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("name", name);
+        paraMap.put("limit", 1);
+        SymptomType symptomType = (SymptomType) session.selectOne(statememt, paraMap);
+
+        return symptomType;
     }
 }
 

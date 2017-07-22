@@ -8,6 +8,7 @@
  ******************************/
 package com.iaso.antibiotic.dao;
 
+import com.iaso.antibiotic.model.Complication;
 import com.iaso.antibiotic.model.InfectionSite;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -44,5 +45,14 @@ public class InfectionSiteDao {
         List<InfectionSite> infectionSiteList = session.selectList(statement, paraMap);
 
         return infectionSiteList;
+    }
+
+    public InfectionSite findInfectionSiteByName(String name) {
+        String statememt = "InfectionSiteMapper.findInfectionSiteByName";
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("name", name);
+        paraMap.put("limit", 1);
+        InfectionSite infectionSite = (InfectionSite) session.selectOne(statememt, paraMap);
+        return infectionSite;
     }
 }

@@ -11,4 +11,8 @@
       #{item}
     </foreach>
   </select>
+
+  <select id="findComplicationByName" resultMap="ComplicationResult">
+    SELECT * FROM complication WHERE complication_name = #{name} LIMIT #{limit}
+  </select>
 </mapper>

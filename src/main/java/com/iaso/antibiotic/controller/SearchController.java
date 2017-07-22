@@ -21,22 +21,40 @@ public class SearchController {
     @RequestMapping(name = "/**/search", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String, Object> search(String keywords, String graph) {
-        /*if (graph.equals("antibiotic") == true) {
-            return antibioticService.buildAntibioticGraph(keywords);
-        } else if (graph.equals("bacteria") == true) {
-            return antibioticService.buildBacteriaGraph(keywords);
-        } else if (graph.equals("disease") == true) {
-            return antibioticService.buildDiseaseGraph(keywords);
-        } else if (graph.equals("symptom") == true) {
-            return antibioticService.buildSymptomGraph(keywords);
-        }*/
-
-        return antibioticService.buildDiseaseGraph(keywords);
-
-        /*HashMap<String, Object> map = new HashMap<String, Object>();
+        HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("keywords", keywords);
         map.put("graph", graph);
-        return map;*/
+        map.put("totalGroup", 0);
+        map.put("status", 404);
+        return map;
+
+//        return antibioticService.buildInfectionSiteGraph(keywords);
+//        return antibioticService.buildSymptomTypeGraph(keywords);
+
+//        if (graph.equals("antibiotic")) {
+//            return antibioticService.buildAntibioticGraph(keywords);
+//        } else if (graph.equals("bacteria")) {
+//            return antibioticService.buildBacteriaGraph(keywords);
+//        } else if (graph.equals("disease")) {
+//            return antibioticService.buildDiseaseGraph(keywords);
+//        } else if (graph.equals("symptom")) {
+//            return antibioticService.buildSymptomGraph(keywords);
+//        } else if (graph.equals("infection_site")) {
+//            return antibioticService.buildInfectionSiteGraph(keywords);
+//        } else if (graph.equals("symptom_type")) {
+//            return antibioticService.buildSymptomTypeGraph(keywords);
+//        } else if (graph.equals("complication")) {
+//            return antibioticService.buildComplicationGraph(keywords);
+//        } else if (graph.equals("situation")) {
+//            return antibioticService.buildSituationGraph(keywords);
+//        } else {
+//            HashMap<String, Object> map = new HashMap<String, Object>();
+//            map.put("keywords", keywords);
+//            map.put("graph", graph);
+//            map.put("totalGroup", 0);
+//            map.put("status", 400);
+//            return map;
+//        }
     }
     /* // !!!推荐: parse 复杂对象(内含ArrayList<对象>) into json
     public HashMap<String, Object> testGraph(String keywords, String graph) {
