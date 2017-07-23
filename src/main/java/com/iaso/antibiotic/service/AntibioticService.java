@@ -122,6 +122,9 @@ public class AntibioticService {
             throw new NullPointerException("The bacteria node can't be found. ");
 
         List<String> idList = antibioticDao.findAllNodeID(bacteria.getBacteriaId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(bacteria.bacteria2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
         List<InfectionSite> infectionSiteList = infectionSiteDao.findInfectionSiteByID(idList);
         List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID("", idList);
@@ -159,6 +162,9 @@ public class AntibioticService {
             throw new NullPointerException("The antibiotic node can't be found. ");
 
         List<String> idList = antibioticDao.findAllNodeID(antibiotic.getId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(antibiotic.antibiotic2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
         List<Situation> situationList = situationDao.findSituationByID(idList);
         List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(antibiotic.getId(), idList);
@@ -197,6 +203,9 @@ public class AntibioticService {
             throw new NullPointerException("The disease node can't be found. ");
 
         List<String> idList = antibioticDao.findAllNodeID(disease.getId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(disease.disease2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
         List<Complication> complicationList = complicationDao.findComplicationByIdList(idList);
         List<Symptom> symptomList = symptomDao.findSymptomByIdList(idList);
@@ -235,8 +244,8 @@ public class AntibioticService {
             throw new NullPointerException("The symptom node can't be found. ");
 
         List<String> idList = antibioticDao.findAllNodeID(symptom.getSymptomId());
-        if (idList.isEmpty())
-            return null;
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(symptom.symptom2GNode(NodeTypeEnum.SourceNode.ordinal()));
 
         List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
         List<SymptomType> symptomTypeList = symptomTypeDao.findSymptomTypeByIdList(idList);
@@ -284,6 +293,9 @@ public class AntibioticService {
         if (symptomType == null)
             throw new NullPointerException("The symptomType node can't be found. ");
         List<String> idList = antibioticDao.findAllNodeID(symptomType.getSymptomTypeId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(symptomType.symptomType2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<SymptomType> symptomTypeList = symptomTypeDao.findSymptomTypeByIdList(idList);
         List<Symptom> symptomList = symptomDao.findSymptomByIdList(idList);
 
@@ -314,7 +326,11 @@ public class AntibioticService {
         Complication complication = complicationDao.findComplicationByName(name);
         if (complication == null)
             throw new NullPointerException("The complication node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(complication.getComplicationId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(complication.complication2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
 
         List<GNode> nodeList = new ArrayList<GNode>();
@@ -337,9 +353,11 @@ public class AntibioticService {
         InfectionSite infectionSite = infectionSiteDao.findInfectionSiteByName(name);
         if (infectionSite == null)
             throw new NullPointerException("The infection site node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(infectionSite.getInfectionSiteId());
-        if (idList == null)
+        if (idList.size() == 0)
             return createSingleNodeGraphMap(infectionSite.infectionSite2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
 
         List<GNode> nodeList = new ArrayList<GNode>();
@@ -363,7 +381,11 @@ public class AntibioticService {
         Situation situation = situationDao.findSituationByName(name);
         if (situation == null)
             throw new NullPointerException("The situation node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(situation.getSituationId());
+        if (idList.size() == 0)
+            return createSingleNodeGraphMap(situation.situation2GNode(NodeTypeEnum.SourceNode.ordinal()));
+
         List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(situation.getSituationId(), idList);
 
         List<GNode> nodeList = new ArrayList<GNode>();
