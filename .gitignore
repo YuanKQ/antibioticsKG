@@ -27,3 +27,9 @@ out/
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.directory
+/antibioticdemo1.iml
+/db.xlsx
+/src/main/java/com/iaso/antibiotic/json/
+/src/main/java/com/iaso/antibiotic/test/
+/src/main/webapp/WEB-INF/TEST/
