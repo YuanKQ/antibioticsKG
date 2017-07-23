@@ -71,6 +71,13 @@ public class AntibioticDao {
         return idList;
     }
 
+    public List<Integer> findDBNameByKeyword(String name) {
+        String statement = "AntibioticMapper.findDBNameByKeyword";
+        List<Integer> dbNoList = session.selectList(statement, name);
+
+        return dbNoList;
+    }
+
 /*    public List<Bacteria> findBacteriaByID(List<String> idList){
         String statment = "BacteriaMapper.findBacteriaByID";
         List<Bacteria> bacteriaList = session.selectList(statment, idList);

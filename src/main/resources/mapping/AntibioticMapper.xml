@@ -44,6 +44,10 @@
         SELECT source FROM edge_in_KG WHERE target = #{researching_id}
     </select>
 
+    <select id="findDBNameByKeyword" parameterType="String" resultType="int">
+        SELECT db_No FROM antibioticKG_index WHERE keyword = #{name}
+    </select>
+
     <!--
     *** relation: antibiotic-bacteria
     *** 参数类型：List<String>

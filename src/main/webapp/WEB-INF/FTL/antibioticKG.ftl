@@ -6,7 +6,7 @@
 </@override>
 
 <@override name="baseDomain">
-<input type="hidden" id="graph" name="graph" value="antibiotic">
+<input type="hidden" id="graph" name="graph" value="antibioticKG">
 </@override>
 
 
@@ -95,15 +95,7 @@
         $("#description").empty();
 
         if (graph.status == 404) {
-            var tmpSVG = d3.select("#shownSVG");
-            tmpSVG.append("g").append("text")
-                    .text("Node not found. \n 抱歉， 该名词暂时没有收录入库。\n数据将持续更新, 敬请期待。")
-                    .attrs({
-                        'font-size': "15pt",
-                        'fill': '#aaa',
-                        'x': "0",
-                        'y': "3%"
-                    });
+            alert(graph.msg + "\n 抱歉， 该名词暂时没有收录入库。\n数据将持续更新, 敬请期待。");
 
             return;
         }
@@ -123,12 +115,14 @@
                 .force("link", d3.forceLink().id(function (d) {
                     return d.id;
                 }).distance(function (d, i) {
-                    if (i < 10)
+                    if (i < 15)  // 最内层 15
                         return linkDistance * 2 + 5;
-                    if (i >= 10 && i < 31)
+                    if (i >= 15 && i < 41) // 第二层 25
                         return linkDistance * 3;
-                    if (i >= 31)
+                    if (i >= 41 && i < 86) //第三层 45
                         return linkDistance * 4;
+                    if (i >= 86)
+                        return linkDistance * 4.5;
                     /*if (groupNum == 1)
                         return linkDistance * 3;
                     if (groupNum == 2)

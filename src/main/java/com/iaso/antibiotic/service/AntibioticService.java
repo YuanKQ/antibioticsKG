@@ -106,8 +106,21 @@ public class AntibioticService {
         return map;
     }
 
-    public HashMap<String, Object> buildBacteriaGraph(String name) {
+    private HashMap<String, Object> createSingleNodeGraphMap(GNode gNode) {
+        List<GNode> nodeList = new ArrayList<GNode>();
+        List<GLink> linkList = new ArrayList<GLink>();
+        int totalGroup = 0;
+
+        nodeList.add(gNode);
+
+        return createGraphMap(nodeList, linkList, totalGroup);
+    }
+
+    public HashMap<String, Object> buildBacteriaGraph(String name) throws NullPointerException {
         Bacteria bacteria = bacteriaDao.findBacteriaByName(name);
+        if (bacteria == null)
+            throw new NullPointerException("The bacteria node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(bacteria.getBacteriaId());
         List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
         List<InfectionSite> infectionSiteList = infectionSiteDao.findInfectionSiteByID(idList);
@@ -140,8 +153,11 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildAntibioticGraph(String name) {
+    public HashMap<String, Object> buildAntibioticGraph(String name) throws NullPointerException {
         Antibiotic antibiotic = antibioticDao.findAntibioticByName(name);
+        if (antibiotic == null)
+            throw new NullPointerException("The antibiotic node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(antibiotic.getId());
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
         List<Situation> situationList = situationDao.findSituationByID(idList);
@@ -175,8 +191,11 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildDiseaseGraph(String name) {
+    public HashMap<String, Object> buildDiseaseGraph(String name) throws NullPointerException {
         Disease disease = diseaseDao.findDiseaseByName(name);
+        if (disease == null)
+            throw new NullPointerException("The disease node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(disease.getId());
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
         List<Complication> complicationList = complicationDao.findComplicationByIdList(idList);
@@ -210,8 +229,11 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildSymptomGraph(String name) {
+    public HashMap<String, Object> buildSymptomGraph(String name) throws NullPointerException {
         Symptom symptom = symptomDao.findSymptomByName(name);
+        if (symptom == null)
+            throw new NullPointerException("The symptom node can't be found. ");
+
         List<String> idList = antibioticDao.findAllNodeID(symptom.getSymptomId());
         if (idList.isEmpty())
             return null;
@@ -257,8 +279,10 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildSymptomTypeGraph(String name) {
+    public HashMap<String, Object> buildSymptomTypeGraph(String name) throws NullPointerException {
         SymptomType symptomType = symptomTypeDao.findSymptomTypeByName(name);
+        if (symptomType == null)
+            throw new NullPointerException("The symptomType node can't be found. ");
         List<String> idList = antibioticDao.findAllNodeID(symptomType.getSymptomTypeId());
         List<SymptomType> symptomTypeList = symptomTypeDao.findSymptomTypeByIdList(idList);
         List<Symptom> symptomList = symptomDao.findSymptomByIdList(idList);
@@ -286,8 +310,10 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildComplicationGraph(String name) {
+    public HashMap<String, Object> buildComplicationGraph(String name) throws NullPointerException {
         Complication complication = complicationDao.findComplicationByName(name);
+        if (complication == null)
+            throw new NullPointerException("The complication node can't be found. ");
         List<String> idList = antibioticDao.findAllNodeID(complication.getComplicationId());
         List<Disease> diseaseList = diseaseDao.findDiseaseByIdList(idList);
 
@@ -307,9 +333,13 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildInfectionSiteGraph(String name) {
+    public HashMap<String, Object> buildInfectionSiteGraph(String name) throws NullPointerException {
         InfectionSite infectionSite = infectionSiteDao.findInfectionSiteByName(name);
+        if (infectionSite == null)
+            throw new NullPointerException("The infection site node can't be found. ");
         List<String> idList = antibioticDao.findAllNodeID(infectionSite.getInfectionSiteId());
+        if (idList == null)
+            return createSingleNodeGraphMap(infectionSite.infectionSite2GNode(NodeTypeEnum.SourceNode.ordinal()));
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
 
         List<GNode> nodeList = new ArrayList<GNode>();
@@ -328,8 +358,11 @@ public class AntibioticService {
         return createGraphMap(nodeList, linkList, totalGroup);
     }
 
-    public HashMap<String, Object> buildSituationGraph(String name) {
+
+    public HashMap<String, Object> buildSituationGraph(String name) throws NullPointerException {
         Situation situation = situationDao.findSituationByName(name);
+        if (situation == null)
+            throw new NullPointerException("The situation node can't be found. ");
         List<String> idList = antibioticDao.findAllNodeID(situation.getSituationId());
         List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(situation.getSituationId(), idList);
 
@@ -348,6 +381,58 @@ public class AntibioticService {
 
 
         return createGraphMap(nodeList, linkList, totalGroup);
+    }
+
+
+    public HashMap<String, Object> findDBName(String name) throws NullPointerException {
+        List<Integer> indexList = antibioticDao.findDBNameByKeyword(name);
+        if (indexList == null)
+            throw new NullPointerException("The type of the node can't be found. ");
+
+        HashMap<String, Object> map = new HashMap<String, Object>();
+
+        map.put("totalResult", 1);
+        map.put("graph", indexMapToDBName(indexList.get(0)));
+
+        /* TO DO: 两个重名的节点
+        if (indexList.size() == 1) {
+            map.put("totalResult", 1);
+            map.put("graph", indexMapToDBName(indexList.get(0)));
+        }else if (indexList.size() > 1) {
+            map.put("totalResult", indexList.size());
+            for (int i: indexList
+                 ) {
+                map.put("graph", indexMapToDBName(i));
+            }
+            return map;
+        }
+        */
+
+        return map;
+
+    }
+
+    static private String indexMapToDBName(int i) {
+        switch (i) {
+            case 1:
+                return "antibiotic";
+            case 2:
+                return "bacteria";
+            case 3:
+                return "complication";
+            case 4:
+                return "disease";
+            case 5:
+                return "infection_site";
+            case 6:
+                return "situation";
+            case 7:
+                return "symptom";
+            case 8:
+                return "symptom_type";
+            default:
+                return "";
+        }
     }
 }
 
