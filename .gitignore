@@ -1,5 +1,5 @@
 #Just for the project built by IntelliJ Idea
-.idea/*
+.idea/
 target/
 out/
 
@@ -33,3 +33,9 @@ hs_err_pid*
 /src/main/java/com/iaso/antibiotic/json/
 /src/main/java/com/iaso/antibiotic/test/
 /src/main/webapp/WEB-INF/TEST/
+/可行性研究报告（组建重点实验室）汇总7-liting (1).doc
+/凯琦_抗生素开源系统简介.docx
+/404.bin
+/.~lock.凯琦_抗生素开源系统简介.docx#
+/src/main/webapp/files/
+/src/main/webapp/WEB-INF/index.html

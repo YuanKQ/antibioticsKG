@@ -25,6 +25,7 @@
 
 
     <!-- 静态资源(js、image等)的访问 -->
+    <mvc:resources mapping="/files/**" location="/files/"/>
     <mvc:default-servlet-handler />
 
     <!--以下配置是为了解决同时使用JSP和FTL，顺序很重要：freemarkerResolver-》servletResolver-》freemarkerConfig-->
@@ -42,6 +43,7 @@
         <property name="exposeRequestAttributes" value="true" />
         <property name="exposeSessionAttributes" value="true" />
     </bean>
+
 
     <bean id="servletResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="WEB-INF/JSP/"/>

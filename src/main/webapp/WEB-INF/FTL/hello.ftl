@@ -21,7 +21,7 @@
 <body>
 <#include "/template/navigationBar.html">
 <#include "/template/search.html">
-hello你好${name}
+
 
 
 </body>

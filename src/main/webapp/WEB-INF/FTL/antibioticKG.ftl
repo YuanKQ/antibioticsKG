@@ -20,10 +20,10 @@
 
 
 <@override name="baseBody">
-<h2>搜索关键词为： ${test!"null"}</h2>
 <div class="row">
     <div class="col-md-8">
-        <div class="panel panel-primary">
+        <#--<div class="panel panel-primary">-->
+        <div class="panel panel-default">
             <div class="panel-heading">
                 Graph
             </div>
@@ -36,7 +36,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-danger">
+        <#--<div class="panel panel-danger">-->
+        <div class="panel panel-info">
             <div class="panel-heading">
                 Description
             </div>
@@ -48,6 +49,15 @@
         </div>
     </div>
 </div>
+
+    <@block name="pageDescription">
+    <p class="lead">关于“英文抗生素知识图谱（AntibioticKG）”</p>
+    <p>
+        “英文抗生素知识图谱”包括常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。 
+        <a href="/introduction">了解更多 <i class="icon-angle-right"></i></a>
+    </p>
+    <br>
+    </@block>
 
 <script type="text/javascript">
     function getResultAndRedraw(kw, graph) {
