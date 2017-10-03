@@ -50,14 +50,7 @@
     </div>
 </div>
 
-    <@block name="pageDescription">
-    <p class="lead">关于“英文抗生素知识图谱（AntibioticKG）”</p>
-    <p>
-        “英文抗生素知识图谱”包括常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。 
-        <a href="/introduction">了解更多 <i class="icon-angle-right"></i></a>
-    </p>
-    <br>
-    </@block>
+
 
 <script type="text/javascript">
     function getResultAndRedraw(kw, graph) {
@@ -332,6 +325,15 @@
     }
 
 </script>
+</@override>
+
+<@override name="pageDescription">
+<p class="lead">关于“英文抗生素知识图谱（AntibioticKG）</p>
+<p>
+    “英文抗生素知识图谱”包括常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。 
+    <a href="introduction">了解更多 <i class="icon-angle-right"></i></a>
+</p>
+<br>
 </@override>
 
 <@extends name='base.ftl'/>

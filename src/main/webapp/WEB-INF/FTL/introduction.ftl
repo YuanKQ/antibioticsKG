@@ -16,12 +16,12 @@
 </style>
 <head>
 <#--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
-<#include "/template/head.html">
+<#include "template/head.html">
     <title><@block name="baseTile">系统简介</@block></title>
 </head>
 
 <body>
-<#include "/template/navigationBar.html">
+<#include "template/navigationBar.html">
 <div class="container">
 
     <h1 class="text-muted"><font face="微软雅黑"><strong>IASO知识图谱</strong></font></h1>
@@ -39,7 +39,7 @@
                                         IASO知识图谱基于现有的医学本体，在线百科，权威医学文献等高质量医学数据资源构建而成的，未来还将不断添加更多的医学实体及其层次化类别信息，继续迭代更新完善知识图谱。
                                     </p>
                                     <p>
-                                        <a class="lead" href="/antibioticKG?graph=antibiotic&amp;keywords=Flucloxacillin" role="button">查看知识图谱 <i class="icon-angle-right"></i></a> 
+                                        <a class="lead" href="antibioticKG?graph=antibiotic&amp;keywords=Flucloxacillin" role="button">查看知识图谱 <i class="icon-angle-right"></i></a> 
 <#--锚点-->
                                         <a class="lead" href="#Paper" role="button">相关论文 <i class="icon-angle-right"></i></a>
                                     </p>
@@ -59,6 +59,7 @@
                         <p>系统目前公开了的“英文抗生素知识图谱（AntibioticKG）”，以抗生素为中心，由常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。
                             系统还将陆续公布IASO知识图谱的其他部分。敬请期待</p>
 <#--此处应插入图片-->
+                        <#--<img alt="静态资源图片" src="images/rename.png">-->
                         <br>
                         <a name="Paper"></a> <h2><font face="微软雅黑"><strong>相关论文</strong></font></h2>
                         <hr>
@@ -96,7 +97,7 @@
 
 
 <#--网页footer部分-->
-<#include "/template/footer.ftl">
+<#include "template/footer.ftl">
 
 </body>
 </html>

@@ -7,9 +7,9 @@
 
 
 <@override name='recommendation'>
-<a href="/search?keywords=阿莫西林&amp;graph=agent">阿莫西林</a> 
-<a href="/search?keywords=头孢拉定&amp;graph=agent">头孢拉定</a> 
-<a href="/search?keywords=阿奇霉素&amp;graph=agent">阿奇霉素</a>
+<a href="search?keywords=阿莫西林&amp;graph=agent">阿莫西林</a> 
+<a href="search?keywords=头孢拉定&amp;graph=agent">头孢拉定</a> 
+<a href="search?keywords=阿奇霉素&amp;graph=agent">阿奇霉素</a>
 </@override>
 
 <@override name="baseBody">

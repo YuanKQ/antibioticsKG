@@ -41,6 +41,11 @@ public class MainController {
 //        return "introduce";
 //    }
 
+    @RequestMapping(value = "/")
+    public String systemIntroducePage1(Model model) {
+        // 设置默认首页显示
+        return "introduction";
+    }
     @RequestMapping(value = "/hello")
     public String hello(Model model) {
         /* 将值传递至前端(ftl), 前端通过{name}, {graph}, {kw}来引用

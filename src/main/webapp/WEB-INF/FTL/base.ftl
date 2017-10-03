@@ -16,15 +16,15 @@
 </style>
 <head>
 <#--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">-->
-    <#include "/template/head.html">
+    <#include "template/head.html">
     <title><@block name="baseTile">base</@block></title>
 </head>
 
 <body>
-    <#include "/template/navigationBar.html">
+    <#include "template/navigationBar.html">
     <div class="container">
         <#--搜索栏-->
-        <#include "/template/searchForm.ftl">
+        <#include "template/searchForm.ftl">
 
         <#--网页主要内容-->
         <div class=row">
@@ -36,7 +36,7 @@
     </div>
 
     <#--网页footer部分-->
-    <#include "/template/footer.ftl">
+    <#include "template/footer.ftl">
 
 
 

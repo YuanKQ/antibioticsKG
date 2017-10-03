@@ -41,9 +41,9 @@
                         </div>
                         <p>推荐：
                             <@block name="recommendation">
-                            <a href="/search?keywords=中药&amp;graph=IASO">IASO1</a> 
-                            <a href="/search?keywords=气&amp;graph=IASO">IASO2</a> 
-                            <a href="/search?keywords=五行&amp;graph=IASO">IASO3</a>
+                            <a href="search?keywords=中药&amp;graph=IASO">IASO1</a> 
+                            <a href="search?keywords=气&amp;graph=IASO">IASO2</a> 
+                            <a href="search?keywords=五行&amp;graph=IASO">IASO3</a>
                             </@block>
                         </p>
                     </div>

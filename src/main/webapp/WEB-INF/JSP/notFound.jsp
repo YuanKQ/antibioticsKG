@@ -39,9 +39,9 @@
 <div id="page" style="border-style:dashed;border-color:#e4e4e4;line-height:30px;background:url(sorry.png) no-repeat right;">
     <h1>抱歉，找不到此页面~</h1>
     <h2>Sorry, the site now can not be accessed. </h2>
-    <font color="#666666">攻城狮正在拼了命地开发给功能模块， 敬请期待！</font><br /><br />
+    <font color="#666666">攻城狮正在拼了命地开发该功能模块， 敬请期待！</font><br /><br />
     <div class="button">
-        <a href="/antibioticKG" title="返回首页" >返回首页</a>
+        <a href="antibioticKG" title="返回首页" >返回首页</a>
     </div>
 </div>
 
