@@ -10,36 +10,21 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-<!--
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-4.0.xsd
-    http://www.springframework.org/schema/mvc
-    http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-    -->
-
 
     <!--指明 controller 所在包，并扫描其中的注解-->
-    <!--<context:component-scan base-package="com.iaso.antibiotic.controller"/>-->
-
     <context:component-scan base-package="com.iaso.antibiotic"/>
-    <!-- 开启注解 -->
-    <!--导入jackson的jar包即可使用springMVC默认配置返回json-->
-    <mvc:annotation-driven>
-    </mvc:annotation-driven>
-
 
     <!--用于支持Servlet、JSP视图解析-->
     <context:annotation-config />
 
-
+    <!--对进入DispatcherServlet的URL进行筛查，如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，才由DispatcherServlet继续处理。-->
+    <mvc:default-servlet-handler/>
+    <!-- 开启注解 -->
+    <!--导入jackson的jar包即可使用springMVC默认配置返回json-->
+    <mvc:annotation-driven/>
     <!-- 静态资源(js、image等)的访问 -->
-<!--    mapping：映射
-
-    location：本地资源路径，注意必须是webapp根目录下的路径。
-
-    两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/）-->
+    <!-- mapping：映射location：本地资源路径，注意必须是webapp根目录下的路径。
+         两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/）-->
     <mvc:resources mapping="/images/**" location="/images/"/>
 
     <!--以下配置是为了解决同时使用JSP和FTL，顺序很重要：freemarkerResolver-》servletResolver-》freemarkerConfig-->
