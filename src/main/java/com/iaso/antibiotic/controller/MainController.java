@@ -78,12 +78,17 @@ public class MainController {
 
     @RequestMapping(value = "/introduction")
     public String systemIntroducePage(Model model) {
-        /* 将值传递至前端(ftl), 前端通过{name}, {graph}, {kw}来引用
-        model.addAttribute("name", " world");
-        model.addAttribute("graph", "antibiotic");
-        model.addAttribute("kw","AmBisome");
-        */
         return "introduction";
+    }
+
+    @RequestMapping(value = "/dataDownload")
+    public String dataDownloadPage(Model model) {
+        return "dataDownload";
+    }
+
+    @RequestMapping(value = "/test")
+    public String testPage(Model model) {
+        return "test";
     }
 
 /*

@@ -39,7 +39,3 @@ hs_err_pid*
 /.~lock.凯琦_抗生素开源系统简介.docx#
 /src/main/webapp/files/
 /src/main/webapp/WEB-INF/index.html
-!/src/main/java/com/iaso/antibiotic/json/GNode.java
-!/src/main/java/com/iaso/antibiotic/json/Graph.java
-!/src/main/java/com/iaso/antibiotic/json/GLink.java
-!/src/main/java/com/iaso/antibiotic/json/
