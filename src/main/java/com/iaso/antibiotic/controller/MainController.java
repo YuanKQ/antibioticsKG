@@ -86,6 +86,11 @@ public class MainController {
         return "dataDownload";
     }
 
+    @RequestMapping(value = "/apiTutorial")
+    public String apiTutorialPage(Model model) {
+        return "apiTutorial";
+    }
+
     @RequestMapping(value = "/test")
     public String testPage(Model model) {
         return "test";

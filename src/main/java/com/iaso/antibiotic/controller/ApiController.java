@@ -18,25 +18,36 @@
  ******************************/
 package com.iaso.antibiotic.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import com.iaso.antibiotic.json.DataNode;
+import com.iaso.antibiotic.json.GNode;
+import com.iaso.antibiotic.model.Antibiotic;
+import com.iaso.antibiotic.service.AntibioticService;
+import com.iaso.antibiotic.service.ApiService;
+import org.springframework.web.bind.annotation.*;
+import com.iaso.antibiotic.exception.NoSuchConceptException;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class ApiController {
-
+    /* //TEST: SpringMVC RequestMapping for both class and methods
     @RequestMapping(value="/tutorial", method = RequestMethod.GET)
     @ResponseBody
     public String tutorialPage() {
         return "api-tutorial";
     }
+    */
 
-    @RequestMapping(value= "/antibiotic/{name}", method = RequestMethod.GET)
-    @ResponseBody
-    public String antibioticSingleNode(@PathVariable String name) {
-        return "singleNode: " + name;
+    // 用static?
+    private ApiService apiService = new ApiService();
+
+    @RequestMapping(value= "/{entityType}/{name}", method = RequestMethod.GET)
+    public DataNode antibioticSingleNode(@PathVariable String entityType, @PathVariable String name) {
+        try {
+            return apiService.getSingleNode(entityType, name);
+        } catch (NullPointerException e) {
+            return new DataNode(1, String.format("NullPointerException: %s can't be found in the KG.", name), null);
+        } catch (NoSuchConceptException e) {
+            return new DataNode(2, String.format("NoSuchConceptException: %s can't be found in the KG.", entityType), null);
+        }
     }
 }

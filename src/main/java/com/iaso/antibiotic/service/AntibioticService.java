@@ -61,42 +61,12 @@ public class AntibioticService {
     //    @Autowired
     private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
 
-//    public AntibioticService() {
-//        antibioticDao = new AntibioticDao();
-//    }
-//
-//
-//    public Antibiotic findAntibioticByName(String name){
-//        return antibioticDao.findAntibioticByName(name);
-//    }
-//
-//    public List<String> findAllNodeID(String id){
-//        return antibioticDao.findAllNodeID(id);
-//    }
-//
-//    public List<Bacteria> findBcateriaByID(List<String> idList){
-//        return antibioticDao.findBacteriaByID(idList);
-//    }
-//
-//    public List<Situation> findSituationByID(List<String> idList){
-//        return antibioticDao.findSituationByID(idList);
-//    }
-//
-//    public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
-//        return antibioticDao.findAntibioticByID(id, idList);
-//    }
-
+    /*
+    * build a subgraph consists of directly related nodes to the center of the graph
+    *
+    * write for SearchController.java
+    * */
     private HashMap<String, Object> createGraphMap(List<GNode> nodeList, List<GLink> linkList, int max) {
-//        List<GLink> linkList = new ArrayList<GLink>();
-//        int size = nodeList.size();
-//        int max = 0;
-//        for (int i = 1; i < size; i++) {
-//            int tmp = nodeList.get(i).getGroup();
-//            max = max > tmp ? max : tmp;
-//            GLink link = new GLink(nodeList.get(0).getId(), nodeList.get(i).getId(), tmp);
-//            linkList.add(link);
-//        }
-
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("nodes", nodeList);
         map.put("links", linkList);
