@@ -48,8 +48,20 @@
         SELECT db_No FROM antibioticKG_index WHERE keyword = #{name}
     </select>
 
+    <select id="findEdgeByNodeIds" resultType="String">
+        SELECT relation_id FROM edge_in_KG WHERE source = #{head} AND target = #{tail}
+        UNION
+        SELECT relation_id FROM edge_in_KG WHERE source = #{tail} AND target = #{head}
+    </select>
+
     <!--
-    *** relation: antibiotic-bacteria
+    <select id="findRelationNameById" parameterType="String" resultType="String">
+        SELECT relation_name FROM relation WHERE relation_id = #{relation_id}
+    </select>
+    -->
+
+    <!--
+    KGRelationtion: antibiotic-bacteria
     *** 参数类型：List<String>
     *** 返回类型：List<Bacteria>
     -->

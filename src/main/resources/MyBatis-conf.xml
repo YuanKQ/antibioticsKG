@@ -28,6 +28,7 @@
         <mapper resource="/mapping/SymptomMapper.xml"/>
         <mapper resource="/mapping/SymptomTypeMapper.xml"/>
         <mapper resource="/mapping/EdgeMapper.xml"/>
+        <mapper resource="/mapping/RelationMapper.xml"/>
     </mappers>
 
 </configuration>

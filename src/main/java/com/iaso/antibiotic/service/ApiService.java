@@ -9,9 +9,15 @@
 package com.iaso.antibiotic.service;
 
 import com.iaso.antibiotic.dao.*;
+import com.iaso.antibiotic.exception.NoRelationsException;
 import com.iaso.antibiotic.exception.NoSuchConceptException;
+import com.iaso.antibiotic.json.DataLink;
 import com.iaso.antibiotic.json.DataNode;
-import com.iaso.antibiotic.model.Antibiotic;
+import com.iaso.antibiotic.model.KGRelation;
+
+
+import java.util.HashMap;
+import java.util.List;
 
 public class ApiService {
     //@Autowired
@@ -37,6 +43,8 @@ public class ApiService {
 
     //    @Autowired
     private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
+
+    private RelationDao relationDao = new RelationDao();
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
         Object data = null;
@@ -66,6 +74,97 @@ public class ApiService {
         return new DataNode(0, "success", data);
     }
 
+    public DataLink getSingleLink(String head, String tail) throws NullPointerException {
+        KGRelation relationShip;
+        InnerNode headNode = handleLinkNode(head);
+        InnerNode tailNode = handleLinkNode(tail);
+        try {
+            relationShip = findRelationType(headNode.id, tailNode.id);
+        } catch (NoRelationsException e) {
+            return new DataLink(0, "success", "No relations");
+        }
+
+        HashMap<String, String> directedLink = confirmLinkDirection(relationShip, headNode, tailNode);
+        return new DataLink(0, "success", relationShip.getRelationId(), directedLink.get("head"),
+                             directedLink.get("tail"), relationShip.getRelationType());
+    }
+
+    private InnerNode handleLinkNode(String name) throws NullPointerException{
+        List<Integer> dblist = antibioticDao.findDBNameByKeyword(name);
+        if (dblist == null || dblist.size() == 0)
+            throw new NullPointerException(name);
+        // 处理dblist的length为0的情况
+        return index2InnerNode(dblist.get(0), name);
+
+    }
+
+    private InnerNode index2InnerNode(int i, String name) throws NullPointerException{
+        switch (i) {
+            case 1:
+                return new InnerNode(antibioticDao.findAntibioticByName(name).getId(), "antibiotic", name);
+            case 2:
+                return new InnerNode(bacteriaDao.findBacteriaByName(name).getBacteriaId(), "bacteria", name);
+            case 3:
+                return new InnerNode(complicationDao.findComplicationByName(name).getComplicationId(), "complication", name);
+            case 4:
+                return new InnerNode(diseaseDao.findDiseaseByName(name).getId(), "disease", name);
+            case 5:
+                return new InnerNode(infectionSiteDao.findInfectionSiteByName(name).getInfectionSiteId(), "infection_site", name);
+            case 6:
+                return new InnerNode(situationDao.findSituationByName(name).getSituationId(), "situation", name);
+            case 7:
+                return new InnerNode(symptomDao.findSymptomByName(name).getSymptomId(), "symptom", name);
+            case 8:
+                return new InnerNode(symptomTypeDao.findSymptomTypeByName(name).getSymptomTypeId(), "symptom_type", name);
+            default:
+                throw new NullPointerException(name);
+        }
 
 
+    }
+
+    private KGRelation findRelationType(String headId, String tailId) throws NoRelationsException{
+        String relationId = antibioticDao.findEdgeByNodeIds(headId, tailId);
+        if (relationId == null)
+            throw new NoRelationsException();
+        return relationDao.findRelationNameById(relationId);
+    }
+
+    private HashMap<String, String> confirmLinkDirection(KGRelation r, InnerNode node1, InnerNode node2) {
+        HashMap<String, String> directedLink = new HashMap<String, String>();
+        if (node1.type.equals(r.getSourceType())) {
+            directedLink.put("head", node1.getName());
+            directedLink.put("tail", node2.getName());
+
+            return directedLink;
+        }
+        directedLink.put("head", node2.getName());
+        directedLink.put("tail", node1.getName());
+
+        return directedLink;
+    }
+
+    private class InnerNode {
+        private String id;
+        private String type;
+        private String name;
+
+        public InnerNode(String id, String type, String name) {
+            this.id = id;
+            this.type = type;
+            this.name = name;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public String getName() {
+            return name;
+        }
+    }
 }

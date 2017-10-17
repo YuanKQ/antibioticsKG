@@ -106,6 +106,8 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
         <version>5.1.8</version>
+      <!--该版本just for mybatis generator-->
+      <!--<version>6.0.5</version>-->
     </dependency>
 
     <!--jdbc-->

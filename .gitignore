@@ -58,3 +58,4 @@ src/main/webapp/template/
 /others/sqlFiles/openKG_antibiotic.sql
 /others/sqlFiles/openKG_edge_in_KG.sql
 /others/TestCases/apiTest.md
+!/src/main/java/com/iaso/antibiotic/json/

@@ -23,20 +23,40 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <!-- 生成模型的包名和位置-->
+        <!-- 1.生成模型的包名和位置-->
         <javaModelGenerator targetPackage="com.iaso.antibiotic.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <!-- 生成映射文件的包名和位置-->
+        <!-- 2.生成映射文件的包名和位置-->
         <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        <!-- 生成DAO的包名和位置-->
+        <!-- 3.生成DAO的包名和位置-->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.iaso.antibiotic.dao" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
-        <!-- 要生成哪些表-->
-        <table tableName="situation" domainObjectName="Situation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <!-- 4.要生成哪些表-->
+        <table tableName="relation" domainObjectName="KGRelation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
     </context>
 </generatorConfiguration>
+
+<!--
+Step 1:
+确定模型, 映射文件, Dao(前三步)无需修改后, 修改第4步,
+<table tableName="relation"   // 数据库中的Table, 比如openKG中的antibiotic
+       domainObjectName="KGRelation"  // 用户定义的与数据库表antibiotic相对应的映射文件/模型/Dao名称, 比如Antibiotic (注意, 与table的名称可以不相同)
+       enableCountByExample="false"   // 生成xml文件中不包含Count操作
+       enableUpdateByExample="false"  // 生成xml文件中不包含Update操作
+       enableDeleteByExample="false"  // 生成xml文件中不包含Delete操作
+       enableSelectByExample="false"  // 生成xml文件中不包含Select操作
+       enableInsert="false"/>         // 生成xml文件中不包含Insert操作
+Step 2:
+使用MyBatisGenerator插件(Maven run)自动生成mapping/AntibioticMapper.xml, dao/AntibioticDao.java, model/Antibiotic.java
+Step 3:
+!!!在MyBatis-conf.xml中注册新生成的AntibioticMapper.xml文件
+<mappers>
+...
+<mapper resource="/mapping/AntibioticMapper.xml" />
+</mappers>
+-->

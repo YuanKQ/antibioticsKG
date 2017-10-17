@@ -50,6 +50,14 @@ public class AntibioticDao {
         return antibiotic;
     }
 
+    public String findEdgeByNodeIds(String headId, String tailId) {
+        String statement = "AntibioticMapper.findEdgeByNodeIds";
+        Map<String, Object> paraMap = new HashMap<String, Object>();
+        paraMap.put("head", headId);
+        paraMap.put("tail", tailId);
+        return (String) session.selectOne(statement, paraMap);
+    }
+
     public List<Antibiotic> findAntibioticByID(String id, List<String> idList){
         String statment = "AntibioticMapper.findAntibioticByID";
         Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -76,6 +84,11 @@ public class AntibioticDao {
         List<Integer> dbNoList = session.selectList(statement, name);
 
         return dbNoList;
+    }
+
+    public String findRelationNameById(String relation_id) {
+        String statement = "AntibioticMapper.findRelationNameById";
+        return (String) session.selectOne(statement, relation_id);
     }
 
 /*    public List<Bacteria> findBacteriaByID(List<String> idList){
