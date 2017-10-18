@@ -69,8 +69,7 @@ public class ApiController {
             return apiService.getSingleLink(head, tail);
         } catch (NullPointerException e) {
             return new DataLink(1,
-                                 String.format("NullPointerException: %s can't be found in the KG.", e.getMessage()),
-                                null);
+                                 String.format("NullPointerException: %s can't be found in the KG.", e.getMessage()));
         }
     }
 

@@ -9,13 +9,17 @@
 package com.iaso.antibiotic.json;
 
 import javax.management.relation.Relation;
+import java.util.ArrayList;
 
 public class DataLink extends DataStatus{
+    private ArrayList<RelationShip> relations;
+
     public DataLink(int code, String msg) {
         super(code, msg);
+        relations = new ArrayList<RelationShip>();
     }
 
-    public DataLink(int code, String msg, String relationType) {
+    /*public DataLink(int code, String msg, String relationType) {
         super(code, msg);
         this.relation = new RelationShip(relationType);
     }
@@ -23,22 +27,31 @@ public class DataLink extends DataStatus{
     public DataLink(int code, String msg, String id, String head, String tail, String relationTyp) {
         super(code, msg);
         this.relation = new RelationShip(id, head, tail, relationTyp);
+    }*/
+
+    public void addRelation(String id, String head, String tail, String relationTyp) {
+        this.relations.add(new RelationShip(id, head, tail, relationTyp));
     }
 
+    public void addRelation(String relationTyp) {
+        this.relations.add(new RelationShip(null, null, null, relationTyp));
+    }
 
+    public ArrayList<RelationShip> getRelations() {
+        return relations;
+    }
 
     /*private String relationType;
 
-    public DataLink(int code, String msg, String relationType) {
-        super(code, msg);
-        this.relationType = relationType;
-    }
+        public DataLink(int code, String msg, String relationType) {
+            super(code, msg);
+            this.relationType = relationType;
+        }
 
-    public String getRelationType() {
-        return relationType;
-    }*/
-
-    private RelationShip relation;
+        public String getRelationType() {
+            return relationType;
+        }*/
+/*    private RelationShip relation;
 
     public RelationShip getRelation() {
         return relation;
@@ -46,7 +59,7 @@ public class DataLink extends DataStatus{
 
     public void setRelation(String head, String tail, String id, String relationType) {
         this.relation = new RelationShip(head, tail, id, relationType);
-    }
+    }*/
 
     class RelationShip {
         private String id;

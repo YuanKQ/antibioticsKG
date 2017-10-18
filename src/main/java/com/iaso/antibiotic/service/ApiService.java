@@ -16,6 +16,7 @@ import com.iaso.antibiotic.json.DataNode;
 import com.iaso.antibiotic.model.KGRelation;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -75,6 +76,40 @@ public class ApiService {
     }
 
     public DataLink getSingleLink(String head, String tail) throws NullPointerException {
+        KGRelation relationShip = null;
+        DataLink dataLink = new DataLink(0, "success");
+        ArrayList<InnerNode> headNodes = handleLinkNode(head);
+        ArrayList<InnerNode> tailNodes = handleLinkNode(tail);
+        for (InnerNode headNode: headNodes) {
+            for (InnerNode tailNode: tailNodes) {
+                try {
+                    relationShip = findRelationType(headNode.id, tailNode.id);
+                    HashMap<String, String> directedLink = confirmLinkDirection(relationShip, headNode, tailNode);
+                    dataLink.addRelation(relationShip.getRelationId(), directedLink.get("head"),
+                            directedLink.get("tail"), relationShip.getRelationType());
+                } catch (NoRelationsException e) {
+                    dataLink.addRelation("No relations");
+                }
+
+            }
+        }
+
+        return dataLink;
+    }
+
+    private ArrayList<InnerNode> handleLinkNode(String name) throws NullPointerException{
+        List<Integer> dblist = antibioticDao.findDBNameByKeyword(name);
+        if (dblist == null || dblist.size() == 0)
+            throw new NullPointerException(name);
+        // 处理dblist的length为0的情况
+        ArrayList<InnerNode> nodeArrayList = new ArrayList<InnerNode>();
+        for (Integer i: dblist)
+            nodeArrayList.add(index2InnerNode(i, name));
+        return nodeArrayList;
+    }
+/*
+
+    public DataLink getSingleLink(String head, String tail) throws NullPointerException {
         KGRelation relationShip;
         InnerNode headNode = handleLinkNode(head);
         InnerNode tailNode = handleLinkNode(tail);
@@ -97,6 +132,7 @@ public class ApiService {
         return index2InnerNode(dblist.get(0), name);
 
     }
+*/
 
     private InnerNode index2InnerNode(int i, String name) throws NullPointerException{
         switch (i) {
