@@ -13,7 +13,10 @@ import com.iaso.antibiotic.exception.NoRelationsException;
 import com.iaso.antibiotic.exception.NoSuchConceptException;
 import com.iaso.antibiotic.json.DataLink;
 import com.iaso.antibiotic.json.DataNode;
+import com.iaso.antibiotic.json.DataSubgraph;
+import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.model.KGRelation;
+import org.omg.DynamicAny.NameDynAnyPair;
 
 
 import java.util.ArrayList;
@@ -46,6 +49,8 @@ public class ApiService {
     private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
 
     private RelationDao relationDao = new RelationDao();
+    
+    private AntibioticService antibioticService = new AntibioticService();
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
         Object data = null;
@@ -99,16 +104,17 @@ public class ApiService {
 
     private ArrayList<InnerNode> handleLinkNode(String name) throws NullPointerException{
         List<Integer> dblist = antibioticDao.findDBNameByKeyword(name);
-        if (dblist == null || dblist.size() == 0)
+        if (dblist == null || dblist.size() == 0) // 不要忘了处理dblist的length为0的情况!!!
             throw new NullPointerException(name);
-        // 处理dblist的length为0的情况
+        
         ArrayList<InnerNode> nodeArrayList = new ArrayList<InnerNode>();
         for (Integer i: dblist)
             nodeArrayList.add(index2InnerNode(i, name));
         return nodeArrayList;
     }
+    
 /*
-
+    // 不能处理同名节点
     public DataLink getSingleLink(String head, String tail) throws NullPointerException {
         KGRelation relationShip;
         InnerNode headNode = handleLinkNode(head);
@@ -181,10 +187,10 @@ public class ApiService {
     }
 
     private class InnerNode {
+
         private String id;
         private String type;
         private String name;
-
         public InnerNode(String id, String type, String name) {
             this.id = id;
             this.type = type;
@@ -201,6 +207,53 @@ public class ApiService {
 
         public String getName() {
             return name;
+        }
+
+    }
+    
+    public DataSubgraph getSubgraph(String center) throws NullPointerException{
+        DataSubgraph dataSubgraph = new DataSubgraph(0, "success");
+        List<Integer> dblist = antibioticDao.findDBNameByKeyword(center);
+        for (Integer db: dblist) {
+            dataSubgraph.addSubgraph(center);
+            HashMap<String, Object> graphHashMap = handleSingleSubgraph(db, center);
+            if (graphHashMap == null || !graphHashMap.containsKey("links"))  // 只有中心节点
+                dataSubgraph.addSubgraph(center);
+            else {
+                List<GLink> links = (List<GLink>)graphHashMap.get("links");
+                for (GLink gLink: links) {
+                    String node = gLink.getTarget();
+                    dataSubgraph.addLink2Subgraph(node, gLink.getLinkType());
+                }
+
+            }
+        }
+
+        if (dataSubgraph.getSubgraphs().size() > 0)
+            return dataSubgraph;
+        else throw new NullPointerException(center);
+    }
+
+    private HashMap<String, Object> handleSingleSubgraph(Integer db, String name) {
+        switch (db) {
+            case 1:
+                return antibioticService.buildAntibioticGraph(name);
+            case 2:
+                return antibioticService.buildBacteriaGraph(name);
+            case 3:
+                return antibioticService.buildComplicationGraph(name);
+            case 4:
+                return antibioticService.buildDiseaseGraph(name);
+            case 5:
+                return antibioticService.buildInfectionSiteGraph(name);
+            case 6:
+                return antibioticService.buildSituationGraph(name);
+            case 7:
+                return antibioticService.buildSymptomGraph(name);
+            case 8:
+                return antibioticService.buildSymptomTypeGraph(name);
+            default:
+                return null;
         }
     }
 }

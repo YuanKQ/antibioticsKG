@@ -20,6 +20,7 @@ package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.json.DataLink;
 import com.iaso.antibiotic.json.DataNode;
+import com.iaso.antibiotic.json.DataSubgraph;
 import com.iaso.antibiotic.json.GNode;
 import com.iaso.antibiotic.model.Antibiotic;
 import com.iaso.antibiotic.service.AntibioticService;
@@ -70,10 +71,25 @@ public class ApiController {
         } catch (NullPointerException e) {
             return new DataLink(1,
                                  String.format("NullPointerException: %s can't be found in the KG.", e.getMessage()));
+        } catch (Exception e) {
+            String msg = "";
+            StackTraceElement[] stackTraceElements = e.getStackTrace();
+            for (StackTraceElement s: stackTraceElements) {
+                msg += s;
+            }
+            return new DataLink(100, msg);
         }
     }
 
-
+    @RequestMapping(value = "/subgraph/{center}", method = RequestMethod.GET)
+    public DataSubgraph getSubgraph(@PathVariable String center) {
+        try {
+            return apiService.getSubgraph(center);
+        } catch (NullPointerException e) {
+            return new DataSubgraph(1,
+                    String.format("NullPointerException: %s can't be found in the KG.", e.getMessage()));
+        }
+    }
 
 
 }
