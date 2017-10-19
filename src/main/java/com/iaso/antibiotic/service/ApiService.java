@@ -54,21 +54,21 @@ public class ApiService {
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
         Object data = null;
-        if (dbName.equals("antibiotic")) {
+        if (dbName.equals("antibiotics")) {
             data = antibioticDao.findAntibioticByName(name);
-        } else if (dbName.equals("bacteria")) {
+        } else if (dbName.equals("bacterias")) {
             data = bacteriaDao.findBacteriaByName(name);
-        } else if (dbName.equals("disease")) {
+        } else if (dbName.equals("diseases")) {
             data = diseaseDao.findDiseaseByName(name);
-        } else if (dbName.equals("symptom")) {
+        } else if (dbName.equals("symptoms")) {
             data = symptomDao.findSymptomByName(name);
-        } else if (dbName.equals("infection_site")) {
+        } else if (dbName.equals("infection_sites")) {
             data = infectionSiteDao.findInfectionSiteByName(name);
-        } else if (dbName.equals("symptom_type")) {
+        } else if (dbName.equals("symptom_types")) {
             data = symptomTypeDao.findSymptomTypeByName(name);
-        } else if (dbName.equals("complication")) {
+        } else if (dbName.equals("complications")) {
             data = complicationDao.findComplicationByName(name);
-        } else if (dbName.equals("situation")) {
+        } else if (dbName.equals("situations")) {
             data = situationDao.findSituationByName(name);
         } else {
             throw new NoSuchConceptException();

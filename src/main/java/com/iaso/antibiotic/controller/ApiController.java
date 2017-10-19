@@ -64,7 +64,7 @@ public class ApiController {
         }
     }
 
-    @RequestMapping(value = "/relation/{head}/{tail}", method = RequestMethod.GET)
+    @RequestMapping(value = "/relations/{head}/{tail}", method = RequestMethod.GET)
     public DataLink getSingleLink(@PathVariable String head, @PathVariable String tail) {
         try {
             return apiService.getSingleLink(head, tail);
@@ -81,7 +81,7 @@ public class ApiController {
         }
     }
 
-    @RequestMapping(value = "/subgraph/{center}", method = RequestMethod.GET)
+    @RequestMapping(value = "/subgraphs/{center}", method = RequestMethod.GET)
     public DataSubgraph getSubgraph(@PathVariable String center) {
         try {
             return apiService.getSubgraph(center);
