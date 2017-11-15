@@ -11,10 +11,7 @@ package com.iaso.antibiotic.service;
 import com.iaso.antibiotic.dao.*;
 import com.iaso.antibiotic.exception.NoRelationsException;
 import com.iaso.antibiotic.exception.NoSuchConceptException;
-import com.iaso.antibiotic.json.DataLink;
-import com.iaso.antibiotic.json.DataNode;
-import com.iaso.antibiotic.json.DataSubgraph;
-import com.iaso.antibiotic.json.GLink;
+import com.iaso.antibiotic.json.*;
 import com.iaso.antibiotic.model.KGRelation;
 import org.omg.DynamicAny.NameDynAnyPair;
 
@@ -185,6 +182,7 @@ public class ApiService {
 
         return directedLink;
     }
+
 
     private class InnerNode {
 

@@ -13,18 +13,16 @@
  *
  *             子图: [单个查询] GET /api/subgraph/$name1, /api/subgraph/$id1
  *
- *             FOR EXPERIMENT: POST 更新testTable
+ *             FOR EXPERIMENT: POST 更新Table: TEST_RESTful
  *
  ******************************/
 package com.iaso.antibiotic.controller;
 
-import com.iaso.antibiotic.json.DataLink;
-import com.iaso.antibiotic.json.DataNode;
-import com.iaso.antibiotic.json.DataSubgraph;
-import com.iaso.antibiotic.json.GNode;
-import com.iaso.antibiotic.model.Antibiotic;
-import com.iaso.antibiotic.service.AntibioticService;
+import com.iaso.antibiotic.exception.DuplicateResourceException;
+import com.iaso.antibiotic.json.*;
+import com.iaso.antibiotic.model.TESTRestful;
 import com.iaso.antibiotic.service.ApiService;
+import com.iaso.antibiotic.service.TESTService;
 import org.springframework.web.bind.annotation.*;
 import com.iaso.antibiotic.exception.NoSuchConceptException;
 
@@ -41,6 +39,7 @@ public class ApiController {
 
     // 用static?
     private ApiService apiService = new ApiService();
+    private TESTService testService = new TESTService();
 
     // 调试完成后统一加上 catch (Exception e) {
     @RequestMapping(value= "/{entityType}/{name}", method = RequestMethod.GET)
@@ -91,5 +90,36 @@ public class ApiController {
         }
     }
 
+    /*以下服务不对外开放, 仅用作测试*/
+    /*以下的POST, PUT, DELETE服务并不会改变数据库,数据存储在内存中, 关闭服务之后数据即清空*/
+    @RequestMapping(value = "/TEST", method = RequestMethod.POST)
+    public DataTEST testPost(@RequestBody TESTRestful dataTest){
+        System.out.println("Creating a new resource.");
+        try {
+            return testService.createResource(dataTest);
+        } catch (DuplicateResourceException e) {
+            return new DataTEST(101, String.format("DuplicateResourceException: %s already exist.",e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/TEST", method = RequestMethod.PUT)
+    public DataTEST testPut(@RequestBody TESTRestful testRestful) {
+        System.out.println("Updating a existed resource.");
+        try {
+            return testService.updateResource(testRestful);
+        } catch (NullPointerException e) {
+            return new DataTEST(1, String.format("NullPointerException: %s can't be found.", testRestful.getName()));
+        }
+    }
+
+    @RequestMapping(value = "/TEST/{id}", method = RequestMethod.DELETE)
+    public DataTEST testDelete(@PathVariable("id") int id) {
+        System.out.println("Deleting...");
+        try {
+            return testService.deleteResource(id);
+        } catch (NullPointerException e) {
+            return new DataTEST(1, String.format("NullPointerException: %d can't be found.", id));
+        }
+    }
 
 }

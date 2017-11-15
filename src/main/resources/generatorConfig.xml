@@ -37,7 +37,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 4.要生成哪些表-->
-        <table tableName="relation" domainObjectName="KGRelation" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
+        <table tableName="TEST_RESTful" domainObjectName="TESTRestful" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableInsert="false"/>
     </context>
 </generatorConfiguration>
 

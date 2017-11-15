@@ -13,7 +13,7 @@
                 <!--<property name="url" value="jdbc:mysql://127.0.0.1:3939/openKG?autoReconnect=true" />-->
                 <property name="username" value="root" />
                 <property name="password" value="1234567" />
-                <!--<property name="password" value="password4root" />-->
+                <!--<property name="password" value="" />-->
             </dataSource>
         </environment>
     </environments>
@@ -29,6 +29,7 @@
         <mapper resource="/mapping/SymptomTypeMapper.xml"/>
         <mapper resource="/mapping/EdgeMapper.xml"/>
         <mapper resource="/mapping/RelationMapper.xml"/>
+        <mapper resource="/mapping/TESTRestfulMapper.xml"/>
     </mappers>
 
 </configuration>
