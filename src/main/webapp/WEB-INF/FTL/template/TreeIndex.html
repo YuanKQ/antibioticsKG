@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+    <link href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <h1><font face="微软雅黑">IASO</font></h1>
+                        <p><strong>抗生素目标索引</strong></p>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                                <input id="path_bottom_1" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-arrow-right">
+                                    </span>
+                                <input id="path_bottom_2" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-arrow-right" aria-hidden="true">
+                                    </span>
+                                <input id="path_bottom_3" type="button" class="btn btn-default">
+                        </div>
+                        <p></p>
+                        <p></p>
+                        <p>关系路径</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">目录索引</div>
+                            <div class="panel-body">
+                                <div id="treeview2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">实体列表</div>
+                            <div class="panel-body">
+                                <div id="leafentity"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+</div>
+
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script src="js/bootstrap-treeview.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            $("path_bottom_1").hide();
+            $("path_bottom_2").hide();
+
+//            $( "#target" ).click(function() {
+//                alert( "Handler for .click() called." );
+//            });
+
+            function getResult() {
+                $.ajax({
+                    type: "GET",
+                    url: "tree",
+                    datatype: "json",
+                    error: function (error) {
+                        console.log(error.toString());
+                    },
+                    success: function (obj) {
+                        console.table(obj);
+                        var antibioticData = [];
+                        var bacteriaData = [];
+                        var complicationData = [];
+                        var diseaseData = [];
+                        var infectionSiteData = [];
+                        var situationData = [];
+                        var symptomData = [];
+                        var symptomTypeData = [];
+//
+                        var antibioticnames = obj.antibioticnames;
+                        var bacterianames = obj.bacterianames;
+                        var complicationnames = obj.complicationnames;
+                        var diseasenames = obj.diseasenames;
+                        var infectionSitenames = obj.infectionSitenames;
+                        var situationnames = obj.situationnames;
+                        var symptomnames = obj.symptomnames;
+                        var symptomTypenames = obj.symptomTypenames;
+
+                        bacterianames.length = 100;
+//                        antibioticnames.forEach(function (name, index) {
+//                            var newElement = {
+//                                text: name,
+//                                href: '#grandchild' + (index + 1),
+//                                tags: ['0']
+//                            };
+//                            antibioticData.push(newElement);
+//                        });
+
+                        antibioticnames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            antibioticData.push(newElement);
+                        });
+                        bacterianames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            bacteriaData.push(newElement);
+                        });
+                        complicationnames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            complicationData.push(newElement);
+                        });
+                        diseasenames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            diseaseData.push(newElement);
+                        });
+                        infectionSitenames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            infectionSiteData.push(newElement);
+                        });
+                        situationnames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            situationData.push(newElement);
+                        });
+                        symptomnames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            symptomData.push(newElement);
+                        });
+                        symptomTypenames.forEach(function (name, index) {
+                            var newElement = {
+                                text: name,
+                                href: '#grandchild' + (index + 1),
+                                tags: ['0']
+                            };
+                            symptomTypeData.push(newElement);
+                        });
+
+
+                         //TODO
+ //                       if (namemap.length > 0) {
+                            var defaultData = [
+                                {
+                                    text: 'Antibiotics Knowledge Graph',
+                                    href: '#parent1',
+                                    tags: ['4'],
+                                    nodes: [
+                                        {
+                                            text: 'Antibiotic',
+                                            href: '#child1',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'Bacteria',
+                                            href: '#child2',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'Complication',
+                                            href: '#child3',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'Disease',
+                                            href: '#child4',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'InfectionSite',
+                                            href: '#child5',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'Situation',
+                                            href: '#child6',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'Symptom',
+                                            href: '#child7',
+                                            tags: ['2'],
+                                            nodes: []
+                                        },
+                                        {
+                                            text: 'SymptomType',
+                                            href: '#child8',
+                                            tags: ['2'],
+                                            nodes: []
+                                        }
+                                    ]
+                                }
+                            ];
+
+                            var json = '[' +
+                                '{' +
+                                '"text": "Parent 1",' +
+                                '"nodes": [' +
+                                '{' +
+                                '"text": "Child 1",' +
+                                '"nodes": [' +
+                                '{' +
+                                '"text": "Grandchild 1"' +
+                                '},' +
+                                '{' +
+                                '"text": "Grandchild 2"' +
+                                '}' +
+                                ']' +
+                                '},' +
+                                '{' +
+                                '"text": "Child 2"' +
+                                '}' +
+                                ']' +
+                                '},' +
+                                '{' +
+                                '"text": "Parent 2"' +
+                                '},' +
+                                '{' +
+                                '"text": "Parent 3"' +
+                                '},' +
+                                '{' +
+                                '"text": "Parent 4"' +
+                                '},' +
+                                '{' +
+                                '"text": "Parent 5"' +
+                                '}' +
+                                ']';
+
+                            $('#treeview2').treeview({
+                                levels: 1,
+                                data: defaultData
+
+                            });
+//                            $('#leafentity').treeview({
+//                                data:nameData
+//                            });
+
+                            $("#treeview2").on("nodeSelected", function(event, data) {
+                                if(data.tags=='4'){
+                                    $('#path_bottom_1').val(data.text);
+                                    $('#path_bottom_2').val('');
+                                    $('#path_bottom_3').val('');
+                                }
+                                if(data.tags=='2'){
+                                    $('#path_bottom_2').val(data.text);
+                                    $('#path_bottom_3').val('');
+                                }
+
+                                if(data.text=='Antibiotic'){
+                                    $('#leafentity').treeview({
+                                    data: antibioticData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                        $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='Bacteria'){
+                                    $('#leafentity').treeview({
+                                        data: bacteriaData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='Complication'){
+                                    $('#leafentity').treeview({
+                                        data: complicationData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='Disease'){
+                                        $('#leafentity').treeview({
+                                            data: diseaseData
+                                        });
+                                        $('#leafentity').on('nodeSelected',function(event,data){
+                                            if(data.tags='0'){
+                                                $('#path_bottom_3').val(data.text);}
+                                        })
+                                    }
+                                else if(data.text=='InfectionSite'){
+                                    $('#leafentity').treeview({
+                                        data: infectionSiteData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='Situation'){
+                                    $('#leafentity').treeview({
+                                        data: situationData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='Symptom'){
+                                    $('#leafentity').treeview({
+                                        data: symptomData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else if(data.text=='SymptomType'){
+                                    $('#leafentity').treeview({
+                                        data: symptomTypeData
+                                    });
+                                    $('#leafentity').on('nodeSelected',function(event,data){
+                                        if(data.tags='0'){
+                                            $('#path_bottom_3').val(data.text);}
+                                    })
+                                }
+                                else {
+                                    $('#leafentity').treeview({
+                                        data: null
+                                    });
+                                }
+                            })
+
+                            var $searchableTree = $('#treeview-searchable').treeview({
+                                data: defaultData,
+                            });
+
+                            var search = function (e) {
+                                var pattern = $('#input-search').val();
+                                var options = {
+                                    ignoreCase: $('#chk-ignore-case').is(':checked'),
+                                    exactMatch: $('#chk-exact-match').is(':checked'),
+                                    revealResults: $('#chk-reveal-results').is(':checked')
+                                };
+                                var results = $searchableTree.treeview('search', [pattern, options]);
+
+                                var output = '<p>' + results.length + ' matches found</p>';
+                                $.each(results, function (index, result) {
+                                    output += '<p>- ' + result.text + '</p>';
+                                });
+                                $('#search-output').html(output);
+                            }
+
+                            $('#btn-search').on('click', search);
+                            $('#input-search').on('keyup', search);
+
+                            $('#btn-clear-search').on('click', function (e) {
+                                $searchableTree.treeview('clearSearch');
+                                $('#input-search').val('');
+                                $('#search-output').html('');
+                            });
+
+
+                            var initSelectableTree = function () {
+                                return $('#treeview-selectable').treeview({
+                                    data: defaultData,
+                                    multiSelect: $('#chk-select-multi').is(':checked'),
+                                    onNodeSelected: function (event, node) {
+                                        $('#selectable-output').prepend('<p>' + node.text + ' was selected</p>');
+                                    },
+                                    onNodeUnselected: function (event, node) {
+                                        $('#selectable-output').prepend('<p>' + node.text + ' was unselected</p>');
+                                    }
+                                });
+                            };
+                            var $selectableTree = initSelectableTree();
+
+                            var findSelectableNodes = function () {
+                                return $selectableTree.treeview('search', [$('#input-select-node').val(), {
+                                    ignoreCase: false,
+                                    exactMatch: false
+                                }]);
+                            };
+                            var selectableNodes = findSelectableNodes();
+
+                            $('#chk-select-multi:checkbox').on('change', function () {
+                                console.log('multi-select change');
+                                $selectableTree = initSelectableTree();
+                                selectableNodes = findSelectableNodes();
+                            });
+
+                            // Select/unselect/toggle nodes
+                            $('#input-select-node').on('keyup', function (e) {
+                                selectableNodes = findSelectableNodes();
+                                $('.select-node').prop('disabled', !(selectableNodes.length >= 1));
+                            });
+
+                            $('#btn-select-node.select-node').on('click', function (e) {
+                                $selectableTree.treeview('selectNode', [selectableNodes, {silent: $('#chk-select-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-unselect-node.select-node').on('click', function (e) {
+                                $selectableTree.treeview('unselectNode', [selectableNodes, {silent: $('#chk-select-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-toggle-selected.select-node').on('click', function (e) {
+                                $selectableTree.treeview('toggleNodeSelected', [selectableNodes, {silent: $('#chk-select-silent').is(':checked')}]);
+                            });
+
+
+                            var $expandibleTree = $('#treeview-expandible').treeview({
+                                data: defaultData,
+                                onNodeCollapsed: function (event, node) {
+                                    $('#expandible-output').prepend('<p>' + node.text + ' was collapsed</p>');
+                                },
+                                onNodeExpanded: function (event, node) {
+                                    $('#expandible-output').prepend('<p>' + node.text + ' was expanded</p>');
+                                }
+                            });
+
+                            var findExpandibleNodess = function () {
+                                return $expandibleTree.treeview('search', [$('#input-expand-node').val(), {
+                                    ignoreCase: false,
+                                    exactMatch: false
+                                }]);
+                            };
+                            var expandibleNodes = findExpandibleNodess();
+
+                            // Expand/collapse/toggle nodes
+                            $('#input-expand-node').on('keyup', function (e) {
+                                expandibleNodes = findExpandibleNodess();
+                                $('.expand-node').prop('disabled', !(expandibleNodes.length >= 1));
+                            });
+
+                            $('#btn-expand-node.expand-node').on('click', function (e) {
+                                var levels = $('#select-expand-node-levels').val();
+                                $expandibleTree.treeview('expandNode', [expandibleNodes, {
+                                    levels: levels,
+                                    silent: $('#chk-expand-silent').is(':checked')
+                                }]);
+                            });
+
+                            $('#btn-collapse-node.expand-node').on('click', function (e) {
+                                $expandibleTree.treeview('collapseNode', [expandibleNodes, {silent: $('#chk-expand-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-toggle-expanded.expand-node').on('click', function (e) {
+                                $expandibleTree.treeview('toggleNodeExpanded', [expandibleNodes, {silent: $('#chk-expand-silent').is(':checked')}]);
+                            });
+
+                            // Expand/collapse all
+                            $('#btn-expand-all').on('click', function (e) {
+                                var levels = $('#select-expand-all-levels').val();
+                                $expandibleTree.treeview('expandAll', {
+                                    levels: levels,
+                                    silent: $('#chk-expand-silent').is(':checked')
+                                });
+                            });
+
+                            $('#btn-collapse-all').on('click', function (e) {
+                                $expandibleTree.treeview('collapseAll', {silent: $('#chk-expand-silent').is(':checked')});
+                            });
+
+
+                            var $checkableTree = $('#treeview-checkable').treeview({
+                                data: defaultData,
+                                showIcon: false,
+                                showCheckbox: true,
+                                onNodeChecked: function (event, node) {
+                                    $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
+                                },
+                                onNodeUnchecked: function (event, node) {
+                                    $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
+                                }
+                            });
+
+                            var findCheckableNodess = function () {
+                                return $checkableTree.treeview('search', [$('#input-check-node').val(), {
+                                    ignoreCase: false,
+                                    exactMatch: false
+                                }]);
+                            };
+                            var checkableNodes = findCheckableNodess();
+
+                            // Check/uncheck/toggle nodes
+                            $('#input-check-node').on('keyup', function (e) {
+                                checkableNodes = findCheckableNodess();
+                                $('.check-node').prop('disabled', !(checkableNodes.length >= 1));
+                            });
+
+                            $('#btn-check-node.check-node').on('click', function (e) {
+                                $checkableTree.treeview('checkNode', [checkableNodes, {silent: $('#chk-check-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-uncheck-node.check-node').on('click', function (e) {
+                                $checkableTree.treeview('uncheckNode', [checkableNodes, {silent: $('#chk-check-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-toggle-checked.check-node').on('click', function (e) {
+                                $checkableTree.treeview('toggleNodeChecked', [checkableNodes, {silent: $('#chk-check-silent').is(':checked')}]);
+                            });
+
+                            // Check/uncheck all
+                            $('#btn-check-all').on('click', function (e) {
+                                $checkableTree.treeview('checkAll', {silent: $('#chk-check-silent').is(':checked')});
+                            });
+
+                            $('#btn-uncheck-all').on('click', function (e) {
+                                $checkableTree.treeview('uncheckAll', {silent: $('#chk-check-silent').is(':checked')});
+                            });
+
+
+                            var $disabledTree = $('#treeview-disabled').treeview({
+                                data: defaultData,
+                                onNodeDisabled: function (event, node) {
+                                    $('#disabled-output').prepend('<p>' + node.text + ' was disabled</p>');
+                                },
+                                onNodeEnabled: function (event, node) {
+                                    $('#disabled-output').prepend('<p>' + node.text + ' was enabled</p>');
+                                },
+                                onNodeCollapsed: function (event, node) {
+                                    $('#disabled-output').prepend('<p>' + node.text + ' was collapsed</p>');
+                                },
+                                onNodeUnchecked: function (event, node) {
+                                    $('#disabled-output').prepend('<p>' + node.text + ' was unchecked</p>');
+                                },
+                                onNodeUnselected: function (event, node) {
+                                    $('#disabled-output').prepend('<p>' + node.text + ' was unselected</p>');
+                                }
+                            });
+
+                            var findDisabledNodes = function () {
+                                return $disabledTree.treeview('search', [$('#input-disable-node').val(), {
+                                    ignoreCase: false,
+                                    exactMatch: false
+                                }]);
+                            };
+                            var disabledNodes = findDisabledNodes();
+
+                            // Expand/collapse/toggle nodes
+                            $('#input-disable-node').on('keyup', function (e) {
+                                disabledNodes = findDisabledNodes();
+                                $('.disable-node').prop('disabled', !(disabledNodes.length >= 1));
+                            });
+
+                            $('#btn-disable-node.disable-node').on('click', function (e) {
+                                $disabledTree.treeview('disableNode', [disabledNodes, {silent: $('#chk-disable-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-enable-node.disable-node').on('click', function (e) {
+                                $disabledTree.treeview('enableNode', [disabledNodes, {silent: $('#chk-disable-silent').is(':checked')}]);
+                            });
+
+                            $('#btn-toggle-disabled.disable-node').on('click', function (e) {
+                                $disabledTree.treeview('toggleNodeDisabled', [disabledNodes, {silent: $('#chk-disable-silent').is(':checked')}]);
+                            });
+
+                            // Expand/collapse all
+                            $('#btn-disable-all').on('click', function (e) {
+                                $disabledTree.treeview('disableAll', {silent: $('#chk-disable-silent').is(':checked')});
+                            });
+
+                            $('#btn-enable-all').on('click', function (e) {
+                                $disabledTree.treeview('enableAll', {silent: $('#chk-disable-silent').is(':checked')});
+                            });
+                        }
+                    });
+//                });
+            }
+            getResult();
+        });
+    </script>
+</div>
+</body>
+</html>

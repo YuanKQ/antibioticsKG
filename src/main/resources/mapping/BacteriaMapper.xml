@@ -24,4 +24,8 @@
         SELECT * FROM bacteria WHERE bacteria_name = #{name} LIMIT #{limit}
     </select>
 
+    <select id="findAllBacteriaName" resultType="String">
+        select bacteria_name from bacteria
+    </select>
+
 </mapper>

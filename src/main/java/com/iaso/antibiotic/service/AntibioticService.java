@@ -12,18 +12,10 @@ import com.iaso.antibiotic.dao.*;
 import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.json.GNode;
 import com.iaso.antibiotic.model.*;
-import com.iaso.antibiotic.model.SymptomType;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import sun.nio.fs.GnomeFileTypeDetector;
 
-import javax.xml.ws.ServiceMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 enum NodeTypeEnum {
     SourceNode, AntibioticNode, BacteriaNode, ComplicationNode, DiseaseNode, InfectionSiteNode, SituationNode,
@@ -415,24 +407,49 @@ public class AntibioticService {
 
         map.put("totalResult", 1);
         map.put("graph", indexMapToDBName(indexList.get(0)));
-
-        /* TO DO: 两个重名的节点
-        if (indexList.size() == 1) {
-            map.put("totalResult", 1);
-            map.put("graph", indexMapToDBName(indexList.get(0)));
-        }else if (indexList.size() > 1) {
-            map.put("totalResult", indexList.size());
-            for (int i: indexList
-                 ) {
-                map.put("graph", indexMapToDBName(i));
-            }
-            return map;
-        }
-        */
-
         return map;
-
     }
+
+    public List<String> findAllantibioticName() {
+        List<String> antibioticList = antibioticDao.findAllAntibioticName();
+        return antibioticList;
+    }
+
+    public List<String> findAllbacteriaName() {
+        List<String> bacteriaList = bacteriaDao.findAllBacteriaName();
+        return bacteriaList;
+    }
+
+    public List<String> findAllcomplicationName() {
+        List<String> complicationList = complicationDao.findAllComplicationName();
+        return complicationList;
+    }
+
+    public List<String> findAlldiseaseName() {
+        List<String> diseaseList = diseaseDao.findAllDiseaseName();
+        return diseaseList;
+    }
+
+    public List<String> findAllinfectionSiteName() {
+        List<String> infectionSiteList = infectionSiteDao.findAllInfectionSiteName();
+        return infectionSiteList;
+    }
+
+    public List<String> findAllsituationName() {
+        List<String> situationList = situationDao.findAllSituationName();
+        return situationList;
+    }
+
+    public List<String> findAllsymptomName() {
+        List<String> symptomList = symptomDao.findAllSymptomName();
+        return symptomList;
+    }
+
+    public List<String> findAllsymptomTypeName() {
+        List<String> symptomTypeList = symptomDao.findAllSymptomName();
+        return symptomTypeList;
+    }
+
 
     static private String indexMapToDBName(int i) {
         switch (i) {

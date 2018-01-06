@@ -55,4 +55,9 @@ public class ComplicationDao {
 
         return complication;
     }
+    public List<String> findAllComplicationName() {
+        String statement = "ComplicationMapper.findAllComplicationName";
+        List<String> ComplicationList = session.selectList(statement);
+        return ComplicationList;
+    }
 }

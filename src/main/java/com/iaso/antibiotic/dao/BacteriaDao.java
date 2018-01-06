@@ -55,5 +55,9 @@ public class BacteriaDao {
         List<Bacteria> bacteriaList = session.selectList(statment, idList);
         return bacteriaList;
     }
-
+    public List<String> findAllBacteriaName() {
+        String statement = "BacteriaMapper.findAllBacteriaName";
+        List<String> BacteriaList = session.selectList(statement);
+        return BacteriaList;
+    }
 }

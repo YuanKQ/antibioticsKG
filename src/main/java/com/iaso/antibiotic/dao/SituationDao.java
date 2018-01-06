@@ -8,13 +8,11 @@
  ******************************/
 package com.iaso.antibiotic.dao;
 
-import com.iaso.antibiotic.model.Complication;
 import com.iaso.antibiotic.model.Situation;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -53,5 +51,10 @@ public class SituationDao {
         Situation situation = (Situation) session.selectOne(statememt, paraMap);
 
         return situation;
+    }
+    public List<String> findAllSituationName() {
+        String statement = "SituationMapper.findAllSituationName";
+        List<String> situationList = session.selectList(statement);
+        return situationList;
     }
 }

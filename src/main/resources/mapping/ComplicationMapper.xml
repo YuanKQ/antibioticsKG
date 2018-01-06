@@ -15,4 +15,8 @@
   <select id="findComplicationByName" resultMap="ComplicationResult">
     SELECT * FROM complication WHERE complication_name = #{name} LIMIT #{limit}
   </select>
+
+  <select id="findAllComplicationName" resultType="String">
+    select complication_name from complication
+  </select>
 </mapper>

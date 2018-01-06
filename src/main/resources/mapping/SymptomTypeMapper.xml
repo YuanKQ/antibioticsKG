@@ -17,4 +17,8 @@
     SELECT * FROM symptom_type WHERE symptom_type_name = #{name} LIMIT #{limit}
   </select>
 
+  <select id="findAllSymptom_typeName" resultType="String">
+    select symptom_type_name from symptom_type
+  </select>
+
 </mapper>

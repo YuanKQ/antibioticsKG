@@ -23,4 +23,8 @@
   <select id="findSymptomByName" resultMap="SymptomResult">
     SELECT * FROM symptom WHERE symptom_name = #{name} LIMIT #{limit}
   </select>
+
+  <select id="findAllSymptomName" resultType="String">
+    select symptom_name from symptom
+  </select>
 </mapper>
