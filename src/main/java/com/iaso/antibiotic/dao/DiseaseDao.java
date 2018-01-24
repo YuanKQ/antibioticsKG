@@ -52,4 +52,9 @@ public class DiseaseDao {
 
         return disease;
     }
+    public List<String> findAllDiseaseName() {
+        String statement = "DiseaseMapper.findAllDiseaseName";
+        List<String> DiseaseList = session.selectList(statement);
+        return DiseaseList;
+    }
 }

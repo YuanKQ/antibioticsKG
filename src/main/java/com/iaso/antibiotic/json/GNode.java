@@ -14,7 +14,11 @@ import java.util.HashMap;
 
 public class GNode implements Serializable {
     /**
+<<<<<<< HEAD
      * Graph节点类
+=======
+     * 节点类
+>>>>>>> treeView
      * 涵盖节点基本信息：
      * ＠id：初步定为药物名称
      * ＠infos：所涵盖信息因节点类型而定

@@ -1,13 +1,14 @@
 package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.service.AntibioticService;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
+
 
 /**
  * Created by yuan on 17-5-10.
@@ -16,7 +17,28 @@ import java.util.HashMap;
 @Controller
 public class SearchController {
     //  搜索栏:搜索领域graph，搜索关键词keywords
+//    private AntibioticService antibioticService = new AntibioticService();
+//    @RequestMapping(value = "/tree", method = RequestMethod.GET)
+//    public @ResponseBody List<String> Name(){
+//        List<String> antibioticnames = antibioticService.findAllantibioticName();
+//        return antibioticnames;
+//    }
+
     private AntibioticService antibioticService = new AntibioticService();
+    @RequestMapping(value = "/tree", method = RequestMethod.GET)
+    public @ResponseBody JSONObject Name() {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("antibioticnames", antibioticService.findAllantibioticName());
+        map.put("bacterianames",antibioticService.findAllbacteriaName());
+        map.put("complicationnames",antibioticService.findAllcomplicationName());
+        map.put("diseasenames",antibioticService.findAlldiseaseName());
+        map.put("infectionSitenames",antibioticService.findAllinfectionSiteName());
+        map.put("situationnames",antibioticService.findAllsituationName());
+        map.put("symptomnames",antibioticService.findAllsymptomName());
+        map.put("symptomTypenames",antibioticService.findAllsymptomTypeName());
+        JSONObject obj = JSONObject.fromObject(map);
+        return obj;
+    }
 
     @RequestMapping(name = "/**/search", method = RequestMethod.GET)
     @ResponseBody
@@ -58,6 +80,7 @@ public class SearchController {
             map.put("msg", e.getMessage());
             return map;
         }
+
         /*if (graph.equals("antibioticKG")) {
             HashMap<String, Object> map = antibioticService.findDBName(keywords);
         }

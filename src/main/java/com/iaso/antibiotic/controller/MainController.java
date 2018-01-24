@@ -9,24 +9,11 @@
 
 package com.iaso.antibiotic.controller;
 
-import com.iaso.antibiotic.model.Antibiotic;
-import com.iaso.antibiotic.model.Bacteria;
-import com.iaso.antibiotic.model.Situation;
 import com.iaso.antibiotic.service.AntibioticService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,6 +27,19 @@ public class MainController {
 //    public String introduce() {
 //        return "introduce";
 //    }
+    //@Autowired
+    private AntibioticService antibioticService = new AntibioticService();
+
+    @RequestMapping(value = "/treeShow")
+    public String treeName() {
+        return "treeShow";
+    }
+
+    @RequestMapping(value = "/nametest")
+    public List<String> findName() {
+        List<String> names = antibioticService.findAllantibioticName();
+        return names;
+    }
 
     @RequestMapping(value = "/")
     public String systemIntroducePage1(Model model) {
@@ -81,6 +81,7 @@ public class MainController {
         return "introduction";
     }
 
+<<<<<<< HEAD
     @RequestMapping(value = "/dataDownload")
     public String dataDownloadPage(Model model) {
         return "dataDownload";
@@ -97,6 +98,18 @@ public class MainController {
     }
 
 
+=======
+    @RequestMapping(value = "/TreeShow")
+    public String TreeShowPage(Model model) {
+        /* 将值传递至前端(ftl), 前端通过{name}, {graph}, {kw}来引用
+        model.addAttribute("name", " world");
+        model.addAttribute("graph", "antibiotic");
+        model.addAttribute("kw","AmBisome");
+        */
+        return "/WEB-INF/FTL/treeShow.ftl";
+    }
+
+>>>>>>> treeView
 
 /*
     @RequestMapping(value = "/test")

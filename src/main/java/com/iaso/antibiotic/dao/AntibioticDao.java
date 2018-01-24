@@ -41,6 +41,21 @@ public class AntibioticDao {
         }
     }
 
+//    public List<Antibiotic> findAll(List<String> idList){
+//        String statment = "AntibioticMapper.findAntibioticByID";
+//        Map<String, Object> paraMap = new HashMap<String, Object>();
+//        paraMap.put("list", idList);
+//        List<Antibiotic> antibioticList = session.selectList(statment, paraMap);
+//        for (Antibiotic a : antibioticList
+//                ) {
+//            if (a.getId().equals(id)) {
+//                antibioticList.remove(a);
+//                break;
+//            }
+//        }
+//        return antibioticList;
+//    }
+
     public Antibiotic findAntibioticByName(String name) {
         String statement = "AntibioticMapper.findAntibioticByName";
         Map<String, Object> paraMap = new HashMap<String, Object>();
@@ -102,4 +117,11 @@ public class AntibioticDao {
         List<Situation> situationList = session.selectList(statment, idList);
         return situationList;
     }*/
+
+    public List<String> findAllAntibioticName() {
+        String statement = "AntibioticMapper.findAllAntibioticName";
+        List<String> antibioticList = session.selectList(statement);
+        return antibioticList;
+    }
+
 }

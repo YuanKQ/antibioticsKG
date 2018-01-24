@@ -8,13 +8,11 @@
  ******************************/
 package com.iaso.antibiotic.dao;
 
-import com.iaso.antibiotic.model.Disease;
 import com.iaso.antibiotic.model.Symptom;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -52,5 +50,10 @@ public class SymptomDao {
         Symptom symptom = (Symptom) session.selectOne(statement, paraMap);
 
         return symptom;
+    }
+    public List<String> findAllSymptomName() {
+        String statement = "SymptomMapper.findAllSymptomName";
+        List<String> symptomList = session.selectList(statement);
+        return symptomList;
     }
 }

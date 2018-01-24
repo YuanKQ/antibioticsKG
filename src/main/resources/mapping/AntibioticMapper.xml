@@ -27,6 +27,18 @@
         select * from antibiotic where antibiotic_name = #{name} LIMIT #{limit}
     </select>
 
+    <select id="findAllAntibioticName" resultType="String">
+        select antibiotic_name from antibiotic
+    </select>
+
+    <select id="findAllrelationName" resultType="String">
+        select relation_name from relation
+    </select>
+
+
+
+
+
     <select id="findAntibioticByID" parameterType="map" resultMap="AntibioticResult">
         SELECT * FROM antibiotic WHERE antibiotic_id IN
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")" >

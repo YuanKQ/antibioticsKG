@@ -17,4 +17,7 @@
     SELECT * FROM infection_site WHERE infection_site_name = #{name} LIMIT #{limit}
   </select>
 
+  <select id="findAllInfectionSiteName" resultType="String">
+    select infection_site_name from infection_site
+  </select>
 </mapper>

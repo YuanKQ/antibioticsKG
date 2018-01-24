@@ -16,4 +16,8 @@
   <select id="findDiseaseByName" resultMap="DiseaseResult">
     SELECT * FROM disease WHERE disease_name = #{name} LIMIT #{limit}
   </select>
+
+  <select id="findAllDiseaseName" resultType="String">
+    select disease_name from disease
+  </select>
 </mapper>

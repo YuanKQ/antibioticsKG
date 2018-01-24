@@ -55,4 +55,9 @@ public class InfectionSiteDao {
         InfectionSite infectionSite = (InfectionSite) session.selectOne(statememt, paraMap);
         return infectionSite;
     }
+    public List<String> findAllInfectionSiteName() {
+        String statement = "InfectionSiteMapper.findAllInfectionSiteName";
+        List<String> InfectionSiteList = session.selectList(statement);
+        return InfectionSiteList;
+    }
 }

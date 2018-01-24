@@ -16,4 +16,8 @@
     <select id="findSituationByName" resultMap="SituationResult">
         SELECT * FROM situation WHERE situation_name = #{name} LIMIT #{limit}
     </select>
+
+    <select id="findAllSituationName" resultType="String">
+        select situation_name from situation
+    </select>
 </mapper>

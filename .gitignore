@@ -39,6 +39,7 @@ hs_err_pid*
 /.~lock.凯琦_抗生素开源系统简介.docx#
 /src/main/webapp/files/
 /src/main/webapp/WEB-INF/index.html
+<<<<<<< HEAD
 others/
 src/main/webapp/WEB-INF/VIEW/
 src/main/webapp/images/
@@ -58,4 +59,9 @@ src/main/webapp/template/
 /others/sqlFiles/openKG_antibiotic.sql
 /others/sqlFiles/openKG_edge_in_KG.sql
 /others/TestCases/apiTest.md
+=======
+!/src/main/java/com/iaso/antibiotic/json/GNode.java
+!/src/main/java/com/iaso/antibiotic/json/Graph.java
+!/src/main/java/com/iaso/antibiotic/json/GLink.java
+>>>>>>> treeView
 !/src/main/java/com/iaso/antibiotic/json/

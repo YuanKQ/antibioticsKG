@@ -54,5 +54,10 @@ public class SymptomTypeDao {
 
         return symptomType;
     }
+    public List<String> findAllSymptomTypeName() {
+        String statement = "symptomTypeMapper.findAllsymptomTypeName";
+        List<String> symptomTypeList = session.selectList(statement);
+        return symptomTypeList;
+    }
 }
 
