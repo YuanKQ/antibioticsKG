@@ -11,8 +11,6 @@
     <title>TreeShow</title>
 </head>
 <body>
-
-<h2>Hello World!</h2>
 <hr>
 <input type="button" value="点击获取菜单" id="getmenu">
 
