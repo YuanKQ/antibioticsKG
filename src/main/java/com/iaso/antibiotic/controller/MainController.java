@@ -81,7 +81,6 @@ public class MainController {
         return "introduction";
     }
 
-<<<<<<< HEAD
     @RequestMapping(value = "/dataDownload")
     public String dataDownloadPage(Model model) {
         return "dataDownload";
@@ -98,7 +97,6 @@ public class MainController {
     }
 
 
-=======
     @RequestMapping(value = "/TreeShow")
     public String TreeShowPage(Model model) {
         /* 将值传递至前端(ftl), 前端通过{name}, {graph}, {kw}来引用
@@ -109,7 +107,6 @@ public class MainController {
         return "/WEB-INF/FTL/treeShow.ftl";
     }
 
->>>>>>> treeView
 
 /*
     @RequestMapping(value = "/test")

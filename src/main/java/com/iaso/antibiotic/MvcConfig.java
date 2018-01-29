@@ -16,7 +16,7 @@ import java.util.Properties;
  * 对应原本的 mvc-dispatcher.xml
  */
 @Configuration
-public class mvcConfig extends WebMvcConfigurerAdapter {
+public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

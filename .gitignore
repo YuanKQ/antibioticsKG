@@ -59,10 +59,9 @@ src/main/webapp/template/
 /others/sqlFiles/openKG_antibiotic.sql
 /others/sqlFiles/openKG_edge_in_KG.sql
 /others/TestCases/apiTest.md
-=======
 !/src/main/java/com/iaso/antibiotic/json/GNode.java
 !/src/main/java/com/iaso/antibiotic/json/Graph.java
 !/src/main/java/com/iaso/antibiotic/json/GLink.java
->>>>>>> treeView
 !/src/main/java/com/iaso/antibiotic/json/
+
 /src/main/resources/application.properties
