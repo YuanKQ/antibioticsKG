@@ -14,39 +14,45 @@ import com.iaso.antibiotic.exception.NoSuchConceptException;
 import com.iaso.antibiotic.json.*;
 import com.iaso.antibiotic.model.KGRelation;
 import org.omg.DynamicAny.NameDynAnyPair;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Component
 public class ApiService {
     //@Autowired
-    private AntibioticDao antibioticDao = new AntibioticDao();
+//    private AntibioticDao antibioticDao = new AntibioticDao();
+    @Autowired
+    private AntibioticDao antibioticDao;
 
-    //    @Autowired
-    private BacteriaDao bacteriaDao = new BacteriaDao();
+    @Autowired
+    private BacteriaDao bacteriaDao;
 
-    //    @Autowired
-    private SituationDao situationDao = new SituationDao();
+    @Autowired
+    private SituationDao situationDao;
 
-    //    @Autowired
-    private InfectionSiteDao infectionSiteDao = new InfectionSiteDao();
+    @Autowired
+    private InfectionSiteDao infectionSiteDao;
 
-    //    @Autowired
-    private DiseaseDao diseaseDao = new DiseaseDao();
+    @Autowired
+    private DiseaseDao diseaseDao;
 
-    //    @Autowired
-    private ComplicationDao complicationDao = new ComplicationDao();
+    @Autowired
+    private ComplicationDao complicationDao;
 
-    //    @Autowired
-    private SymptomDao symptomDao = new SymptomDao();
+    @Autowired
+    private SymptomDao symptomDao;
 
-    //    @Autowired
-    private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
+    @Autowired
+    private SymptomTypeDao symptomTypeDao;
 
-    private RelationDao relationDao = new RelationDao();
-    
+    @Autowired
+    private RelationDao relationDao;
+
     private AntibioticService antibioticService = new AntibioticService();
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
@@ -103,7 +109,7 @@ public class ApiService {
         List<Integer> dblist = antibioticDao.findDBNameByKeyword(name);
         if (dblist == null || dblist.size() == 0) // 不要忘了处理dblist的length为0的情况!!!
             throw new NullPointerException(name);
-        
+
         ArrayList<InnerNode> nodeArrayList = new ArrayList<InnerNode>();
         for (Integer i: dblist)
             nodeArrayList.add(index2InnerNode(i, name));
@@ -189,6 +195,7 @@ public class ApiService {
         private String id;
         private String type;
         private String name;
+
         public InnerNode(String id, String type, String name) {
             this.id = id;
             this.type = type;
@@ -208,7 +215,7 @@ public class ApiService {
         }
 
     }
-    
+
     public DataSubgraph getSubgraph(String center) throws NullPointerException{
         DataSubgraph dataSubgraph = new DataSubgraph(0, "success");
         List<Integer> dblist = antibioticDao.findDBNameByKeyword(center);

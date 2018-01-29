@@ -8,5 +8,10 @@
  ******************************/
 package com.iaso.antibiotic.dao;
 
-public class TESTRestfulDao {
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+@Mapper
+@Component
+public interface TESTRestfulDao {
 }

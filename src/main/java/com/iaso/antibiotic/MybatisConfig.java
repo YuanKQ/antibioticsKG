@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * 对应原本的 MyBatis-conf.xml
  */
 @Configuration
-@PropertySource("classpath*:application.properties")
+@PropertySource("classpath:application.properties")
 public class MybatisConfig {
 
     @Value("classpath*:/mapping/*.xml") private Resource[] mappers;//注入mapper的路径
@@ -53,7 +53,7 @@ public class MybatisConfig {
     }
 
     @Bean
-    org.apache.ibatis.session.Configuration mybatisConfig() {
+    org.apache.ibatis.session.Configuration mybatisConfiguration() {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setCacheEnabled(true);
@@ -71,7 +71,7 @@ public class MybatisConfig {
         org.mybatis.spring.SqlSessionFactoryBean sessionFactoryBean = new org.mybatis.spring.SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
         sessionFactoryBean.setMapperLocations(mappers);
-        sessionFactoryBean.setConfiguration(mybatisConfig());
+        sessionFactoryBean.setConfiguration(mybatisConfiguration());
         return sessionFactoryBean;
     }
 }

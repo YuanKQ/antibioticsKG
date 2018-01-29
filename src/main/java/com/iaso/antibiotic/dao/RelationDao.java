@@ -9,31 +9,13 @@
 package com.iaso.antibiotic.dao;
 
 import com.iaso.antibiotic.model.KGRelation;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.Reader;
+@Component
+@Mapper
+public interface RelationDao {
 
-public class RelationDao {
-    private SqlSessionFactory sessionFactory;
-    private SqlSession session;
-
-    public RelationDao() {
-        String resource = "MyBatis-conf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public KGRelation findRelationNameById(String relation_id) {
-        String statement = "RelationMapper.findRelationNameById";
-        return (KGRelation)session.selectOne(statement, relation_id);
-    }
+    KGRelation findRelationNameById(@Param("relation_id") String relation_id);
 }

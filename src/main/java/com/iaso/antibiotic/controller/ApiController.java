@@ -38,8 +38,11 @@ public class ApiController {
     */
 
     // 用static?
-    private ApiService apiService = new ApiService();
-    private TESTService testService = new TESTService();
+//    private ApiService apiService = new ApiService();
+//    private TESTService testService = new TESTService();
+
+    private ApiService apiService = null;
+    private TESTService testService = null;
 
     // 调试完成后统一加上 catch (Exception e) {
     @RequestMapping(value= "/{entityType}/{name}", method = RequestMethod.GET)

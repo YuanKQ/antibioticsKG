@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--命名空间唯一-->
-<mapper namespace="AntibioticMapper">
+<mapper namespace="com.iaso.antibiotic.dao.AntibioticDao">
     <!--
     *** 将数据查询结果映射成JavaBean
     *** id 数据库中主键映射

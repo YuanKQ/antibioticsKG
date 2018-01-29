@@ -8,10 +8,8 @@
  ******************************/
 package com.iaso.antibiotic.dao;
 
-import com.iaso.antibiotic.model.Antibiotic;
 import com.iaso.antibiotic.model.Bacteria;
-import com.iaso.antibiotic.model.InfectionSite;
-import com.iaso.antibiotic.model.Situation;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,40 +22,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//@Component
-public class BacteriaDao {
-    private SqlSession session;
-    private SqlSessionFactory sessionFactory;
+@Component
+@Mapper
+public interface BacteriaDao {
 
-    public BacteriaDao() {
-        String resource = "MyBatis-conf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    Bacteria findBacteriaByName(String name);
 
-    public Bacteria findBacteriaByName(String name) {
-        String statement = "BacteriaMapper.findBacteriaByName";
-        Map<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("name", name);
-        paraMap.put("limit", 1);
-        Bacteria bacteria = (Bacteria) session.selectOne(statement, paraMap);
+    public List<Bacteria> findBacteriaByID(List<String> idList);
 
-        return bacteria;
-    }
-
-    public List<Bacteria> findBacteriaByID(List<String> idList) {
-        String statment = "BacteriaMapper.findBacteriaByID";
-        List<Bacteria> bacteriaList = session.selectList(statment, idList);
-        return bacteriaList;
-    }
-    public List<String> findAllBacteriaName() {
-        String statement = "BacteriaMapper.findAllBacteriaName";
-        List<String> BacteriaList = session.selectList(statement);
-        return BacteriaList;
-    }
+    public List<String> findAllBacteriaName();
 }

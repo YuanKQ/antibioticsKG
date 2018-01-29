@@ -9,51 +9,25 @@
 package com.iaso.antibiotic.dao;
 
 import com.iaso.antibiotic.model.Symptom;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 
-//@Component
-public class SymptomDao {
-    private SqlSessionFactory sessionFactory;
-    private SqlSession session;
+@Component
+@Mapper
+public interface SymptomDao {
 
-    public SymptomDao() {
-        String resource = "MyBatis-conf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public List<Symptom> findSymptomByIdList(List idList);
 
-    public List<Symptom> findSymptomByIdList(List idList) {
-        String statememt = "SymptomMapper.findSymptomByIdList";
-        List<Symptom> symptomList = session.selectList(statememt, idList);
+    public Symptom findSymptomByName(String name);
 
-        return symptomList;
-    }
-
-    public Symptom findSymptomByName(String name) {
-        String statement = "SymptomMapper.findSymptomByName";
-        HashMap<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("name", name);
-        paraMap.put("limit", 1);
-        Symptom symptom = (Symptom) session.selectOne(statement, paraMap);
-
-        return symptom;
-    }
-    public List<String> findAllSymptomName() {
-        String statement = "SymptomMapper.findAllSymptomName";
-        List<String> symptomList = session.selectList(statement);
-        return symptomList;
-    }
+    public List<String> findAllSymptomName();
 }

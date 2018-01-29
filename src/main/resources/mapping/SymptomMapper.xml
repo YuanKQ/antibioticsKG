@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iaso.antibiotic.dao.SymptomMapper">
+<mapper namespace="com.iaso.antibiotic.dao.SymptomDao">
   <resultMap id="SymptomResult" type="com.iaso.antibiotic.model.Symptom">
     <id column="symptom_id" jdbcType="VARCHAR" property="symptomId" />
     <result column="symptom_name" jdbcType="VARCHAR" property="symptomName" />
@@ -9,6 +9,7 @@
   <resultMap extends="SymptomResult" id="ResultMapWithBLOBs" type="com.iaso.antibiotic.model.Symptom">
     <result column="description" jdbcType="LONGVARCHAR" property="description" />
   </resultMap>
+
   <sql id="Blob_Column_List">
     description
   </sql>
@@ -21,7 +22,7 @@
   </select>
 
   <select id="findSymptomByName" resultMap="SymptomResult">
-    SELECT * FROM symptom WHERE symptom_name = #{name} LIMIT #{limit}
+    SELECT * FROM symptom WHERE symptom_name = #{name} LIMIT 1
   </select>
 
   <select id="findAllSymptomName" resultType="String">

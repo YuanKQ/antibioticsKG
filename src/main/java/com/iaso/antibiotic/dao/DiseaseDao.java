@@ -9,6 +9,7 @@
 package com.iaso.antibiotic.dao;
 
 import com.iaso.antibiotic.model.Disease;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,41 +21,13 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 
-//@Component
-public class DiseaseDao {
-    private SqlSession session;
-    private SqlSessionFactory sessionFactory;
+@Component
+@Mapper
+public interface DiseaseDao {
 
-    public DiseaseDao() {
-        String resource = "MyBatis-conf.xml";
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            sessionFactory = new SqlSessionFactoryBuilder().build(reader);
-            session = sessionFactory.openSession();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    List<Disease> findDiseaseByIdList(List<String> idList);
 
-    public List<Disease> findDiseaseByIdList(List<String> idList) {
-        String statememt = "DiseaseMapper.findDiseaseByIdList";
-        List<Disease> diseaseList = session.selectList(statememt, idList);
+    Disease findDiseaseByName(String name);
 
-        return diseaseList;
-    }
-
-    public Disease findDiseaseByName(String name) {
-        String statememt = "DiseaseMapper.findDiseaseByName";
-        HashMap<String, Object> paraMap = new HashMap<String, Object>();
-        paraMap.put("name", name);
-        paraMap.put("limit", 1);
-        Disease disease = (Disease) session.selectOne(statememt, paraMap);
-
-        return disease;
-    }
-    public List<String> findAllDiseaseName() {
-        String statement = "DiseaseMapper.findAllDiseaseName";
-        List<String> DiseaseList = session.selectList(statement);
-        return DiseaseList;
-    }
+    List<String> findAllDiseaseName();
 }

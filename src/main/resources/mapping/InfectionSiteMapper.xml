@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iaso.antibiotic.dao.InfectionSiteMapper">
+<mapper namespace="com.iaso.antibiotic.dao.InfectionSiteDao">
   <resultMap id="InfectionSiteResult" type="com.iaso.antibiotic.model.InfectionSite">
     <id column="infection_site_id" jdbcType="VARCHAR" property="infectionSiteId" />
     <result column="infection_site_name" jdbcType="VARCHAR" property="infectionSiteName" />
@@ -14,10 +14,10 @@
   </select>
 
   <select id="findInfectionSiteByName" resultMap="InfectionSiteResult">
-    SELECT * FROM infection_site WHERE infection_site_name = #{name} LIMIT #{limit}
+    SELECT * FROM infection_site WHERE infection_site_name = #{name} LIMIT 1
   </select>
 
   <select id="findAllInfectionSiteName" resultType="String">
-    select infection_site_name from infection_site
+    SELECT infection_site_name FROM infection_site
   </select>
 </mapper>

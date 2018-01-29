@@ -12,6 +12,8 @@ import com.iaso.antibiotic.dao.*;
 import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.json.GNode;
 import com.iaso.antibiotic.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,37 +29,38 @@ enum LinkTypeEnum {
     DiseaseToBacteria, BacteriaToInfectionSite, SymptomTypeToSymptomType, SymptomToSymptomType, DiseaseToSymptom
 }
 
+@Component
 public class AntibioticService {
 
-    //@Autowired
-    private AntibioticDao antibioticDao = new AntibioticDao();
+    @Autowired
+//    private AntibioticDao antibioticDao = new AntibioticDao();
+    private AntibioticDao antibioticDao;
+    @Autowired
+    private BacteriaDao bacteriaDao;
 
-    //    @Autowired
-    private BacteriaDao bacteriaDao = new BacteriaDao();
+    @Autowired
+    private SituationDao situationDao;
 
-    //    @Autowired
-    private SituationDao situationDao = new SituationDao();
+    @Autowired
+    private InfectionSiteDao infectionSiteDao;
 
-    //    @Autowired
-    private InfectionSiteDao infectionSiteDao = new InfectionSiteDao();
+    @Autowired
+    private DiseaseDao diseaseDao;
 
-    //    @Autowired
-    private DiseaseDao diseaseDao = new DiseaseDao();
+    @Autowired
+    private ComplicationDao complicationDao;
 
-    //    @Autowired
-    private ComplicationDao complicationDao = new ComplicationDao();
+    @Autowired
+    private SymptomDao symptomDao;
 
-    //    @Autowired
-    private SymptomDao symptomDao = new SymptomDao();
-
-    //    @Autowired
-    private SymptomTypeDao symptomTypeDao = new SymptomTypeDao();
+    @Autowired
+    private SymptomTypeDao symptomTypeDao;
 
     /*
-    * build a subgraph consists of directly related nodes to the center of the graph
-    *
-    * write for SearchController.java
-    * */
+     * build a subgraph consists of directly related nodes to the center of the graph
+     *
+     * write for SearchController.java
+     * */
     private HashMap<String, Object> createGraphMap(List<GNode> nodeList, List<GLink> linkList, int max) {
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("nodes", nodeList);

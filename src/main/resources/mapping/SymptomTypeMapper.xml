@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iaso.antibiotic.dao.SymptomTypeMapper">
+<mapper namespace="com.iaso.antibiotic.dao.SymptomTypeDao">
   <resultMap id="SymptomTypeMap" type="com.iaso.antibiotic.model.SymptomType">
     <id column="symptom_type_id" jdbcType="VARCHAR" property="symptomTypeId" />
     <result column="symptom_type_name" jdbcType="VARCHAR" property="symptomTypeName" />
@@ -17,7 +17,7 @@
     SELECT * FROM symptom_type WHERE symptom_type_name = #{name} LIMIT #{limit}
   </select>
 
-  <select id="findAllSymptom_typeName" resultType="String">
+  <select id="findAllSymptomTypeName" resultType="String">
     select symptom_type_name from symptom_type
   </select>
 

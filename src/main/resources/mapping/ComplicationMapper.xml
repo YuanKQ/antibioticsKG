@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iaso.antibiotic.dao.ComplicationMapper">
+<mapper namespace="com.iaso.antibiotic.dao.ComplicationDao">
   <resultMap id="ComplicationResult" type="com.iaso.antibiotic.model.Complication">
     <id column="complication_id" jdbcType="VARCHAR" property="complicationId" />
     <result column="complication_name" jdbcType="VARCHAR" property="complicationName" />
@@ -13,7 +13,7 @@
   </select>
 
   <select id="findComplicationByName" resultMap="ComplicationResult">
-    SELECT * FROM complication WHERE complication_name = #{name} LIMIT #{limit}
+    SELECT * FROM complication WHERE complication_name = #{name} LIMIT 1
   </select>
 
   <select id="findAllComplicationName" resultType="String">
