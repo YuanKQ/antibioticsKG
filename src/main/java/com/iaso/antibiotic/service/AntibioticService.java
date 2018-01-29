@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 enum NodeTypeEnum {
     SourceNode, AntibioticNode, BacteriaNode, ComplicationNode, DiseaseNode, InfectionSiteNode, SituationNode,
@@ -32,29 +33,27 @@ enum LinkTypeEnum {
 @Component
 public class AntibioticService {
 
-    @Autowired
-//    private AntibioticDao antibioticDao = new AntibioticDao();
+
     private AntibioticDao antibioticDao;
-    @Autowired
     private BacteriaDao bacteriaDao;
-
-    @Autowired
     private SituationDao situationDao;
-
-    @Autowired
     private InfectionSiteDao infectionSiteDao;
-
-    @Autowired
     private DiseaseDao diseaseDao;
-
-    @Autowired
     private ComplicationDao complicationDao;
-
-    @Autowired
     private SymptomDao symptomDao;
+    private SymptomTypeDao symptomTypeDao;
 
     @Autowired
-    private SymptomTypeDao symptomTypeDao;
+    public AntibioticService(AntibioticDao antibioticDao, BacteriaDao bacteriaDao, SituationDao situationDao, InfectionSiteDao infectionSiteDao, DiseaseDao diseaseDao, ComplicationDao complicationDao, SymptomDao symptomDao, SymptomTypeDao symptomTypeDao) {
+        this.antibioticDao = antibioticDao;
+        this.bacteriaDao = bacteriaDao;
+        this.situationDao = situationDao;
+        this.infectionSiteDao = infectionSiteDao;
+        this.diseaseDao = diseaseDao;
+        this.complicationDao = complicationDao;
+        this.symptomDao = symptomDao;
+        this.symptomTypeDao = symptomTypeDao;
+    }
 
     /*
      * build a subgraph consists of directly related nodes to the center of the graph
@@ -132,7 +131,9 @@ public class AntibioticService {
 
         List<Bacteria> bacteriaList = bacteriaDao.findBacteriaByID(idList);
         List<Situation> situationList = situationDao.findSituationByID(idList);
-        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(antibiotic.getId(), idList);
+        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(antibiotic.getId(), idList).stream()
+                .filter(antibiotic1 -> !antibiotic1.getId().equals(antibiotic.getId()))
+                .collect(Collectors.toList());
 
         List<GNode> nodeList = new ArrayList<GNode>();
         List<GLink> linkList = new ArrayList<GLink>();
@@ -351,7 +352,9 @@ public class AntibioticService {
         if (idList.size() == 0)
             return createSingleNodeGraphMap(situation.situation2GNode(NodeTypeEnum.SourceNode.ordinal()));
 
-        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(situation.getSituationId(), idList);
+        List<Antibiotic> antibioticList = antibioticDao.findAntibioticByID(situation.getSituationId(), idList).stream()
+                .filter(antibiotic1 -> !antibiotic1.getId().equals(situation.getSituationId()))
+                .collect(Collectors.toList());
 
         List<GNode> nodeList = new ArrayList<GNode>();
         List<GLink> linkList = new ArrayList<GLink>();

@@ -24,7 +24,7 @@
     *** 如果没有返回结果，resultMap和resultType都不需要
     -->
     <select id="findAntibioticByName" resultMap="AntibioticResult">
-        select * from antibiotic where antibiotic_name = #{name} LIMIT #{limit}
+        select * from antibiotic where antibiotic_name = #{name} LIMIT 1
     </select>
 
     <select id="findAllAntibioticName" resultType="String">

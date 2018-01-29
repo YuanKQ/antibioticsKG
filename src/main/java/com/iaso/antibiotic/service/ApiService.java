@@ -53,7 +53,8 @@ public class ApiService {
     @Autowired
     private RelationDao relationDao;
 
-    private AntibioticService antibioticService = new AntibioticService();
+    @Autowired
+    private AntibioticService antibioticService;
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
         Object data = null;

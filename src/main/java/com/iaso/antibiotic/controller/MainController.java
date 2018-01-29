@@ -10,6 +10,7 @@
 package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.service.AntibioticService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,8 @@ public class MainController {
 //    public String introduce() {
 //        return "introduce";
 //    }
-    //@Autowired
-    private AntibioticService antibioticService = new AntibioticService();
+    @Autowired
+    private AntibioticService antibioticService;
 
     @RequestMapping(value = "/treeShow")
     public String treeName() {

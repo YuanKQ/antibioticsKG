@@ -2,6 +2,7 @@ package com.iaso.antibiotic.controller;
 
 import com.iaso.antibiotic.service.AntibioticService;
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,9 @@ public class SearchController {
 //        return antibioticnames;
 //    }
 
-    private AntibioticService antibioticService = new AntibioticService();
+    @Autowired
+    private AntibioticService antibioticService ;
+
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public @ResponseBody JSONObject Name() {
         HashMap<String, Object> map = new HashMap<String, Object>();

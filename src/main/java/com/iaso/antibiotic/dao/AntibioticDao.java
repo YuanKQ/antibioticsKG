@@ -17,8 +17,8 @@ import java.util.List;
 
 //import javax.annotation.Resources;
 
-@Component
 @Mapper
+@Component
 public interface AntibioticDao {
     Antibiotic findAntibioticByName(@Param("name") String name);
 
@@ -26,7 +26,7 @@ public interface AntibioticDao {
 
     String findAllrelationName();
 
-    List<Antibiotic> findAntibioticByID(String id, List<String> ids);//TODO screen result
+    List<Antibiotic> findAntibioticByID(@Param("id") String id, @Param("list") List<String> ids);//TODO screen result
 
     List<String> findAllNodeID(@Param("researching_id") String researching_id);
 

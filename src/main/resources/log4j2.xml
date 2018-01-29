@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" strict="true" name="XMLConfigTest" packages="org.apache.logging.log4j.test">
+    <Properties>
+        <Property name="baseDir">logs</Property>
+        <Property name="filename">${baseDir}/antibioticKG.log</Property>
+        <Property name="errorFileName">${baseDir}/antibioticKG-err.log</Property>
+    </Properties>
+    <Filter type="ThresholdFilter" level="trace"/>
+
+    <Appenders>
+
+        <RollingFile name="RollingFile" fileName="${filename}" filePattern="${baseDir}/archive/antibioticKG-%d{yyyy-MM-dd}.log.gz" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%highlight{%d %p %C{1.} [%t] %m%n}</Pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy interval="1" />
+            <DefaultRolloverStrategy max="60"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileErr" fileName="${errorFileName}" filePattern="${baseDir}/archive/antibioticKG-err-%d{yyyy-MM-dd}.log.gz" ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%highlight{%d %p %C{1.} [%t] %m%n}</Pattern>9
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy interval="1" />
+            <DefaultRolloverStrategy max="60"/>
+        </RollingFile>
+
+        <Appender type="Console" name="STDOUT">
+            <Layout type="PatternLayout" charset="UTF-8"  pattern="%highlight{%d %p %C{1.} [%t] %m%n}"/>
+        </Appender>
+
+        <Appender type="Console" name="CONCISE_STDOUT">
+            <Layout type="PatternLayout" charset="UTF-8" pattern="%highlight{%d %p %C{1.} [%t] %m%n}"/>
+        </Appender>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="STDOUT"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="RollingFileErr" level="WARN"/>
+        </Root>
+
+        <!--关闭apache httpclient的日志输出-->
+        <Logger name="org.apache.http.impl.client" level="DEBUG"/>
+        <Logger name="org.apache.http.impl.conn" level="DEBUG"/>
+        <Logger name="org.apache.http.headers" level="DEBUG"/>
+        <Logger name="org.apache.http.wire" level="WARN"/>
+
+        <Logger name="org.springframework" level="WARN"/>
+    </Loggers>
+
+
+</Configuration>

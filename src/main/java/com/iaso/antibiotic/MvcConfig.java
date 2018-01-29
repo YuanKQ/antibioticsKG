@@ -1,10 +1,17 @@
 package com.iaso.antibiotic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
@@ -16,23 +23,36 @@ import java.util.Properties;
  * 对应原本的 mvc-dispatcher.xml
  */
 @Configuration
+@EnableWebMvc
 public class MvcConfig extends WebMvcConfigurerAdapter {
+
+    private static Logger logger = LoggerFactory.getLogger(MvcConfig.class);
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/", "/images/**");
-        registry.addResourceHandler("/img/", "/img/**");
-        registry.addResourceHandler("/src/", "/src/**");
-        registry.addResourceHandler("/dist/", "/dist/**");
-        registry.addResourceHandler("/fonts/", "/fonts/**");
-        registry.addResourceHandler("/css/", "/css/**");
-        registry.addResourceHandler("/js/", "/js/**");
+        registry.addResourceHandler("/images/", "/images/**").addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("/img/", "/img/**").addResourceLocations("classpath:/img/");
+        registry.addResourceHandler("/src/", "/src/**").addResourceLocations("classpath:/src/");
+        registry.addResourceHandler("/dist/", "/dist/**").addResourceLocations("classpath:/dist/");
+        registry.addResourceHandler("/fonts/", "/fonts/**").addResourceLocations("classpath:/fonts/");
+        registry.addResourceHandler("/css/", "/css/**").addResourceLocations("classpath:/css/");
+        registry.addResourceHandler("/js/*").addResourceLocations("classpath:/js/");
+
+        registry.setOrder(-1); //必须要把order设为-1，即在controller之前解析
+    }
+
+    @Override
+    public void configureViewResolvers(ViewResolverRegistry registry) {
+        registry.viewResolver(freemarkerResolver());
+        registry.viewResolver(servletResolver());
+//        registry.order(Ordered.HIGHEST_PRECEDENCE);
     }
 
     @Bean
-    FreeMarkerViewResolver resolver() {
+    ViewResolver freemarkerResolver() {
         FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
-        resolver.setCache(true);
+        resolver.setViewClass(org.springframework.web.servlet.view.freemarker.FreeMarkerView.class);
+        resolver.setCache(false);
         resolver.setPrefix("");
         resolver.setSuffix(".ftl");
         resolver.setContentType("text/html;charset=UTF-8");
@@ -43,15 +63,13 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean
-    InternalResourceViewResolver servletResolver() {
-        return new InternalResourceViewResolver("WEB-INF/JSP/", ".jsp");
-    }
 
     @Bean
     FreeMarkerConfigurer freeMarkerConfigurer() {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPath("WEB-INF/FTL/");
+
+        configurer.setTemplateLoaderPath("classpath:/WEB-INF/FTL/");
+
         Properties freemarkerSettings = new Properties();
         freemarkerSettings.setProperty("template_update_delay", "5");
         freemarkerSettings.setProperty("default_encoding", "UTF-8");
@@ -73,27 +91,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         freemarkerVariables.put("super", "superDirective");
 
         configurer.setFreemarkerVariables(freemarkerVariables);
+
         return configurer;
     }
 
-    @Bean
-    cn.org.rapid_framework.freemarker.directive.BlockDirective blockDirective() {
-        return new cn.org.rapid_framework.freemarker.directive.BlockDirective();
-    }
 
     @Bean
-    cn.org.rapid_framework.freemarker.directive.ExtendsDirective extendsDirective() {
-        return new cn.org.rapid_framework.freemarker.directive.ExtendsDirective();
+    ViewResolver servletResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver("/WEB-INF/JSP/", ".jsp");
+        resolver.setViewClass(JstlView.class);
+        return resolver;
     }
-
-    @Bean
-    cn.org.rapid_framework.freemarker.directive.OverrideDirective overrideDirective() {
-        return new cn.org.rapid_framework.freemarker.directive.OverrideDirective();
-    }
-
-    @Bean
-    cn.org.rapid_framework.freemarker.directive.SuperDirective superDirective() {
-        return new cn.org.rapid_framework.freemarker.directive.SuperDirective();
-    }
-
 }
