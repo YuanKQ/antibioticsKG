@@ -19,20 +19,8 @@ import javax.annotation.PostConstruct;
 @EnableWebMvc
 public class SpringbootApplication {
     private static Logger logger = LoggerFactory.getLogger(SpringbootApplication.class);
-    private AntibioticDao antibioticDao;
-    @PostConstruct
-    public void test() {
-        logger.debug(antibioticDao.findAllNodeID("asaa").toString());
-    }
-
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
-    }
-
-    @Autowired
-    public SpringbootApplication setAntibioticDao(AntibioticDao antibioticDao) {
-        this.antibioticDao = antibioticDao;
-        return this;
     }
 }

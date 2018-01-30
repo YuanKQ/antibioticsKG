@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--命名空间唯一-->
+
+<!--
+    Mybatis的mapper的namespace应该是对应的dao接口, xml文件当中每一个语句的id都对应dao接口当中的一个方法名,
+    Mybatis会在运行时自动为dao接口生成动态代理的实例 org.apache.ibatis.binding.MapperProxy
+    因此称为namespace
+-->
 <mapper namespace="com.iaso.antibiotic.dao.AntibioticDao">
     <!--
     *** 将数据查询结果映射成JavaBean

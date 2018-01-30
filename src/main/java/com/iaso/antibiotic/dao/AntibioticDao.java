@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//import javax.annotation.Resources;
 
+/**
+ * dao应该是一个接口
+ */
 @Mapper
 @Component
 public interface AntibioticDao {

@@ -24,36 +24,17 @@ import java.util.List;
 
 @Component
 public class ApiService {
-    //@Autowired
-//    private AntibioticDao antibioticDao = new AntibioticDao();
-    @Autowired
+
+    //使用setter方式注入
     private AntibioticDao antibioticDao;
-
-    @Autowired
     private BacteriaDao bacteriaDao;
-
-    @Autowired
     private SituationDao situationDao;
-
-    @Autowired
     private InfectionSiteDao infectionSiteDao;
-
-    @Autowired
     private DiseaseDao diseaseDao;
-
-    @Autowired
     private ComplicationDao complicationDao;
-
-    @Autowired
     private SymptomDao symptomDao;
-
-    @Autowired
     private SymptomTypeDao symptomTypeDao;
-
-    @Autowired
     private RelationDao relationDao;
-
-    @Autowired
     private AntibioticService antibioticService;
 
     public DataNode getSingleNode(String dbName, String name) throws NullPointerException, NoSuchConceptException {
@@ -262,4 +243,26 @@ public class ApiService {
                 return null;
         }
     }
+
+    @Autowired
+    public ApiService setAntibioticDao(AntibioticDao antibioticDao) {this.antibioticDao = antibioticDao;return this;}
+    @Autowired
+    public ApiService setBacteriaDao(BacteriaDao bacteriaDao) {this.bacteriaDao = bacteriaDao;return this;}
+    @Autowired
+    public ApiService setSituationDao(SituationDao situationDao) {this.situationDao = situationDao;return this;}
+    @Autowired
+    public ApiService setInfectionSiteDao(InfectionSiteDao infectionSiteDao) {this.infectionSiteDao = infectionSiteDao;return this;}
+    @Autowired
+    public ApiService setDiseaseDao(DiseaseDao diseaseDao) {this.diseaseDao = diseaseDao;return this;}
+    @Autowired
+    public ApiService setComplicationDao(ComplicationDao complicationDao) {this.complicationDao = complicationDao;return this;}
+    @Autowired
+    public ApiService setSymptomDao(SymptomDao symptomDao) {this.symptomDao = symptomDao;return this;}
+    @Autowired
+    public ApiService setSymptomTypeDao(SymptomTypeDao symptomTypeDao) {this.symptomTypeDao = symptomTypeDao;return this;}
+    @Autowired
+    public ApiService setRelationDao(RelationDao relationDao) {this.relationDao = relationDao;return this;}
+    @Autowired
+    public ApiService setAntibioticService(AntibioticService antibioticService) {this.antibioticService = antibioticService;return this;}
+
 }
