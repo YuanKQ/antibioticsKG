@@ -12,9 +12,13 @@ import com.iaso.antibiotic.dao.*;
 import com.iaso.antibiotic.json.GLink;
 import com.iaso.antibiotic.json.GNode;
 import com.iaso.antibiotic.model.*;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.ViewResolver;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +37,7 @@ enum LinkTypeEnum {
 @Component
 public class AntibioticService {
 
-
+    //dependencies
     private AntibioticDao antibioticDao;
     private BacteriaDao bacteriaDao;
     private SituationDao situationDao;
@@ -449,6 +453,7 @@ public class AntibioticService {
                 return "";
         }
     }
+
 }
 
 

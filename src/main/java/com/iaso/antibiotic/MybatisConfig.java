@@ -17,6 +17,9 @@ import javax.sql.DataSource;
 
 /**
  * 对应原本的 MyBatis-conf.xml
+ * https://blog.lanyonm.org/articles/2014/04/21/spring-4-mybatis-java-config.html
+ * 关键词: minimum springboot application
+ *
  */
 @Configuration
 @PropertySource("classpath:application.properties")//PropertySource注解用于指定配置文件(.properties文件),以便下面的@Value注解获取配置项
@@ -79,7 +82,7 @@ public class MybatisConfig {
      * @return
      */
     @Bean
-    org.mybatis.spring.SqlSessionFactoryBean sessionFactory() {
+    public org.mybatis.spring.SqlSessionFactoryBean sessionFactory() {
         org.mybatis.spring.SqlSessionFactoryBean sessionFactoryBean = new org.mybatis.spring.SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource());
         sessionFactoryBean.setMapperLocations(mappers);//关键:设置扫描mapper的路径

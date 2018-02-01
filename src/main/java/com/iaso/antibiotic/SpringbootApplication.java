@@ -20,6 +20,14 @@ import javax.annotation.PostConstruct;
 public class SpringbootApplication {
     private static Logger logger = LoggerFactory.getLogger(SpringbootApplication.class);
 
+    @Autowired
+    AntibioticDao antibioticDao;
+
+    @PostConstruct
+    public void test() {
+        antibioticDao.findAllNodeID("sasa");
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
     }
