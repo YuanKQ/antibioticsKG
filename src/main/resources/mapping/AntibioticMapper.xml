@@ -33,11 +33,11 @@
     </select>
 
     <select id="findAllAntibioticName" resultType="String">
-        select antibiotic_name from antibiotic
+        select antibiotic_name from antibiotic LIMIT 60
     </select>
 
     <select id="findAllrelationName" resultType="String">
-        select relation_name from relation
+        select relation_name from relation LIMIT 50
     </select>
 
 

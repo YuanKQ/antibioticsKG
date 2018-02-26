@@ -18,6 +18,6 @@
   </select>
 
   <select id="findAllInfectionSiteName" resultType="String">
-    SELECT infection_site_name FROM infection_site
+    SELECT infection_site_name FROM infection_site  LIMIT 50
   </select>
 </mapper>

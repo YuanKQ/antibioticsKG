@@ -392,41 +392,49 @@ public class AntibioticService {
 
     public List<String> findAllantibioticName() {
         List<String> antibioticList = antibioticDao.findAllAntibioticName();
+        antibioticList.add("...");
         return antibioticList;
     }
 
     public List<String> findAllbacteriaName() {
         List<String> bacteriaList = bacteriaDao.findAllBacteriaName();
+        bacteriaList.add("...");
         return bacteriaList;
     }
 
     public List<String> findAllcomplicationName() {
         List<String> complicationList = complicationDao.findAllComplicationName();
+        complicationList.add("...");
         return complicationList;
     }
 
     public List<String> findAlldiseaseName() {
         List<String> diseaseList = diseaseDao.findAllDiseaseName();
+        diseaseList.add("...");
         return diseaseList;
     }
 
     public List<String> findAllinfectionSiteName() {
         List<String> infectionSiteList = infectionSiteDao.findAllInfectionSiteName();
+        infectionSiteList.add("...");
         return infectionSiteList;
     }
 
     public List<String> findAllsituationName() {
         List<String> situationList = situationDao.findAllSituationName();
+        situationList.add("...");
         return situationList;
     }
 
     public List<String> findAllsymptomName() {
         List<String> symptomList = symptomDao.findAllSymptomName();
+        symptomList.add("...");
         return symptomList;
     }
 
     public List<String> findAllsymptomTypeName() {
         List<String> symptomTypeList = symptomDao.findAllSymptomName();
+        symptomTypeList.add("...");
         return symptomTypeList;
     }
 

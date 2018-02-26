@@ -28,8 +28,23 @@ public class SearchController {
     @Autowired
     private AntibioticService antibioticService ;
 
+//    @RequestMapping(value = "/tree", method = RequestMethod.GET)
+//    public @ResponseBody JSONObject Name() {
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("antibioticnames", antibioticService.findAllantibioticName());
+//        map.put("bacterianames",antibioticService.findAllbacteriaName());
+//        map.put("complicationnames",antibioticService.findAllcomplicationName());
+//        map.put("diseasenames",antibioticService.findAlldiseaseName());
+//        map.put("infectionSitenames",antibioticService.findAllinfectionSiteName());
+//        map.put("situationnames",antibioticService.findAllsituationName());
+//        map.put("symptomnames",antibioticService.findAllsymptomName());
+//        map.put("symptomTypenames",antibioticService.findAllsymptomTypeName());
+//        JSONObject obj = JSONObject.fromObject(map);
+//        return obj;
+//    }
+
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
-    public @ResponseBody JSONObject Name() {
+    public @ResponseBody HashMap<String, Object> Name() {
         HashMap<String, Object> map = new HashMap<String, Object>();
         map.put("antibioticnames", antibioticService.findAllantibioticName());
         map.put("bacterianames",antibioticService.findAllbacteriaName());
@@ -39,8 +54,9 @@ public class SearchController {
         map.put("situationnames",antibioticService.findAllsituationName());
         map.put("symptomnames",antibioticService.findAllsymptomName());
         map.put("symptomTypenames",antibioticService.findAllsymptomTypeName());
-        JSONObject obj = JSONObject.fromObject(map);
-        return obj;
+
+//        JSONObject obj = JSONObject.fromObject(map);
+        return map;
     }
 
     @RequestMapping(name = "/**/search", method = RequestMethod.GET)

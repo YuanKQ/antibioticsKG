@@ -11,12 +11,14 @@ package com.iaso.antibiotic.service;
 import com.iaso.antibiotic.exception.DuplicateResourceException;
 import com.iaso.antibiotic.json.DataTEST;
 import com.iaso.antibiotic.model.TESTRestful;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
 public class TESTService {
     private static final AtomicInteger countId = new AtomicInteger();
     private static List<TESTRestful> restfulArrayList = new ArrayList<TESTRestful>();

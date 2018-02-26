@@ -25,7 +25,7 @@
     </select>
 
     <select id="findAllBacteriaName" resultType="String">
-        SELECT bacteria_name FROM bacteria
+        SELECT bacteria_name FROM bacteria LIMIT 50
     </select>
 
 </mapper>

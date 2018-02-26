@@ -18,6 +18,6 @@
     </select>
 
     <select id="findAllSituationName" resultType="String">
-        select situation_name from situation
+        select situation_name from situation LIMIT 50
     </select>
 </mapper>

@@ -23,6 +23,7 @@ import com.iaso.antibiotic.json.*;
 import com.iaso.antibiotic.model.TESTRestful;
 import com.iaso.antibiotic.service.ApiService;
 import com.iaso.antibiotic.service.TESTService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.iaso.antibiotic.exception.NoSuchConceptException;
 
@@ -41,8 +42,13 @@ public class ApiController {
 //    private ApiService apiService = new ApiService();
 //    private TESTService testService = new TESTService();
 
-    private ApiService apiService = null;
-    private TESTService testService = null;
+    @Autowired
+    private ApiService apiService;
+    @Autowired
+    private TESTService testService;
+
+    public ApiController() {
+    }
 
     // 调试完成后统一加上 catch (Exception e) {
     @RequestMapping(value= "/{entityType}/{name}", method = RequestMethod.GET)

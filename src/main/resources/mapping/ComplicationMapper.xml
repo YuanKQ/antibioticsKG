@@ -17,6 +17,6 @@
   </select>
 
   <select id="findAllComplicationName" resultType="String">
-    select complication_name from complication
+    select complication_name from complication LIMIT 50
   </select>
 </mapper>

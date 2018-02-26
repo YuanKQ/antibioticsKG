@@ -19,6 +19,6 @@
   </select>
 
   <select id="findAllDiseaseName" resultType="String">
-    select disease_name from disease
+    select disease_name from disease LIMIT 50
   </select>
 </mapper>

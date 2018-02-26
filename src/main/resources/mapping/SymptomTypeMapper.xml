@@ -14,11 +14,11 @@
   </select>
 
   <select id="findSymptomTypeByName" resultMap="SymptomTypeMap">
-    SELECT * FROM symptom_type WHERE symptom_type_name = #{name} LIMIT #{limit}
+    SELECT * FROM symptom_type WHERE symptom_type_name = #{name}
   </select>
 
   <select id="findAllSymptomTypeName" resultType="String">
-    select symptom_type_name from symptom_type
+    select symptom_type_name from symptom_type LIMIT 50
   </select>
 
 </mapper>
