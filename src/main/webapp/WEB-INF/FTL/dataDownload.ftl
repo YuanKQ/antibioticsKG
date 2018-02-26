@@ -68,7 +68,7 @@
                             多名医学生参与进行评定抗生素对儿的相似程度(毫无相似，0分；极其相似，10分)。每对抗生素对儿至少保证由三名医学生参与评定，最终评定结果取医学生评分的平均值。</p>
                             <p></p>
                             <p>
-                            <a href="http://turinglab.cn/iakgso/res/tt.txt">下载数据集</a>
+                            <a href="https://github.com/YuanKQ/MedSim-antibiotics-labeled-dataset">下载数据集</a>
                             </p>
                         </div>
                         </div>
