@@ -39,7 +39,7 @@
                             <input type="hidden" id="graph" name="graph" value="IASO">
                         </@block>
                         </div>
-                        <p>推荐：
+                        <p>hot：
                             <@block name="recommendation">
                             <a href="search?keywords=中药&amp;graph=IASO">IASO1</a> 
                             <a href="search?keywords=气&amp;graph=IASO">IASO2</a> 

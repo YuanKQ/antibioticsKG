@@ -65,3 +65,4 @@ src/main/webapp/template/
 !/src/main/java/com/iaso/antibiotic/json/
 
 /src/main/resources/application.properties
+/logs/

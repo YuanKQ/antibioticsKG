@@ -4,7 +4,7 @@
 <head>
     <#--<%--<meta http-equiv="Content-Type" content="text/html; charset=utf-8">--%>-->
     <#include "template/head.html">
-    <title>数据下载页面</title>
+    <title>Data download page</title>
 </head>
 <style>
 
@@ -22,7 +22,7 @@
 <#include "template/navigationBar.html">
 <div class="container">
 
-    <h1 class="text-muted"><font face="微软雅黑"><strong>IASO知识图谱</strong></font></h1>
+    <h1 class="text-muted"><font face="微软雅黑"><strong>IASO Knowledge Graph</strong></font></h1>
     <div class="panel">
         <div class="panel-body">
             <div class="container">
@@ -33,45 +33,67 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-10"  >
-                                    <p class="lead">本系统公开的数据集仅为非商业性的科学研究或课堂教学目的使用，严禁用于临床诊断，并不得将数据集用于任何商业用途。<br>
-                                        使用前请仔细阅读<a href="#contract">数据集下载协议</a>.
+                                    <p class="lead" align="left"><font face="Times New Roman" >The data set published in this system is only used for non-commercial scientific research or classroom teaching purposes. It is strictly forbidden to be used for clinical diagnosis, and data set should not be used for any commercial purposes.<br>
+                                        Read carefully before using<a href="#contract"> Dataset download protocol</a>.
                                     </p>
-                                        <a class="lead" href="antibioticKG?graph=antibiotic&amp;keywords=Flucloxacillin" role="button">查看知识图谱 <i class="icon-angle-right"></i></a> 
-                                        <a class="lead" href="#dataSet" role="button">下载数据集<i class="icon-angle-right"></i></a>
+                                    <p align="left">
+                                        <a class="lead" href="antibioticKG?graph=antibiotic&amp;keywords=Flucloxacillin" role="button">View Knowledge Graph <i class="icon-angle-right"></i></a> 
+                                        <a class="lead" href="#dataSet" role="button">Download Data Set<i class="icon-angle-right"></i></a></font>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <a name="contract"></a><h2><font face="微软雅黑"><strong>数据集下载协议</strong></font></h2>
+                        <a name="contract"></a><h2><font face="Times New Roman"><strong>Data Set Download Protocol</strong></font></h2>
                         <hr>
-                        <p>您（以下称“研究者”）正在请求IASO开源系统授予您访问、下载并使用数据集（以下简称“数据集”）的权利（以下简称“授权”），作为获得该等授权的条件，您同意遵守以下条款：</p><br/>
-                        <p>
-                            1、研究者同意仅为非商业性的科学研究或课堂教学目的使用数据集，严禁用于临床诊断，并不得将数据集用于任何商业用途；<br/>
-                            2、我们不享有数据集中使用的图片、音频、文字等内容的知识产权，对前述内容不作任何保证，包括但不限于不侵犯他人知识产权或可将前述内容用于任何特定目的；<br/>
-                            3、我们不承担因数据集使用造成的任何形式的损失或伤害，不会对任何因使用数据集产生的法律后果承担任何责任；<br/>
-                            4、与数据集使用有关的任何法律责任均由研究者承担，如研究者或其员工、代理人、分支机构使用数据集的行为给我们造成声誉或经济损失，研究者应当承担赔偿责任；<br/>
-                            5、研究者可以授权其助手、同事或其他合作者访问和使用数据集，但应确保前述人员已经认真阅读并同意接受本协议约束；<br/>
-                            6、如果研究者受雇于以盈利为目的的商业主体，应确保使用数据集仅用于非商业目的，且其雇主同样受本协议约束，研究者确认其签订本协议前已经取得雇主的充分授权。<br/>
-                            7、我们有权随时取消或撤回对研究者使用数据集的授权，并有权要求研究者删除已下载数据集；<br/>
-                        </p>
+                        <p><font face="Times New Roman">You (hereinafter referred to as "Researcher") are requesting the IASO Open Source System to grant you the right to access, download and use data sets (hereinafter referred to as "data sets"). As a condition for obtaining such authorization, you agree to abide by the following terms:</font></p><br/>
+                        <p><font face="Times New Roman">
+                            1. Researchers agree to use data sets only for non-commercial scientific research or classroom teaching purposes. It is strictly forbidden to use data sets for clinical diagnosis and not for any commercial purposes.<br/>
+
+                            2. We do not enjoy the intellectual property rights of pictures, audio, text and other contents used in data sets, and do not guarantee the aforementioned contents, including, but not limited to, infringement of the intellectual property rights of others or the use of the aforementioned contents for any specific purpose;<br/>
+
+                            3. We are not liable for any form of loss or damage caused by the use of data sets, and will not be liable for any legal consequences arising from the use of data sets.<br/>
+
+                            4. Any legal liability related to the use of data sets shall be borne by researchers. If the use of data sets by researchers or their employees, agents or branches causes reputation or economic losses to us, researchers shall be liable for compensation.<br/>
+
+                            5. Researchers may authorize their assistants, colleagues or other partners to access and use data sets, but they shall ensure that the aforementioned persons have carefully read and agree to be bound by this Agreement.<br/>
+
+                            6. If a researcher is employed by a profit-making business entity, he or she shall ensure that data sets are used only for non-commercial purposes and that his or her employer is also bound by this Agreement. The researcher confirms that he or she has obtained sufficient authorization from the employer before signing this Agreement.<br/>
+
+                            7. We have the right to revoke or withdraw the authorization of researchers to use datasets at any time, and to request researchers to delete downloaded datasets.
+                        </font></p>
 
                         <br>
-                        <a name="dataSet"></a><h2><font face="微软雅黑"><strong>数据集下载</strong></font></h2>
+                        <a name="dataSet"></a><h2><font face="Times New Roman"><strong>Data Set Download</strong></font></h2>
                         <hr>
-                        <div class="container">
+                        <div class="container"><font face="Times New Roman">
                             <div class="row">
                             <div class="col-md-10">
-                            <h3>常用抗生素语义相似度标记数据集</h3>
-                            <p>数据集中涵盖了临床上最常用的10大类共40种抗生素随机组合而成的共200对抗生素对儿。
-
-                            多名医学生参与进行评定抗生素对儿的相似程度(毫无相似，0分；极其相似，10分)。每对抗生素对儿至少保证由三名医学生参与评定，最终评定结果取医学生评分的平均值。</p>
-                            <p></p>
+                                <font face="Times New Roman">
+                            <h3>Semantic Similarity Marker Data Set of Common Antibiotics</h3>
+                            <p>The data set covers a total of 200 antibiotic pairs randomly assembled from 40 antibiotics in 10 most commonly used clinical categories. Several medical students participated in evaluating the similarity of antibiotic counterparts (no similarity, 0 points; extremely similar, 10 points). Each pair of antibiotic pairs is guaranteed to be evaluated by at least three medical students. The final evaluation results are based on the average score of medical students.</p>
+                                    </font>
                             <p>
-                            <a href="https://github.com/YuanKQ/MedSim-antibiotics-labeled-dataset">下载数据集</a>
+                            <a href="antibioticSim.txt">Download Data Set</a>
                             </p>
+
                         </div>
                         </div>
+                        </div>
+
+                        <div class="container"><font face="Times New Roman">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <font face="Times New Roman">
+                                        <h3>The dataset of IASO Knowledge Graph</h3>
+                                        <p>The displayed antibiotics KG was constructed based on the DO, IDO, NCBI, HPO and DrugBank databases. Here, 507 infectious diseases and their therapy methods, in combination with 332 different infection sites, 936 relevant symptoms of the digestive, reproductive, neurological and other systems, 371 types of complications, 838,407 types of bacteria, 341 types of antibiotics and their introductions, 1,504 pairs of reaction rates (antibacterial spectrum) between antibiotics and bacteria, 431 pairs of drug interaction relationships, and 86 pairs of antibiotic-specific population contraindicated relationships, were studied.</p>
+                                    </font>
+                                    <p>
+                                        <a href="antibiotic_change_IRI.zip">Download Data Set</a>
+                                    </p>
+
+                                </div>
+                            </div>
                         </div>
 
                             </div>

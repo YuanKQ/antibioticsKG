@@ -43,7 +43,8 @@
             </div>
             <div class="panel-body" >
                 <div id="description" style="height:600px; overflow-y:auto;">
-                    <p>&lt;&lt;将鼠标停留在节点上,可查看节点相应消息。</p>
+                    <p>&lt;&lt;You can check the node's corresponding message by stopping the mouse on the node.</p>
+                    <#--<p>&lt;&lt;将鼠标停留在节点上,可查看节点相应消息。</p>-->
                 </div>
             </div>
         </div>
@@ -328,11 +329,17 @@
 </@override>
 
 <@override name="pageDescription">
-<p class="lead">关于“英文抗生素知识图谱（AntibioticKG）</p>
+<p class="lead">About English Antibiotic Knowledge Graph</p>
 <p>
-    “英文抗生素知识图谱”包括常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。 
-    <a href="introduction">了解更多 <i class="icon-angle-right"></i></a>
+    The English Antibiotics Knowledge Graph includes common antibiotics, diseases, pathogens, infection sites, complications, symptoms, symptoms, types of symptoms and their relationships, which comes to more than 450,000 entities and nearly 6,000 relationships.
+
+    <a href="introduction">Learn More <i class="icon-angle-right"></i></a>
 </p>
+<#--<p class="lead">关于“英文抗生素知识图谱（AntibioticKG）</p>-->
+<#--<p>-->
+    <#--“英文抗生素知识图谱”包括常见抗生素，疾病，病菌，感染部位，并发症，症状，症状类型及其关系组成，共计45余万实体和近6千条关系。 -->
+    <#--<a href="introduction">了解更多 <i class="icon-angle-right"></i></a>-->
+<#--</p>-->
 <br>
 </@override>
 

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -30,7 +29,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/", "/images/**").addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("/WEB-INF/FTL/images/", "/WEB-INF/FTL/images/**").addResourceLocations("classpath:/images/");
         registry.addResourceHandler("/img/", "/img/**").addResourceLocations("classpath:/img/");
         registry.addResourceHandler("/src/", "/src/**").addResourceLocations("classpath:/src/");
         registry.addResourceHandler("/dist/", "/dist/**").addResourceLocations("classpath:/dist/");
