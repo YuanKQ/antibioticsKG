@@ -33,7 +33,7 @@
                             <br>
                             <div class="row">
                                 <div class="col-md-10" >
-                                    <p class="lead" align="left"><font face="Times New Roman"> The Antibiotic KG, which is currently published in the system, centers on antibiotics and consists of common antibiotics, diseases, pathogens, infection sites, complications, symptoms, types of symptoms and their relationships, totaling more than 450,000 entities and nearly 6,000 relationships. Researchers can now obtain entities, relationships and query entity-centered micro-knowledge maps in the "Antibiotic KG" by calling API provided by the system.
+                                    <p class="lead" align="left" style="text-align:justify"><font face="Times New Roman"> The Antibiotic KG, which is currently published in the system, centers on antibiotics and consists of common antibiotics, diseases, pathogens, infection sites, complications, symptoms, types of symptoms and their relationships, totaling more than 450,000 entities and nearly 6,000 relationships. Researchers can now obtain entities, relationships and query entity-centered micro-knowledge maps in the "Antibiotic KG" by calling API provided by the system.
                                     <br>
                                         Read carefully before using<a href="#contract"> Dataset download protocol</a>.
                                     </p>
@@ -48,8 +48,8 @@
                         <br>
                         <a name="contract"></a><h2><font face="Times New Roman"><strong>Data Set Usage Protocol</strong></font></h2>
                         <hr>
-                        <p><font face="Times New Roman">You (hereinafter referred to as "Researcher") are requesting the IASO Open Source System to grant you the right to access, download and use data sets (hereinafter referred to as "data sets"). As a condition for obtaining such authorization, you agree to abide by the following terms:</font></p><br/>
-                        <p><font face="Times New Roman">
+                        <p style="text-align:justify"><font face="Times New Roman" size="4">You (hereinafter referred to as "Researcher") are requesting the IASO Open Source System to grant you the right to access, download and use data sets (hereinafter referred to as "data sets"). As a condition for obtaining such authorization, you agree to abide by the following terms:</font></p><br/>
+                        <p style="text-align:justify"><font face="Times New Roman" size="4">
                             1. Researchers agree to use data sets only for non-commercial scientific research or classroom teaching purposes. It is strictly forbidden to use data sets for clinical diagnosis and not for any commercial purposes.<br/>
 
                             2. We do not enjoy the intellectual property rights of pictures, audio, text and other contents used in data sets, and do not guarantee the aforementioned contents, including, but not limited to, infringement of the intellectual property rights of others or the use of the aforementioned contents for any specific purpose;<br/>
@@ -68,26 +68,26 @@
                         <br>
                         <a name="tutorial"></a><h2><font face="Times New Roman"><strong>Tutorial</strong></font></h2>
                         <hr>
-                        <p><font face="Times New Roman">The system API design refers to RESTful API design principles, and now completes the query (read resources) operation.<br>
+                        <p style="text-align:justify"><font face="Times New Roman" size="4">The system API design refers to RESTful API design principles, and now completes the query (read resources) operation.<br>
                             A KG is composed of several elements. Through RESTful API, IASO displays the KG components that the user could discern the information effortlessly, and are the following:
                         </font></p>
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <font face="Times New Roman">
+                                    <font face="Times New Roman" size="4">
 
                                     <h2>Taxonomy Query</h2>
-                                    <p>The presentation of the taxonomy on which the knowledge graph is based is significant for understanding the inheritance relations between classes. Our system provides a holistic view of this taxonomy, in a hierarchical representation. The partial views that allow the user to focus on a portion of other relationships, are achieved through the aspects shown below.
+                                    <p style="text-align:justify">The presentation of the taxonomy on which the knowledge graph is based is significant for understanding the inheritance relations between classes. Our system provides a holistic view of this taxonomy, in a hierarchical representation. The partial views that allow the user to focus on a portion of other relationships, are achieved through the aspects shown below.
                                     </p>
 
                                     <h2>Entity Facts Query</h2>
-                                        <p>
+                                        <p style="text-align:justify">
                                             The visualization system displays all the knowledge graph classes, at the request of the user, providing the name and other information, in an intelligible manner. As shown in Figure 1, our aim is to extract knowledge related to Amoxicillin from the KG. The corresponding information, such as an ID, a name, a drug type, a description, as well as the drug indication information, are the actual data and in most cases what the user is actually interested in. This disambiguated information can aid the user to look up known information.
                                         </p>
-                                    <p>At present, antibiotic, bacteria, complication, disease, infection_site, symptom and symptom_type are provided for seven types of entity queries. The query results are returned in JSON format.
+                                    <p style="text-align:justify">At present, antibiotic, bacteria, complication, disease, infection_site, symptom and symptom_type are provided for seven types of entity queries. The query results are returned in JSON format.
                                     </p>
 
-                                    <p >API calls: <code class="json">[GET]  /api/{entity_type}/{entity_name}</code><br>
+                                    <p style="text-align:justify">API calls: <code class="json">[GET]  /api/{entity_type}/{entity_name}</code><br>
                                         {entity_type} the optional values are: antibiotics, bacterias, complications, diseases, infection_sites, symptoms, symptom_types<br>
                                         {entiry_name} is entity name for user query
                                     </p>
@@ -99,23 +99,23 @@
 
 
                                     <h2>Entity Relation Query</h2>
-                                    <p>The extraction process starts with a set of triples for a given relation. For example, (diphtheria, disease_bacteria, corynebacterium) would be a valid triple for the disease_bacteria relation. The input entity is processed to recognize and match with the KG concept (see Figure 2). When an entity matches a KG concept, a subgraph will be returned to present all its connected entities, the relation type and the relation direction from head entity to tail entity. Any other entity which does not appear in the KG has no relationship with the input entity. There may be a variety of relationships when an entity belongs to different entity types.
+                                    <p style="text-align:justify">The extraction process starts with a set of triples for a given relation. For example, (diphtheria, disease_bacteria, corynebacterium) would be a valid triple for the disease_bacteria relation. The input entity is processed to recognize and match with the KG concept (see Figure 2). When an entity matches a KG concept, a subgraph will be returned to present all its connected entities, the relation type and the relation direction from head entity to tail entity. Any other entity which does not appear in the KG has no relationship with the input entity. There may be a variety of relationships when an entity belongs to different entity types.
                                     </p>
-                                    <p>At present, there are seven types of entity relationship queries for antibiotics, pathogens, complications, diseases, infection sites, symptoms and symptom types. The results of the query are returned in JSON format. The content of the query covers entity relationship types and the direction of the relationship. There may be phenomena that the same name entity belongs to different types of entity, and the returned results cover multiple relationships.</p>
-                                    <p >API calls:  <code class="json">[GET]  /api/relations/{entity1}/{entity2}</code><br>
+                                    <p style="text-align:justify">At present, there are seven types of entity relationship queries for antibiotics, pathogens, complications, diseases, infection sites, symptoms and symptom types. The results of the query are returned in JSON format. The content of the query covers entity relationship types and the direction of the relationship. There may be phenomena that the same name entity belongs to different types of entity, and the returned results cover multiple relationships.</p>
+                                    <p style="text-align:justify">API calls:  <code class="json">[GET]  /api/relations/{entity1}/{entity2}</code><br>
                                         {entity1}, {entiry2}are entity names for user query.
                                     </p>
                                     <h3>Example</h3>
-                                    <p> Query the relationship of Diphtheria and Corynebacterium  <code class="json">[GET]  /api/relations/Corynebacterium/Diphtheria</code><br>The results are as follows,
+                                    <p style="text-align:justify"> Query the relationship of Diphtheria and Corynebacterium  <code class="json">[GET]  /api/relations/Corynebacterium/Diphtheria</code><br>The results are as follows,
                                     </p>
                                     <pre><code id="relationJSON"></code></pre>
 
                                     <br>
                                     <h2>Subgraph Query</h2>
-                                    <p>Taxonomy and entity relations are two types of links that transform the knowledge graph from a hierarchy to a graph. When receiving an entity queried by user, IASO returns a subgraph composed of this entity and the entities that it is directly related to (see Figure 3). For example, “ear” is considered as an infectious site in infectious disease diagnosis. Its pathogenic bacteria include enterobacteriaceae, Haemophilus influenzae, moraexlla, proteus, etc. Apart from the link that should be visible, a label with the link name (effectively, the relation type) is also displayed.
+                                    <p style="text-align:justify">Taxonomy and entity relations are two types of links that transform the knowledge graph from a hierarchy to a graph. When receiving an entity queried by user, IASO returns a subgraph composed of this entity and the entities that it is directly related to (see Figure 3). For example, “ear” is considered as an infectious site in infectious disease diagnosis. Its pathogenic bacteria include enterobacteriaceae, Haemophilus influenzae, moraexlla, proteus, etc. Apart from the link that should be visible, a label with the link name (effectively, the relation type) is also displayed.
 
                                     </p>
-                                        <p>
+                                        <p style="text-align:justify">
                                             At present, sub-graph (micro knowledge map) query is provided. The sub-graph is composed of Central entity (query entity provided by caller) and its relationship and entity directly associated with the central entity. There may be the phenomenon that the same-name entity belongs to different types of entity, and the returned result covers multiple sub-graphs.
                                         </p>
 
@@ -123,7 +123,7 @@
                                         {entiry_name} is entity name for user query
                                     </p>
                                     <h3>Example</h3>
-                                    <p> Query the subgraph of the entity ear <code class="json">[GET]  /api/subgraphs/Ear</code><br>The results are as follows,
+                                    <p style="text-align:justify"> Query the subgraph of the entity ear <code class="json">[GET]  /api/subgraphs/Ear</code><br>The results are as follows,
                                     </p>
                                     <pre id="subgraphJSON"></pre>
                                     </font>
